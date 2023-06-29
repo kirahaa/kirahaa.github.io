@@ -12,7 +12,7 @@ module.exports = {
     title: `Kirahaa`,
     author: {
       name: `Hayeong Kim`,
-      summary: `who lives and works in Seoul building useful things.`,
+      summary: `I believe the importance of experience`,
     },
     description: `kirahaa blog`,
     siteUrl: `https://kirahaa.github.io/`,
