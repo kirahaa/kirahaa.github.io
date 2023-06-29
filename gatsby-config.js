@@ -9,7 +9,7 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Kirahaa Blog`,
+    title: `Kirahaa`,
     author: {
       name: `Hayeong Kim`,
       summary: `who lives and works in Seoul building useful things.`,
@@ -17,7 +17,9 @@ module.exports = {
     description: `kirahaa blog`,
     siteUrl: `https://kirahaa.github.io/`,
     social: {
+      email: `khy4018@gmail.com`,
       github: `kirahaa`,
+      linkedIn: `kirahaa`
     },
   },
   plugins: [
@@ -120,6 +122,9 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/profile.png`, // This path is relative to the root of the site.
       },
+    },
+    {
+      resolve: 'gatsby-plugin-sass'
     },
   ],
 }

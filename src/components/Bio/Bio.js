@@ -8,6 +8,9 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+import Icon from "../Icon"
+import {getContactHref, getIcon} from "../../utils"
+import * as styles from './Bio.module.scss'
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -19,7 +22,9 @@ const Bio = () => {
             summary
           }
           social {
-            twitter
+            email
+            github
+            linkedIn
           }
         }
       }
@@ -36,20 +41,33 @@ const Bio = () => {
         className="bio-avatar"
         layout="fixed"
         formats={["auto", "webp", "avif"]}
-        src="../images/profile.png"
-        width={50}
-        height={50}
+        src="../../images/profile.png"
+        width={75}
+        height={75}
         quality={95}
         alt="Profile picture"
       />
       {author?.name && (
-        <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          <a href={`https://github.com/${social?.github || ``}`}>
-            You should follow me on Github
-          </a>
-        </p>
+        <>
+          <h1>
+            <strong>{author.name}</strong>
+          </h1>
+          <p>{author?.summary || null}</p>
+          <ul className={styles['contacts__list']}>
+            {Object.keys(social).map((name) => (!social[name] ? null : (
+                <li key={name} className={styles['contacts__listItem']}>
+                  <a
+                    className={styles['contacts__listLink']}
+                    href={getContactHref(name, social[name])}
+                    target="_blank"
+                  >
+                    <Icon name={name} icon={getIcon(name)}/>
+                  </a>
+                </li>
+              )
+            ))}
+          </ul>
+        </>
       )}
     </div>
   )
