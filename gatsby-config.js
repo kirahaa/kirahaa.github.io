@@ -14,8 +14,8 @@ module.exports = {
       name: `Hayeong Kim`,
       summary: `who lives and works in Seoul building useful things.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `kirahaa blog`,
+    siteUrl: `https://kirahaa.github.io/`,
     social: {
       github: `kirahaa`,
     },
@@ -118,7 +118,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/profile.png`, // This path is relative to the root of the site.
       },
     },
   ],
