@@ -1,11 +1,11 @@
 {
-  "name": "gatsby-starter-blog",
-  "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "name": "kirahaa-blog",
+  "private": false,
+  "description": "kirahaa blog",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Hayeong Kim <khy4018@gmail.com>",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/kirahaa/kirahaa.github.io/issues"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.0.4",
@@ -29,7 +29,7 @@
     "gh-pages": "^5.0.0",
     "prettier": "^2.8.8"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://kirahaa.github.io/",
   "keywords": [
     "gatsby"
   ],
