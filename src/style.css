@@ -34,8 +34,9 @@
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
   --fontFamily-serif: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
-  --font-body: var(--fontFamily-serif);
-  --font-heading: var(--fontFamily-sans);
+  --fontFamily-pretendard: Pretendard, -apple-system, BlinkMacSystemFont, "Noto Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-body: var(--fontFamily-pretendard);
+  --font-heading: var(--fontFamily-pretendard);
   --fontWeight-normal: 400;
   --fontWeight-bold: 700;
   --fontWeight-black: 900;
@@ -54,6 +55,7 @@
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
   --color-primary: #380099;
+  --color-primary-light: #eee6f7;
   --color-text: #2e353f;
   --color-text-light: #4f5969;
   --color-gray: #888;
@@ -198,13 +200,10 @@ li > ul {
 
 blockquote {
   color: var(--color-text-light);
-  margin-left: calc(-1 * var(--spacing-6));
-  margin-right: var(--spacing-8);
-  padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-6);
-  border-left: var(--spacing-1) solid var(--color-primary);
-  font-size: var(--fontSize-2);
-  font-style: italic;
-  margin-bottom: var(--spacing-8);
+  margin: 16px 0;
+  padding: 20px;
+  border-left: 4px solid rgb(204, 206, 217);
+  background-color: rgb(246, 248, 252);
 }
 
 blockquote > :last-child {
@@ -236,6 +235,21 @@ a {
 a:hover,
 a:focus {
   text-decoration: none;
+}
+
+code {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border: 1.5px dashed var(--color-primary);
+  padding: 2px 4px;
+  margin: 0 4px;
+  font-family: "Fira Code", Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.deckgo-highlight-code-carbon {
+  box-shadow: none;
 }
 
 /* Custom classes */

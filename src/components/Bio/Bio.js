@@ -59,6 +59,7 @@ const Bio = () => {
                   <a
                     className={styles['contacts__listLink']}
                     href={getContactHref(name, social[name])}
+                    rel="noreferrer"
                     target="_blank"
                   >
                     <Icon name={name} icon={getIcon(name)}/>
