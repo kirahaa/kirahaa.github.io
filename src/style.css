@@ -165,7 +165,7 @@ p {
   line-height: var(--lineHeight-relaxed);
   --baseline-multiplier: 0.179;
   --x-height-multiplier: 0.35;
-  margin: var(--spacing-0) var(--spacing-0) var(--spacing-8) var(--spacing-0);
+  margin: var(--spacing-8) var(--spacing-0) var(--spacing-8) var(--spacing-0);
   padding: var(--spacing-0);
 }
 
@@ -213,6 +213,14 @@ blockquote > :last-child {
 blockquote > ul,
 blockquote > ol {
   list-style-position: inside;
+}
+
+blockquote > h1:first-child, h2:first-child, h3:first-child, h4:first-child {
+  margin-top: 0;
+}
+
+blockquote p:first-child {
+  margin-top: 0;
 }
 
 table {
@@ -336,6 +344,10 @@ code {
   margin-bottom: var(--spacing-0);
   min-width: 75px;
   border-radius: 100%;
+}
+
+.blog-post section {
+  margin-bottom: var(--spacing-32);
 }
 
 .blog-post header h1 {
