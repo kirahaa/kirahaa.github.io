@@ -261,3 +261,14 @@ github의 해당 블로그 repo에 들어가서 **Setting > Branches** 메뉴에
 다음 포스팅에서는 **개츠비 플러그인을 사용해 블로그 커스텀하는 법**을 더 자세히 살펴보겠습니다!
 
 다음 포스팅도 기대해주세욧 😉✨
+
+<br/>
+
+---
+
+#### 참고 자료
+
+- https://anneslab.tistory.com/116
+- https://yeri-kim.github.io/posts/how-to-install-gatsby/
+- https://uzzam.dev/6
+- https://pks2974.medium.com/jam-stack-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-17dd5c34edf7
