@@ -3,6 +3,9 @@ title: Gatsby로 Github 블로그 만들기
 date: "2023-06-29T22:12:03.284Z"
 description: "Gatsby로 Github 블로그 만들기"
 category: "gatsby"
+tags:
+  - "Gatsby"
+  - "blog"
 ---
 
 안녕하세요! 드디어 저의 깃허브 블로그 첫 포스팅입니다✨
