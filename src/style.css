@@ -281,13 +281,22 @@ code {
   margin: 0;
 }
 
-.home {
+.wrap {
   display: flex;
 }
 
-.post-list {
+.right {
   flex: 2;
   padding-left: var(--spacing-10);
+}
+
+.page-title {
+  margin-top: 0;
+  font-size: var(--fontSize-5);
+}
+
+.post-list {
+  list-style: none;
 }
 
 .post-list-item {

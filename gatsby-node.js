@@ -25,6 +25,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           fields {
             slug
           }
+          frontmatter {
+            tags
+          }
         }
       }
     }
@@ -39,6 +42,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const posts = result.data.allMarkdownRemark.nodes
+
+  let tags = new Set()
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -58,8 +63,25 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           nextPostId,
         },
       })
+
+      if (post.frontmatter.tags) {
+        post.frontmatter.tags.forEach(tag => {
+          tags.add(tag)
+        })
+      }
     })
   }
+
+  const tagTemplate = path.resolve("src/templates/tags.js")
+  tags.forEach(tag => {
+    createPage({
+      path: `/tags/${tag}/`,
+      component: tagTemplate,
+      context: {
+        tag
+      }
+    })
+  })
 }
 
 /**

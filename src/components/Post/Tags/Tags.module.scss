@@ -1,0 +1,34 @@
+@import "../../../assets/scss/variables";
+
+.tags {
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+
+    &--item {
+      display: inline-block;
+    }
+
+    &--link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4px 16px;
+      background-color: $color-tag-bg;
+      text-decoration: none;
+      border-radius: 100px;
+      color: $color-base;
+      font-size: 14px;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        color: $color-primary;
+      }
+    }
+  }
+}
