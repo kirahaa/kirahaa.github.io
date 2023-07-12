@@ -11,6 +11,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import Icon from "../Icon"
 import {getContactHref, getIcon} from "../../utils"
 import * as styles from './Bio.module.scss'
+import Tags from "../Post/Tags"
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -28,12 +29,36 @@ const Bio = () => {
           }
         }
       }
+      allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+      nodes {
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          description
+          tags
+        }
+      }
+      group(field: frontmatter___tags) {
+        edges {
+            node {
+                id
+            }
+        }
+        fieldValue
+        totalCount
+      }
+    }
     }
   `)
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
   const social = data.site.siteMetadata?.social
+    const {group: tags} = data.allMarkdownRemark
 
   return (
     <div className="bio">
@@ -68,6 +93,7 @@ const Bio = () => {
               )
             ))}
           </ul>
+          <Tags tags={tags.map((tag) => tag.fieldValue)}/>
         </>
       )}
     </div>

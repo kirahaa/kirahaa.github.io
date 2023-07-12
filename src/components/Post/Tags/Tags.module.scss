@@ -1,16 +1,20 @@
 @import "../../../assets/scss/variables";
 
 .tags {
+  position: relative;
+
   &__list {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
-    gap: 16px;
+    gap: 10px;
     list-style: none;
     padding: 0;
 
     &--item {
       display: inline-block;
+      margin-bottom: 0;
     }
 
     &--link {
