@@ -25,7 +25,7 @@ const BlogIndex = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <div className="wrap">
-        <Bio />
+        <Bio showTags={true} />
         <div className="right">
           <ol className="post-list">
             {posts.map(post => {

@@ -13,7 +13,7 @@ import {getContactHref, getIcon} from "../../utils"
 import * as styles from './Bio.module.scss'
 import Tags from "../Post/Tags"
 
-const Bio = () => {
+const Bio = ({showTags}) => {
   const data = useStaticQuery(graphql`
     query BioQuery {
       site {
@@ -42,11 +42,11 @@ const Bio = () => {
           tags
         }
       }
-      group(field: frontmatter___tags) {
+      group(field: {frontmatter: {tags: SELECT}}) {
         edges {
-            node {
-                id
-            }
+          node {
+          id
+          }
         }
         fieldValue
         totalCount
@@ -93,7 +93,7 @@ const Bio = () => {
               )
             ))}
           </ul>
-          <Tags tags={tags.map((tag) => tag.fieldValue)}/>
+          {showTags && <Tags tags={tags.map((tag) => tag.fieldValue)}/>}
         </>
       )}
     </div>
