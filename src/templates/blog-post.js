@@ -5,6 +5,7 @@ import Bio from "../components/Bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Tags from "../components/Post/Tags"
+import Comments from "../components/Post/Comments"
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post },
@@ -30,7 +31,8 @@ const BlogPostTemplate = ({
         <Tags tags={post.frontmatter.tags}/>
         <hr />
         <footer>
-          <Bio />
+          <Bio showTags={false} />
+          <Comments id={post.id}/>
         </footer>
       </article>
       <nav className="blog-post-nav">
