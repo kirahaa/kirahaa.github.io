@@ -3,17 +3,17 @@ import {Link} from "gatsby"
 import * as styles from './Tags.module.scss'
 
 const Tags = ({tags}) => (
-    <div className={styles['tags']}>
-        <ul className={styles['tags__list']}>
-            {tags && tags.map(tag => (
-                <li key={tag} className={styles['tags__listItem']}>
-                    <Link className={styles['tags__listLink']} to={`/tags/${tag}`}>
-                        {tag}
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    </div>
+  <div className={styles['tags']}>
+    <ul className={styles['tags__list']}>
+      {tags && tags.map(tag => (
+        <li key={tag} className={styles['tags__listItem']}>
+          <Link className={styles['tags__listLink']} to={`/tags/${tag}`}>
+            {tag}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
 )
 
 export default Tags

@@ -80,16 +80,16 @@ const Bio = ({showTags}) => {
           <p>{author?.summary || null}</p>
           <ul className={styles['contacts__list']}>
             {Object.keys(social).map((name) => (!social[name] ? null : (
-                <li key={name} className={styles['contacts__listItem']}>
-                  <a
-                    className={styles['contacts__listLink']}
-                    href={getContactHref(name, social[name])}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <Icon name={name} icon={getIcon(name)}/>
-                  </a>
-                </li>
+              <li key={name} className={styles['contacts__listItem']}>
+                <a
+                  className={styles['contacts__listLink']}
+                  href={getContactHref(name, social[name])}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <Icon name={name} icon={getIcon(name)}/>
+                </a>
+              </li>
               )
             ))}
           </ul>
