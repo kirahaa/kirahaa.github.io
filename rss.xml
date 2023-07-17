@@ -1,4 +1,1079 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 17 Jul 2023 01:01:01 GMT</lastBuildDate><item><title><![CDATA[Gatsby 블로그 꾸미기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/custom-gatsby-blog/</link><guid isPermaLink="false">https://kirahaa.github.io/custom-gatsby-blog/</guid><pubDate>Sat, 01 Jul 2023 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;자, 이제 본격적으로 나만의 블로그를 예쁘게 꾸며볼 시간입니다!😆&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 17 Jul 2023 07:25:02 GMT</lastBuildDate><item><title><![CDATA[AWS 프리티어 EC2 인스턴스 생성]]></title><description><![CDATA[AWS는 Amazon Web Service의 약어로 대표적인 클라우드 플랫폼입니다.
+AWS는 계정 생성 후 1년 동안 일정 무료 사용량을 제공하는 프리티어 서비스를 제공합니다. 시작하기 1) AWS 계정 생성, region…]]></description><link>https://kirahaa.github.io/aws-ec2-hosting/</link><guid isPermaLink="false">https://kirahaa.github.io/aws-ec2-hosting/</guid><pubDate>Sat, 15 Jul 2023 13:57:56 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 310px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/b518440d99795355f7c39bb20e35c2bc/56e1b/aws_0.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 52.53164556962025%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABT0lEQVR42oWS7UsCQRDG/Vv7WF8krD4kQYkRYkUkVGgkimUmHWqYb2glpiRhlGVRaF5iih1Cp0nt7EycpRTc1cMyMMNvmdl9Rkc/hIgMgDEGAJxzxpQISgUYACLSb+lIQzgQaUs3RIlIljseX2DHHzxK58oVMRxLirV66iQrhKLuXUHuvg1Jlcuvspw+zZssqwvLa06P32Cc3/Ls2ewuo2kxkjgGAPXOAJyIIvGUZWV9xrwUOIjpp+Y23b6R0cnC5XX9uTE+bc7k8kTEOVfvXK01nd6gEAw/VsVwNHn/UBZCUUmSQodxl3e/9SKpj03UL7Wv6L32lQxOn4UeVbaptKHx230Guw0sWHlmAm8cXExg84w/JfHOjflZXrTjrWtIaliFSK1zurBSRk/pMcoaqGijdolYjz46f/uMhFzDd/79tP+WBIkzQlCmUCJoLcknZU5hkc74J8IAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;aws&quot;
+        title=&quot;&quot;
+        src=&quot;/static/b518440d99795355f7c39bb20e35c2bc/56e1b/aws_0.png&quot;
+        srcset=&quot;/static/b518440d99795355f7c39bb20e35c2bc/4d6f2/aws_0.png 158w,
+/static/b518440d99795355f7c39bb20e35c2bc/56e1b/aws_0.png 310w&quot;
+        sizes=&quot;(max-width: 310px) 100vw, 310px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AWS&lt;/strong&gt;는 &lt;strong&gt;Amazon Web Service&lt;/strong&gt;의 약어로 대표적인 클라우드 플랫폼입니다.&lt;br/&gt;
+AWS는 계정 생성 후 1년 동안 일정 무료 사용량을 제공하는 프리티어 서비스를 제공합니다.&lt;/p&gt;
+&lt;h2&gt;시작하기&lt;/h2&gt;
+&lt;h3&gt;1) AWS 계정 생성, region 설정&lt;/h3&gt;
+&lt;p&gt;개인정보와 결제 카드 등을 등록해서 AWS 가입을 해줍니다.
+상단 메뉴에서 지역은 &lt;strong&gt;아시아 태평양 (서울) ap-northeast-2&lt;/strong&gt;로 설정해 줍니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 337px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/b7c4232f19be0eb7e91a3fee082c4828/f5074/aws_region.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 137.9746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAcABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAECAwUE/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/2gAMAwEAAhADEAAAAcwlGp7i0HOSSaggf//EABwQAAAGAwAAAAAAAAAAAAAAAAACAwQQMhEzQf/aAAgBAQABBQKEUynKOtqQ2pmG2v8A/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAwEBPwEf/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPwEf/8QAGhAAAgIDAAAAAAAAAAAAAAAAARAAcSJB4f/aAAgBAQAGPwJZDc6jbNs3P//EABsQAAIDAQEBAAAAAAAAAAAAAAABEWHwMSFB/9oACAEBAAE/IUkN+j65GodE3Az0y0hTHT70y0hVJNNI/9oADAMBAAIAAwAAABDMGU3/xAAXEQEAAwAAAAAAAAAAAAAAAAAAARAR/9oACAEDAQE/EK1D/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/EFYr/8QAIRAAAgEDBAMBAAAAAAAAAAAAAREAITFxQVFhoZGx0fD/2gAIAQEAAT8QSBdciWIJ1dBrDXDAEGKIbZiiotsELuLOHud9q4bslz8lWbfsTuoEASeT9jgkq/JhMvKH/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;aws region&quot;
+        title=&quot;&quot;
+        src=&quot;/static/b7c4232f19be0eb7e91a3fee082c4828/f5074/aws_region.jpg&quot;
+        srcset=&quot;/static/b7c4232f19be0eb7e91a3fee082c4828/ab180/aws_region.jpg 158w,
+/static/b7c4232f19be0eb7e91a3fee082c4828/ba98e/aws_region.jpg 315w,
+/static/b7c4232f19be0eb7e91a3fee082c4828/f5074/aws_region.jpg 337w&quot;
+        sizes=&quot;(max-width: 337px) 100vw, 337px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;2) 인스턴스 시작&lt;/h3&gt;
+&lt;p&gt;메인 화면에서 EC2 서비스를 클릭하거나, 상단 검색 메뉴에서 EC2를 검색하면 다음과 같은 대시보드를 확인 할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5f6f4d81571d4b7416443adc95fcc368/bbbf7/aws_1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.26582278481012%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABsUlEQVR42m1Sy24bMQzc/7/WiWOndlyn6D/02ENv7a23okARBAG8Xe1KIvVaSTuFaMNIHwQGlAiRHHLUrfcfsH77HqvtAbf3D7jZHrDZP+Jud8Rqsxesd0esd4+4vT/+gdXmgDd3D+Ibbrbv0NUcUaJDs5QSYozIOeO1LcuC/1l713Kan+cZpRZ0zAzvnSRpo6GNxUlNMMaCiEDEGCcDSw61FJQLQpqR5nyN1VrhQ0DnfEApVTpaa6HJg0JptC7MFmhO8CmjLhWlnqE5/hNzIaIjS4jeXQsa9pilwaXgsiDN5dr0Om6pqH+too3fMTtYSxIgslA24FkxThNjsB69ZvQTQVknd4FxAnU5/9IM7RJcTOjazqZRvWIYcDIBvfaYOGGkiImjeMHlrK4IQmLkBOsCurZ078OZIRNO/YCnpxewZTATmmgNTf0QAvq+h1JKlGViTNpgUArDoETErgVzTmeGHGC+fcb46QHmy0cMwyiP226azTnLerQxcm/fxLgJHC0oGoQU0DWp2TkRwRLDvvwEff8K+/wDxA7OOfkWi4gzw3sv7Fosl4w5J5SSpXib4jdmmvKyOGE+TAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;aws instance&quot;
+        title=&quot;&quot;
+        src=&quot;/static/5f6f4d81571d4b7416443adc95fcc368/984b6/aws_1.png&quot;
+        srcset=&quot;/static/5f6f4d81571d4b7416443adc95fcc368/4d6f2/aws_1.png 158w,
+/static/5f6f4d81571d4b7416443adc95fcc368/3c1ae/aws_1.png 315w,
+/static/5f6f4d81571d4b7416443adc95fcc368/984b6/aws_1.png 630w,
+/static/5f6f4d81571d4b7416443adc95fcc368/e7d8e/aws_1.png 945w,
+/static/5f6f4d81571d4b7416443adc95fcc368/58c38/aws_1.png 1260w,
+/static/5f6f4d81571d4b7416443adc95fcc368/bbbf7/aws_1.png 1280w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;인스턴스 시작 버튼을 누르면 클라우드 서버 구축을 시작하는 것입니다.&lt;/p&gt;
+&lt;h3&gt;3) AMI 선택(어떤 종류의 서버 컴퓨터를 돌릴 것인지)&lt;/h3&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/918190bc8ed757b9100da25a0247f348/90377/aws_ami.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 69.62025316455697%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAA7DAAAOwwHHb6hkAAACLklEQVR42m2TXXKcMBCEuf8tcoTcIM95TVXih8Re73ptAwsI/UsIvtRof1MVqroYDainZ9RqBjXTjYp+nOhPJ5TWGGv/A3OLtbEoNRNTJKV0g/ee5qNt+f3nmZfdjv3xg0Epxmm6QDFc4umSH8bpTKoNzkeWpdwQY6IZxpG26+j6nrbvb2RCMD2QP66tc2QhyIWlrKzrGaKykUpt2zIqTcqZnO8tSFyR7pC8dZ7PceatG5m0JabMukFeMo3In2dd5T7Kv6IUwVqVFNkFuBCYjMfGjE+Fsp3zOWcaa12tWBUtyxmidFmq4qtaExIupqrC+sBoPCEXHp9KKAr3+wPPzy/sDwd2u1de9/saHw5vdKcR5xzOWay159h7OmWZXfyHUAQ08lHmKCc6qfn2Fhhjsd4TQsSHUFuNMWJ95Dh5jsNMN3s67Tm5hA6JRrwTxUMh4H2os5QiEstphhBYrqO4jENa/9SBp92Rp9d3fv555X2c0SHThBjrhhQjgwkYn4CNbbvj/GyX/IoNiTEUWh3oBGFl2kCLbYRwsJEPdTarMaaqksMSpaJSOoh5QVnPum34GAl5IZeNvELcf8P8+ILvn4Qw0SrD+6DqHITAao3zmmAMqu/R0npaqlWWdeXa1bqW2oE/fmf89ZU4vdDI7MScXb3LQ/35Nq+USTFVH4pi8etSSi2qjbkjFkwG7YIoDPWyn4ax4nr55YR9iNUKZS2kC7mshXDW+k6oFXoe0XrmLxHqOGaemtRAAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;aws ami&quot;
+        title=&quot;&quot;
+        src=&quot;/static/918190bc8ed757b9100da25a0247f348/984b6/aws_ami.png&quot;
+        srcset=&quot;/static/918190bc8ed757b9100da25a0247f348/4d6f2/aws_ami.png 158w,
+/static/918190bc8ed757b9100da25a0247f348/3c1ae/aws_ami.png 315w,
+/static/918190bc8ed757b9100da25a0247f348/984b6/aws_ami.png 630w,
+/static/918190bc8ed757b9100da25a0247f348/e7d8e/aws_ami.png 945w,
+/static/918190bc8ed757b9100da25a0247f348/90377/aws_ami.png 1231w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;저는 &lt;strong&gt;Amazon Linux&lt;/strong&gt;를 선택하였습니다. 이 중 프리티어 사용가능이 아닌 OS도 있으니 잘 보고 선택해야 합니다.&lt;/p&gt;
+&lt;h3&gt;4) 인스턴스 유형 선택&lt;/h3&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5b5f8928b88db5e65f6566f1014e3575/912c7/aws_instance.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 70.25316455696203%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAA7DAAAOwwHHb6hkAAACA0lEQVR42o1T2YoUQRDs//8Hv8JP8FlQcfEAhZWd2ZnZ7q47s67ukMyZbh0FsSCog6rIjMisIRGhlIrWGmqtirLNpWJZFvw5Ykow1iLnjFLKDmLGQEwIISLGhFwKUkr6gDOjt46zP+LrywNqL0q2YkVihvcekRit9R1COggr5wxmRu/Xw5QIkjlW4GB/4MPhLaiSbNGXRe+X2pFrR+uLqhCIsiHECOe9SnAhatob1I5c0et62yc9EwXn2ePpMmN2AVwa+gq1bVA/jME0TSDOGkkyFWxruaj727mQ2kgIXEG1oy+r2rETzsaojNrqzeCqnoifAjkPMekdGRLYBAKVdlcsJRTJxjoY5zHNRtfjbGCdV0hA8SblCs9VPRPiFxvhIt8R1o1wHEccn58xG7d7dIf4a06yJsbREg6Tw8URzjZhjFkDDiJpnCZcLi+wPighEWnVt+JIC+nMjMyMyBnnkPHl8YjPj0c8fHvE02jhc716KNgLooW4h3gjUktfsa4rKBfMLD3KigstMAvgt7bZGvuaRf4L0pcxEVy89qfeqw1Fgq0AP71BeP8KdP54zXAcJ5xOZ/iY9u/3O1q7fs1Ssv4QIWy9YelNM+bTO8yfXiPP3zGIX14ypKw99j9DMvYh3ODhc0NogKeMQSRMxsJYr6ZLD0rUfxIS6e/aSb2FdzO8d/gJ8d4/EP+3o9sAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;aws instance&quot;
+        title=&quot;&quot;
+        src=&quot;/static/5b5f8928b88db5e65f6566f1014e3575/984b6/aws_instance.png&quot;
+        srcset=&quot;/static/5b5f8928b88db5e65f6566f1014e3575/4d6f2/aws_instance.png 158w,
+/static/5b5f8928b88db5e65f6566f1014e3575/3c1ae/aws_instance.png 315w,
+/static/5b5f8928b88db5e65f6566f1014e3575/984b6/aws_instance.png 630w,
+/static/5b5f8928b88db5e65f6566f1014e3575/e7d8e/aws_instance.png 945w,
+/static/5b5f8928b88db5e65f6566f1014e3575/912c7/aws_instance.png 1228w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;프리티어를 마음 편하게 사용하려면 메모리 1GB의 &lt;strong&gt;t2.micro&lt;/strong&gt; 밖에 선택사항이 없습니다.. 😂&lt;/p&gt;
+&lt;h3&gt;5) 인스턴스 세부 정보 변경&lt;/h3&gt;
+&lt;p&gt;바로 [검토 및 시작] 버튼을 눌러도 잘 생성되지만, [인스턴스 세부 정보 변경] 버튼을 눌러 세부사항을 입맛에 맞게 변경할 수 있습니다.&lt;br/&gt;
+저는 따로 변경하지 않고 진행하였습니다.&lt;/p&gt;
+&lt;h3&gt;6) 키 페어 설정&lt;/h3&gt;
+&lt;p&gt;새 키 페어 생성 버튼을 누르면 키 페어 이름을 입력해주고, 다운로드 된 키페어 파일을 로컬 컴퓨터에 잘 저장해 놓아야 합니다. 이름은 뭐든 괜찮습니다.&lt;br/&gt;
+키 페어 다운로드 버튼을 누르면 &lt;code&gt;.pem&lt;/code&gt; 파일이 다운로드 됩니다.&lt;/p&gt;
+&lt;h3&gt;7) 보안 그룹 설정&lt;/h3&gt;
+&lt;p&gt;보안 그룹은 EC2 인스턴스에 접근할 수 있는 그룹입니다.&lt;br/&gt;
+보안이 중요하다면 접근 가능한 포트와 IP를 지정하는 것이 좋습니다.&lt;br/&gt;
+저는 일단 기본으로 진행했습니다.&lt;/p&gt;
+&lt;p&gt;이제 인스턴스 시작 버튼을 누르면 EC2 인스턴스 생성이 완료됩니다.&lt;br/&gt;
+터미널에서 인스턴스에 접근해서 서버 코드를 올리고 서버를 구동할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/026b03f3f90df2fca59187a83075175f/a2afc/aws_connect.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.835443037974684%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABpklEQVR42k2R227TQBCG/ea8BeIZuOGCCwSt2oQ2JyA8AkpLc3DsOI7jPc3u+kO7JFV/6deMZ8b/HLYYTX7yMF3w7faOz19uuLl/YDT+zuNkxnzxi+mF88WS2WLJ/MdvHqczRvcfGI1vGU+WTEZfmX58x92n9xQ+BIYYqTtFfTa02tJpi/EeI4ITn2m94LzPlBAIMWJF8CHmfBwC3bmjMFrhvWe9r3kpK9b7A6tdzfNuz2qz5WlTZv/PZsNqvWW1Lvm7q9gdWl7Kmk3VsK4O7Nue521JoZVCRGhPJ45tS9M01FWF6nu8OJxYvBe8CCIuW+8ckpjyzmYmvyxLCqU14j1N23JoT/RaY4zFZQGPtS7bdJoY4yvTVskOw5BtQlVVFNZaYoh0XZd/9j7koitO/QllDD6+hrL4oWlz49TMOUccoDm2FL3qc6Dv+0uB5O80QYIxBq01qXHKkSYahvwYyU/Nh8uEaaiiTzf0Hm1MvmESHS6FCUpptPv/mtdYWvGkDMoKEgZceCOolMoFkm8mr/e4wjjhbAPmzc4xDhyVzYIhXqaFvNk/TYCwBNoz580AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;aws connect&quot;
+        title=&quot;&quot;
+        src=&quot;/static/026b03f3f90df2fca59187a83075175f/984b6/aws_connect.png&quot;
+        srcset=&quot;/static/026b03f3f90df2fca59187a83075175f/4d6f2/aws_connect.png 158w,
+/static/026b03f3f90df2fca59187a83075175f/3c1ae/aws_connect.png 315w,
+/static/026b03f3f90df2fca59187a83075175f/984b6/aws_connect.png 630w,
+/static/026b03f3f90df2fca59187a83075175f/e7d8e/aws_connect.png 945w,
+/static/026b03f3f90df2fca59187a83075175f/58c38/aws_connect.png 1260w,
+/static/026b03f3f90df2fca59187a83075175f/a2afc/aws_connect.png 1914w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이제 인스턴스가 잘 생성되었습니다. 연결 버튼을 눌러 터미널을 열어줍니다.&lt;/p&gt;
+&lt;p&gt;이제 하단 명령어를 통해 제가 만든 서비스를 설치해 줍니다.
+저는 git을 설치해서 해당 레포지토리를 클론한 뒤 서버를 실행시키는 방법을 사용하였습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ pwd
+/home/ec2-user 뜨면 잘 연결된 겁니다🎉
+
+$ sudo yum update y   // yum update를 해줍니다.&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;git을 설치해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ sudo yum install git -y
+
+$ git --version
+git version 2.34.1.windows.1  // git 버전이 잘 뜨면 성공🎉&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이제 git 레포지토리를 클론하여 가져옵니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;git clone https://github.com/본인깃허브아이디/레포지토리.git&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;그럼 다음과 같이, username과 password를 입력합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;Username for &amp;#39;https://github.com&amp;#39;: 깃허브아이디
+Password for &amp;#39;https://kirahaa@gmail.com&amp;#39;: &lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;패스워드는 &lt;strong&gt;github 로그인 &gt; Settings &gt; Developer settings &gt; Personal access tokens &gt; Generate New Token &gt; 필요항목 입력(repository만 체크) 후 Generate Token&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;생성된 토큰을 &lt;strong&gt;Ctrl + shift + v&lt;/strong&gt; 해서 붙여넣기 해줍니다.&lt;/p&gt;
+&lt;p&gt;이제 생성된 디렉토리를 확인해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ ls 
+// 생성된 레포 뜸 ex) auth-with-jwt&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;해당 디렉토리로 들어갑니다.&lt;/p&gt;
+&lt;p&gt;자 이제, &lt;code&gt;npm install&lt;/code&gt;을 해서 패키지들을 설치해 주어야 하는데,&lt;br/&gt;
+npm을 입력하면 &lt;code&gt;-bash: npm: command not found&lt;/code&gt;라고 뜰 것입니다.&lt;br/&gt;
+그럼 다음 명령어들을 순서대로 쳐줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+$ . ~/.nvm/nvm.sh
+
+$ nvm install node&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이제 node를 설치해야 하는데, &lt;code&gt;nvm install node&lt;/code&gt;하면 에러가 뜰 것입니다.&lt;br/&gt;
+버전 문제 때문에 다음과 같이 16버전을 다운받아 주어야 합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;nvm install 16&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;node가 잘 설치되었나 버전 확인을 해줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;node -v&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이제 &lt;code&gt;package.json&lt;/code&gt; 내 패키지들을 설치해 줍니다.&lt;/p&gt;
+&lt;p&gt;여기서 잠깐! git에는 mongodb 정보가 담겨있는 &lt;code&gt;config.js&lt;/code&gt;파일이 제외되어 있어서, 새로 만들어줘야 했습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ cat &amp;gt; config.js&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code&gt;cat&lt;/code&gt; 명령어를 통해 파일 생성이 되면 내용을 바로 입력할 수 있습니다.
+(참고: &lt;a href=&quot;https://heytech.tistory.com/33&quot;&gt;https://heytech.tistory.com/33&lt;/a&gt;)&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;module.exports = {
+  &amp;#39;secret&amp;#39;: &amp;#39;SeCrEtKeYfOrHaShInG&amp;#39;,
+  &amp;#39;mongodbUri&amp;#39;: &amp;#39;mongodb+srv://&amp;lt;본인 아이디&amp;gt;:&amp;lt;패스워드&amp;gt;@mycluster.likcia7.mongodb.net/?retryWrites=true&amp;amp;w=majority&amp;#39;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// 저장 및 종료
+키보드 control과 z 버튼 동시에 눌러주기.&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;괄호가 잘 안닫혔는지, &lt;code&gt;node app.js&lt;/code&gt; 명령어를 실행해 주었더니, 오류가 떴습니다.😥&lt;br/&gt;
+그래서 다시 &lt;code&gt;config.js&lt;/code&gt; 파일 수정해주기!&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// 편집 및 저장
+// 편집 명령어
+$ vi 파일명.확장자명&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;명령어 입력 후 엔터를 눌러주면 기존에 저장한 내용이 나옵니다.&lt;br/&gt;
+확인해보니 역시 닫는 괄호가 잘 안 닫혀있어, 파일을 수정해 줍니다.&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;편집을 모두 마쳤다면, 키보드 &lt;code&gt;ESC&lt;/code&gt;를 눌러 편집 기능을 비 활성화 해줍니다.&lt;br/&gt;
+이제 마지막으로 &lt;code&gt;:wq&lt;/code&gt;를 입력하고 &lt;code&gt;Enter&lt;/code&gt;를 눌러주면 파일이 저장되고 터미널로 화면이 전환됩니다.&lt;br/&gt;
+이제 다시 &lt;code&gt;node app.js&lt;/code&gt; 명령어를 통해 서버를 실행해 줍니다!🎉&lt;/p&gt;
+&lt;h2&gt;8) 인바운드 규칙 추가&lt;/h2&gt;
+&lt;p&gt;이제 마지막 단계입니다!&lt;/p&gt;
+&lt;p&gt;퍼블릭 IPv4 주소인 &lt;strong&gt;13.209.42.233&lt;/strong&gt;으로 접속했더니 잘 되지 않습니다.&lt;br/&gt;
+그건 저희가 포트 3000번에 열었기 때문인데요, 그래서 &lt;strong&gt;13.209.42.233:3000&lt;/strong&gt;으로 접속해 줍니다.
+그래도 아마 접속이 안될 것입니다ㅠㅠ&lt;/p&gt;
+&lt;p&gt;자 이제 다시 aws 인스턴스 페이지로 돌아가서 왼쪽 메뉴에서 &lt;strong&gt;네트워크 및 보안 &gt; 보안 그룹&lt;/strong&gt;에 들어갑니다.&lt;/p&gt;
+&lt;p&gt;해당 인스턴스 이름을 클릭한 뒤, 하단에 보이는 &lt;strong&gt;인바운드 규칙 &gt; 인바운드 규칙 편집&lt;/strong&gt;을 눌러 포트를 새로 추가해 줍니다.&lt;/p&gt;
+&lt;p&gt;현재 제 인바운드 리스트에는 세가지가 있는데요.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;left&quot;&gt;유형&lt;/th&gt;
+&lt;th align=&quot;left&quot;&gt;프로토콜&lt;/th&gt;
+&lt;th align=&quot;left&quot;&gt;포트 범위&lt;/th&gt;
+&lt;th align=&quot;left&quot;&gt;소스&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;SSH&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;TCP&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;22&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;0.0.0.0/0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;HTTP&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;TCP&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;80&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;0.0.0.0/0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;사용자 지정 TCP&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;TCP&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;3000&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;0.0.0.0/0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;이렇게 추가해 주시면 됩니다.&lt;/p&gt;
+&lt;p&gt;그럼 이제 주소창에 &lt;strong&gt;13.209.42.233:3000&lt;/strong&gt;을 입력하면&lt;/p&gt;
+&lt;p&gt;aws 서버 만들기 완료입니다!!🎉🎉🎉&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a7fe00ef919ef6004ae0107993311ff7/f6862/aws_complete.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 47.46835443037975%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAWklEQVR42uWQOw6AMAxDc/8zZupCp5aFKJ/BqFQdEVDYGN5mP1kmVcXAzODuU4S3roKWnMHMSCmhlDIt7ARIZEOtK0TkpaxDx9yI00C7YVxyW3iJPVz4JT8U7hDDwWrRLt6/AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;aws complete&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a7fe00ef919ef6004ae0107993311ff7/984b6/aws_complete.png&quot;
+        srcset=&quot;/static/a7fe00ef919ef6004ae0107993311ff7/4d6f2/aws_complete.png 158w,
+/static/a7fe00ef919ef6004ae0107993311ff7/3c1ae/aws_complete.png 315w,
+/static/a7fe00ef919ef6004ae0107993311ff7/984b6/aws_complete.png 630w,
+/static/a7fe00ef919ef6004ae0107993311ff7/e7d8e/aws_complete.png 945w,
+/static/a7fe00ef919ef6004ae0107993311ff7/58c38/aws_complete.png 1260w,
+/static/a7fe00ef919ef6004ae0107993311ff7/f6862/aws_complete.png 1917w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;➕ 이후 찾은 문제점&lt;br/&gt;&lt;/h3&gt;
+&lt;p&gt;위 과정으로 aws 인스턴스가 잘 만들어졌다고 생각했는데, 서버가 자꾸 끊기는 문제가 발생했습니다.&lt;br/&gt;
+아직 정확한 문제를 찾지는 못했으나, ec2의 t2.micro의 작은 메모리이다 보니, 끊기는 것은 어쩔 수 없는 문제인가 봅니다..&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;에필로그&lt;/h3&gt;
+&lt;p&gt;여기까지 node.js의 express를 활용한 jwt 인증 구현을 해보았는데요, 사실 이번에는 튜토리얼 영상을 보며 코드를 따라친 느낌이라 그냥 찍먹한 느낌입니다..ㅎㅎ&lt;/p&gt;
+&lt;p&gt;그래도 데이터베이스도 직접 만져보고, aws 인스턴스도 만들어보고 찍먹러로써는 정말 좋은 경험이었습니다! &lt;br/&gt;
+하나의 프로젝트의 처음부터 끝까지 경험해보고 싶다면 추천합니다! 👍&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Node.js + Express + JWT 인증 시스템 구현하기(feat. MongoDB)]]></title><description><![CDATA[Node.js와 Express, Mongodb를 이용한 JWT 토큰 기반 인증 시스템을 구현 한 뒤, AWS ec2를 통해 배포한 내용을 정리하였습니다. 1. 프로젝트 생성 및 설정하기 새로운 디렉토리를 만든 후, package.json…]]></description><link>https://kirahaa.github.io/node-express-jwt-auth/</link><guid isPermaLink="false">https://kirahaa.github.io/node-express-jwt-auth/</guid><pubDate>Fri, 14 Jul 2023 13:57:56 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;Node.js와 Express, Mongodb를 이용한 JWT 토큰 기반 인증 시스템을 구현 한 뒤, AWS ec2를 통해 배포한 내용을 정리하였습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2&gt;1. 프로젝트 생성 및 설정하기&lt;/h2&gt;
+&lt;p&gt;새로운 디렉토리를 만든 후, package.json 파일을 다음과 같이 설정해주고, &lt;code&gt;npm install&lt;/code&gt; 명령어를 통해 프로젝트에 필요한 모듈을 설치해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;json&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// package.json
+{
+  &amp;quot;name&amp;quot;: &amp;quot;express-jwt-auth&amp;quot;,
+  &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;,
+  &amp;quot;description&amp;quot;: &amp;quot;auth with express jwt&amp;quot;,
+  &amp;quot;main&amp;quot;: &amp;quot;index.js&amp;quot;,
+  &amp;quot;dependencies&amp;quot;: {
+    &amp;quot;bcrypt&amp;quot;: &amp;quot;^5.0.0&amp;quot;,
+    &amp;quot;cookie-parser&amp;quot;: &amp;quot;^1.4.5&amp;quot;,
+    &amp;quot;ejs&amp;quot;: &amp;quot;^3.1.3&amp;quot;,
+    &amp;quot;express&amp;quot;: &amp;quot;^4.17.1&amp;quot;,
+    &amp;quot;jsonwebtoken&amp;quot;: &amp;quot;^8.5.1&amp;quot;,
+    &amp;quot;mongoose&amp;quot;: &amp;quot;^5.9.23&amp;quot;,
+    &amp;quot;validator&amp;quot;: &amp;quot;^13.1.1&amp;quot;
+  },
+  &amp;quot;scripts&amp;quot;: {
+    &amp;quot;start&amp;quot;: &amp;quot;node app.js&amp;quot;,
+    &amp;quot;test&amp;quot;: &amp;quot;echo \&amp;quot;Error: no test specified\&amp;quot; &amp;amp;&amp;amp; exit 1&amp;quot;
+  },
+  &amp;quot;keywords&amp;quot;: [
+    &amp;quot;auth&amp;quot;,
+    &amp;quot;express&amp;quot;,
+    &amp;quot;jwt&amp;quot;
+  ],
+  &amp;quot;author&amp;quot;: &amp;quot;hayeong&amp;quot;,
+  &amp;quot;license&amp;quot;: &amp;quot;ISC&amp;quot;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;디렉토리 구조&lt;/h3&gt;
+&lt;p&gt;프로젝트에서 사용할 디렉토리 구조는 다음과 같습니다.
+페이지 템플릿은 &lt;code&gt;ejs&lt;/code&gt;를 사용하였습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;├─ .gitignore
+├─ README.md
+├─ app.js
+├─ config.example.js
+├─ controllers
+│  └─ authController.js
+├─ middleware
+│  └─ authMiddleware.js
+├─ models
+│  └─ User.js
+├─ package.json
+├─ public
+│  └─ style.css
+├─ routes
+│  └─ authRoutes.js
+└─ views
+   ├─ detail.ejs
+   ├─ home.ejs
+   ├─ login.ejs
+   ├─ partials
+   │  ├─ footer.ejs
+   │  └─ header.ejs
+   └─ signup.ejs&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;©generated by &lt;a href=&quot;https://woochanleee.github.io/project-tree-generator&quot;&gt;Project Tree Generator&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;app.js 세팅하기&lt;/h3&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// app.js
+const express = require(&amp;#39;express&amp;#39;);
+const mongoose = require(&amp;#39;mongoose&amp;#39;);
+
+const config = require(&amp;#39;./config&amp;#39;)
+
+const app = express();
+
+// middleware
+app.use(express.static(&amp;#39;public&amp;#39;));
+
+// view engine
+app.set(&amp;#39;view engine&amp;#39;, &amp;#39;ejs&amp;#39;);
+
+mongoose.connect(config.mongodbUri)
+const db = mongoose.connection
+db.on(&amp;#39;error&amp;#39;, console.error)
+db.once(&amp;#39;open&amp;#39;, ()=&amp;gt;{
+    console.log(&amp;#39;connected to mongodb server&amp;#39;)
+    app.listen(3000)
+})
+
+// routes
+app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; res.render(&amp;#39;home&amp;#39;));&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code&gt;config.js&lt;/code&gt; 파일은 프로젝트에서 사용할 MongoDB 서버의 정보와, JWT 토큰을 만들 때 사용될 &lt;code&gt;secret&lt;/code&gt; 키의 정보를 지니고 있습니다.&lt;/p&gt;
+&lt;p&gt;보안에 관련된 정보는 따로 파일에 분리하여 관리하는 것이 좋습니다.
+github 저장소에도 &lt;code&gt;config.js&lt;/code&gt; 파일은 &lt;code&gt;.gitignore&lt;/code&gt;에 추가해서 커밋이 되지 않도록 설정합니다.
+예제 정보가 적혀있는 &lt;code&gt;config.example.js&lt;/code&gt; 파일의 이름을 &lt;code&gt;config.js&lt;/code&gt;로 수정하고 사용합니다.
+설정 파일을 작성하기 전에, MongoDB 서버를 만들어 봅시다.&lt;/p&gt;
+&lt;h2&gt;2. MongoDB 준비&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.mongodb.com/&quot;&gt;MongoDB 홈페이지&lt;/a&gt;에 들어가서 회원가입을 해 줍니다.&lt;br/&gt;
+새로운 프로젝트를 만들고 새로운 클러스터를 만듭니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f2c905606f20f08dad165fad974c1fa9/9caaa/mongodb_1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABTklEQVR42oWS3W4VIRSF5/2fxBfwAbzyRi+MNyYmtqYxaU87TGf42xvYfAZOzrGapi6yMgOEzbeAZYuemDJpuAheEiqClkKzRv9P01rIRUkiiCrL/e54OnZa7/zcPD/czmlPBMlkVXrvbxvOto41Y/m+3nPrHatEnD9w3vPod9wgL8JbGgWHbtcH3n36wMebbyynzXHkSLVGbUapDVWdkYdHjOFa65XqgjWohn49r7z/+pkvdzcsj84RUqJZRWsnqhEl4WO8+jzf/qZ70QyjtI4ZLA/bOgn/XfBSpVZ8zPiQiClhZvRX4lvvI/JGzGlGfk3NDCmVI1V8UkSU1ux6fn+Iz0WXk3Nsxz4pQjpHjHncsHCEMPuicnbRSXh4jw+BmIUjpvkd64eXp23jOQZqq/MtjfMahUJO+BTn/9jgstEYv4xFUXxWguh8j7U1fgN2Yb6VbYCypwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;make new cluster in mongodb&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f2c905606f20f08dad165fad974c1fa9/984b6/mongodb_1.png&quot;
+        srcset=&quot;/static/f2c905606f20f08dad165fad974c1fa9/4d6f2/mongodb_1.png 158w,
+/static/f2c905606f20f08dad165fad974c1fa9/3c1ae/mongodb_1.png 315w,
+/static/f2c905606f20f08dad165fad974c1fa9/984b6/mongodb_1.png 630w,
+/static/f2c905606f20f08dad165fad974c1fa9/e7d8e/mongodb_1.png 945w,
+/static/f2c905606f20f08dad165fad974c1fa9/58c38/mongodb_1.png 1260w,
+/static/f2c905606f20f08dad165fad974c1fa9/9caaa/mongodb_1.png 2874w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;저는 &lt;code&gt;Project 0&lt;/code&gt;의 &lt;code&gt;myCluster&lt;/code&gt;란 이름의 클러스터를 만들어 주었습니다.&lt;/p&gt;
+&lt;h3&gt;데이터 베이스 만들기&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Browse Collections &gt; add my own data&lt;/strong&gt;에서 새로운 데이터 베이스를 생성합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/0fce7eaf88640a4114d10bcb5b96e403/f621c/mongodb_2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 48.10126582278481%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAACAUlEQVR42n2SS2sTURiG8y8FE5smk3vakHYyk7lP0napuFaKUSuohbSQpRsX7rSCWkttWkQkVVDT2NDQC9M88p20RUU8cJgzw5z3e28xzfTQDI9s3UfOGdMnVw/IWyEFu/HfLf9kzYBsPSBj+JS9RWJp3aVgNZg2fOK6S9oISNcCNMMnL8B2qC7KkH8NKl48s6bPjAAmdBvN9NWe0h1Shk9yzuH28gPe7+zy6u0mr99tsfmhS/fjJ27eaZHSHYpOU7ETZqJQq3mU3UViSd1RYDJdZBecBlNVi0drHUZHI/r9A06Oj4mic2S1VteIVwxKTvOKtex0zVXfYpmaR74eKu9S8w5azeVGxWRlrcPXwYjewZDh2ZgfRyecKcB1pqp1Sm7zSnbG8EhWLYp2c+LhBFDCcZVHcuFhu0OvP2Tvy3f6o1MOTyMiYPlJm+szNXLK1/CCaaiIzHhLxLQLhmnTI2cHlL0FJXml3eFwOORzb5+DwYAoipTke0/bJGYNFUbODIhXTRJzFtNzNiVngVh63lUTLtMruQuKoXgo63w8hjF8+zng5f4u91fXiSvAJnkz4NqsTqJqkTXDScoCKAwv/RAJkqKkvNXd483WNpvbO7zY2ODx82fcuttSbC57WLKbE7b1YCJZaMvL36WVskodpBZSj4IVUvGWlJo/yv1byYXhLw/sDdyHZaEEAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;make database in mongodb&quot;
+        title=&quot;&quot;
+        src=&quot;/static/0fce7eaf88640a4114d10bcb5b96e403/984b6/mongodb_2.png&quot;
+        srcset=&quot;/static/0fce7eaf88640a4114d10bcb5b96e403/4d6f2/mongodb_2.png 158w,
+/static/0fce7eaf88640a4114d10bcb5b96e403/3c1ae/mongodb_2.png 315w,
+/static/0fce7eaf88640a4114d10bcb5b96e403/984b6/mongodb_2.png 630w,
+/static/0fce7eaf88640a4114d10bcb5b96e403/e7d8e/mongodb_2.png 945w,
+/static/0fce7eaf88640a4114d10bcb5b96e403/58c38/mongodb_2.png 1260w,
+/static/0fce7eaf88640a4114d10bcb5b96e403/f621c/mongodb_2.png 2878w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;저는 데이터 베이스 이름을 &lt;code&gt;node-auth&lt;/code&gt;로 설정하고, collection 이름을 &lt;code&gt;users&lt;/code&gt;로 설정하였습니다.&lt;br/&gt;
+설정이 끝나면 &lt;strong&gt;Connect &gt; Connect to your application &gt; Drivers&lt;/strong&gt; 해당 데이터 베이스에 연결하면 하단에 &lt;strong&gt;application code&lt;/strong&gt;가 나옵니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a76ab49290854c5fad78ba9fdfb20274/a58ca/mongodb_3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.89873417721519%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAACGUlEQVR42mWSyW4TQRRF+/tYsWCD2KCwQMSZbHe7J/fk+HdYAd6Q4HbyIYgkKHFit93ueTyoKyRE4klPqnoqnbr36Uq6YWCYJrZtM5CHfJ3NuH9YcXV1za+ra5bLe7abDZtgQ7Bei16vVkRRxGw2Q1U1LNvGMAwc10EaqCMUXcPxPD70DjnzF3R1F2+Iy5y2bYnrgrDMxLy7Z2UpzovFAk3TmEwmTFyP6ekU6WikcKJraLbFwfERc98nTBJ+3txwfXtHsA3Jq5K0yKmbhqZpSPNcAH3fxzQMjpQhr/fe8bF/iKSoKrpp4noesqww9xckaS5s3y0fiKKYsiyFsqfqoE8KDV1nZOq8P9xnoKlII1UTO3Rdl+PBkPP5gqZtyfOcXZxQlBV1U1PV9TPoJVBVVRzXZWw5nHaWZXX0qND12O/1+H52xnYX8fv2ll0cU1YVnbjO7pPKl0BZlrEsG8uy8CYekjzqLI/xPI9Xb9/w+dsX8XgbJ2RFSdm0VE0rVFed0qamqMrnHWqajuN6jC0bbzJBGsgKqhi6fDrocT73SUtYBhHrMGEdpgRhQpbl/+3wx9znpC9jjC3M8ViAJU3XheUOOBgMWVxckBUF62BDGEXESUKapsRpSl4UwnpVV3+Bc2RFETnsLE+nU6Qu2KY1xnYc+v0+F5eXFG3Dchuw3e2Is4wwT0iyTHT3WZT9y6GuP+ZQ0w329g/4A2A1hlEen3jlAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Connect to cluster in mongodb&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a76ab49290854c5fad78ba9fdfb20274/984b6/mongodb_3.png&quot;
+        srcset=&quot;/static/a76ab49290854c5fad78ba9fdfb20274/4d6f2/mongodb_3.png 158w,
+/static/a76ab49290854c5fad78ba9fdfb20274/3c1ae/mongodb_3.png 315w,
+/static/a76ab49290854c5fad78ba9fdfb20274/984b6/mongodb_3.png 630w,
+/static/a76ab49290854c5fad78ba9fdfb20274/e7d8e/mongodb_3.png 945w,
+/static/a76ab49290854c5fad78ba9fdfb20274/58c38/mongodb_3.png 1260w,
+/static/a76ab49290854c5fad78ba9fdfb20274/a58ca/mongodb_3.png 2876w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;application code 예시&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;mongodb+srv://&amp;#x3C;본인 아이디&gt;:&amp;#x3C;패스워드&gt;@mycluster.likcia7.mongodb.net/?retryWrites=true&amp;#x26;w=majority&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;3. MongoDB 연결하기&lt;/h2&gt;
+&lt;h3&gt;config.js 세팅하기&lt;/h3&gt;
+&lt;p&gt;위에서 생성한 &lt;strong&gt;application code&lt;/strong&gt;를 복사 붙여넣기 해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;module.exports = {
+  &amp;#39;secret&amp;#39;: &amp;#39;SeCrEtKeYfOrHaShInG&amp;#39;,
+  &amp;#39;mongodbUri&amp;#39;: &amp;#39;mongodb+srv://&amp;lt;본인 아이디&amp;gt;:&amp;lt;패스워드&amp;gt;@mycluster.likcia7.mongodb.net/?retryWrites=true&amp;amp;w=majority&amp;#39;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code&gt;secret&lt;/code&gt; 키는 이후에 JWT 토큰을 검증하는 서명 부분에 사용할 비밀 키입니다. 보안에 연관된 정보들은 config.js 파일에 보관해 줍니다.&lt;/p&gt;
+&lt;p&gt;여기까지 코드작성이 완료되었다면, 터미널에서 &lt;code&gt;node app.js&lt;/code&gt;를 입력하여 서버를 실행할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;gt; node app.js
+
+connected to mongodb server // 이렇게 뜨면 성공! 🎉&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h2&gt;4. 본격 API 만들기&lt;/h2&gt;
+&lt;h3&gt;Auth Routes&lt;/h3&gt;
+&lt;p&gt;인증에 관련된 라우터를 구성해 줍니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;left&quot;&gt;route&lt;/th&gt;
+&lt;th align=&quot;left&quot;&gt;request&lt;/th&gt;
+&lt;th align=&quot;right&quot;&gt;description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;strong&gt;/signup&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;GET&lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt;sign up page&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;strong&gt;/login&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;GET&lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt;login page&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;strong&gt;/signup&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;POST&lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt;create a new user in db&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;strong&gt;/login&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;POST&lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt;authenticate a current user&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;strong&gt;/logout&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;GET&lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt;logout page&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;authRoutes.js&lt;/code&gt; 파일을 생성한 후, 다음과 같이 라우터를 설정해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// routes/authRoutes.js
+const { Router } = require(&amp;#39;express&amp;#39;);
+
+const router = Router();
+
+router.get(&amp;#39;/signup&amp;#39;, () =&amp;gt; {});
+router.post(&amp;#39;/signup&amp;#39;, () =&amp;gt; {});
+router.get(&amp;#39;/login&amp;#39;, () =&amp;gt; {});
+router.post(&amp;#39;/login&amp;#39;, () =&amp;gt; {});
+router.get(&amp;#39;/logout&amp;#39;, () =&amp;gt; {})
+
+module.exports = router;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;컨트롤러&lt;/h3&gt;
+&lt;p&gt;이제 각각의 기능을 구현할 컨트롤러를 만들어 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// controllers/authController.js
+
+module.exports.signup_get = (req, res) =&amp;gt; {
+	res.render(&amp;#39;signup&amp;#39;)
+}
+
+module.exports.login_get = (req, res) =&amp;gt; {
+	res.render(&amp;#39;login&amp;#39;)
+}
+
+module.exports.signup_post = (req, res) =&amp;gt; {
+	res.send(&amp;#39;new signup&amp;#39;)
+}
+
+module.exports.login_post = (req, res) =&amp;gt; {
+	res.send(&amp;#39;user login&amp;#39;)
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;구성한 컨트롤러를 router에 연결합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// routes/authRoutes.js
+
+const {Router} = require(&amp;#39;express&amp;#39;);
+const authController = require(&amp;#39;../controllers/authController&amp;#39;);
+
+const router = Router();
+
+router.get(&amp;#39;/signup&amp;#39;, authController.signup_get);
+router.post(&amp;#39;/signup&amp;#39;, authController.signup_post);
+router.get(&amp;#39;/login&amp;#39;, () =&amp;gt; authController.login_get);
+router.post(&amp;#39;/login&amp;#39;, () =&amp;gt; authController.login_post);
+
+
+module.exports = router;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code&gt;app.js&lt;/code&gt;에도 이 라우터들을 연결해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;...
+const authRoutes = require(&amp;#39;./routes/authRoutes&amp;#39;);
+...
+
+app.use(authRoutes);&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h2&gt;5. Postman을 이용한 API 테스트&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.postman.com/&quot;&gt;Postman&lt;/a&gt;은 프론트엔드가 구현되기 전에 서버에 대한 요청을 시뮬레이션할 수 있는 플랫폼입니다.&lt;br/&gt;
+이를 통해 개발한 API를 테스트하고, 테스트 결과를 공유하여 API 개발의 생산성을 높일 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f6d933c1ad2dcad32db2f3e6bacb358e/f9c26/postman.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.26582278481012%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABf0lEQVR42pVSy47UMBDMT3BjFL8dP5I4yTjZeIEs3JA48zH8fKF2dqJBggOHkl3q7nJ1t5uUEuZpgrUW3ntM0wTnHJRSEFJCKgVjDKYxYh4itJLgQoC3N7D0BjkWpGgRNENnDRrvA3xM6Pu+ClXhECofhqFyEpdSQGtV7yc0JLvBGQkTZ4hPPyHDjCbnjLTcsb1s2LYN5DgNA8K76DiO9YGu6y6QY601lLbVsYwZH3/8AusLmnleEKJDKTuO4w3DOMIaDWsN2rYFY6yijkCIi9OdRBnjYO0N+vYBirdoKNE4i7yu2PcdMUZwzmsBnQ/8jVPtyQWEpAclGrLfeYdlWTDPc22Jkh5OCM9CFYzwHmP8yqezClpncc+5OiTR4B1c19WFUPxcirwEafNSK0ianz5/AsXJdaOVge80XtYVpZTqNHhfN26svURpXs/tPsDFyS9BFz1CirjvGeX1Feu61qLnhfyz9Sc8FtXcvxWs3z+jPzK+fD1wHMcfbv4HJPgbj0Mjf3elS8EAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Postman&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f6d933c1ad2dcad32db2f3e6bacb358e/984b6/postman.png&quot;
+        srcset=&quot;/static/f6d933c1ad2dcad32db2f3e6bacb358e/4d6f2/postman.png 158w,
+/static/f6d933c1ad2dcad32db2f3e6bacb358e/3c1ae/postman.png 315w,
+/static/f6d933c1ad2dcad32db2f3e6bacb358e/984b6/postman.png 630w,
+/static/f6d933c1ad2dcad32db2f3e6bacb358e/e7d8e/postman.png 945w,
+/static/f6d933c1ad2dcad32db2f3e6bacb358e/58c38/postman.png 1260w,
+/static/f6d933c1ad2dcad32db2f3e6bacb358e/f9c26/postman.png 2880w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Postman을 통해 생성한 api 주소로 각 요청을 보내 연결이 잘 되는지 확인할 수 있습니다.&lt;/p&gt;
+&lt;h2&gt;6. model&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;mongoose&lt;/code&gt;를 통해 유저 정보를 MongoDB에 넣을때, 스키마를 만들어야 합니다.&lt;br/&gt;
+스키마란 기본적으로 데이터베이스에서 사용자 데이터나 기록이 어떻게 표시되어야 하는지를 정의합니다.&lt;br/&gt;
+해당 파트에서 유효성 문구 등을 직접 설정할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// models/User.js
+
+const mongoose = require(&amp;#39;mongoose&amp;#39;);
+const { isEmail } = require(&amp;#39;validator&amp;#39;);
+
+const userSchema = new mongoose.Schema({
+	email: {
+		type: String,
+		required: [true, &amp;#39;Please enter an email&amp;#39;],
+		unique: true,
+		lowercase: true,
+		validate: [isEmail, &amp;#39;Please enter a valid email&amp;#39;]
+	},
+	password: {
+		type: String,
+		required: [true, &amp;#39;Please enter a password&amp;#39;],
+		minlength: [6, &amp;#39;Minimum password length is 6 characters&amp;#39;]
+	},
+});
+
+const User = mongoose.model(&amp;#39;user&amp;#39;, userSchema);
+
+module.exports = User;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;다시 컨트롤러로 돌아가서 유저 모델을 연결해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// controllers/authController.js
+const User = require(&amp;#39;../models/User&amp;#39;);
+
+// handle errors
+const handleErrors = (err) =&amp;gt; {
+	console.log(err.message, err.code);
+	let error = { email: &amp;#39;&amp;#39;, password: &amp;#39;&amp;#39;};
+
+	// duplicate error code
+	if (err.code === 11000) {
+		errors.email = &amp;#39;that email is aleady registered&amp;#39;;
+		return errors;
+	}
+
+	// validation errors
+	if (err.message.includes(&amp;#39;user validation failed&amp;#39;)) {
+		Object.values(err.errors).forEach(({properties}) =&amp;gt; {
+			error[properties.path] = properties.message;
+		})
+	}
+
+	return errors;
+}
+
+module.exports.signup_get = (req, res) =&amp;gt; {
+	res.render(&amp;#39;signup&amp;#39;)
+}
+
+module.exports.login_get = (req, res) =&amp;gt; {
+	res.render(&amp;#39;login&amp;#39;)
+}
+
+module.exports.signup_post = async (req, res) =&amp;gt; {
+	const {email, password} = req.body;
+
+	try {
+		const user = await User.create({ email, password }); // 유저 생성
+		res.status(201).json(user);
+	}
+	catch (err) {
+		const errors = handleErrors(err);
+		res.status(400).json({errors})
+	}
+}
+
+module.exports.login_post = async (req, res) =&amp;gt; {
+	const {email, password} = req.body;
+
+	console.log(email, password);
+	res.send(&amp;#39;user login&amp;#39;)
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;비밀번호 해시처리&lt;/h3&gt;
+&lt;p&gt;현재 유저정보가 DB에 잘 쌓이고 있는데, 비밀번호가 그대로 드러나고 있습니다.&lt;br/&gt;
+이를 방지하기 위해, &lt;code&gt;bcrypt&lt;/code&gt; 라이브러리를 사용하여 비밀번호를 암호화 시켜줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// User.js
+
+const mongoose = require(&amp;#39;mongoose&amp;#39;);
+const { isEmail } = require(&amp;#39;validator&amp;#39;);
+const bcrypt = require(&amp;#39;bcrypt&amp;#39;);
+
+const userSchema = new mongoose.Schema({
+	email: {
+		type: String,
+		required: [true, &amp;#39;Please enter an email&amp;#39;],
+		unique: true,
+		lowercase: true,
+		validate: [isEmail, &amp;#39;Please enter a valid email&amp;#39;]
+	},
+	password: {
+		type: String,
+		required: [true, &amp;#39;Please enter a password&amp;#39;],
+		minlength: [6, &amp;#39;Minimum password length is 6 characters&amp;#39;]
+	},
+});
+
+// fire a function before doc saved to db
+userSchema.pre(&amp;#39;save&amp;#39;, async function (next) {
+	const salt = await bcrypt.genSalt();
+	this.password = await bcrypt.hash(this.password, salt);
+	
+	next();
+})
+
+const User = mongoose.model(&amp;#39;user&amp;#39;, userSchema);
+
+module.exports = User;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;데이터가 저장되기 전에(&lt;code&gt;pre&lt;/code&gt;) 비밀번호를 해시 처리해서 암호화 시켜줍니다.&lt;/p&gt;
+&lt;h3&gt;Cookies&lt;/h3&gt;
+&lt;p&gt;쿠키는 클라이언트 개개인의 상태 정보를 담고 있는 데이터입니다.&lt;br/&gt;
+다음과 같은 방법으로 브라우저에 쿠키를 생성할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// app.js
+
+// cookies
+app.get(&amp;#39;/set-cookies&amp;#39;, (req, res) =&amp;gt; {
+	res.setHeader(&amp;#39;Set-Cookie&amp;#39;, &amp;#39;newUser=true&amp;#39;);
+	// 또는
+	res.cookie(&amp;#39;newUser&amp;#39;, false);
+	
+	res.send(&amp;#39;you got the cookies!&amp;#39;);
+});&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 여기서 주의할 점!&lt;/p&gt;
+&lt;p&gt;쿠키는 javascript의 document.cookie를 통해 접근할 수 있기 때문에, 해킹 당할 위험이 있다.
+이를 보호하기 위해 HttOnly나 Secure 속성을 설정할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;res.cookie(&amp;#39;test&amp;#39;, true, { httpOnly: true })&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이렇게 httpOnly 옵션을 추가하면, 클라이언트의 환경(웹 브라우저)에서 스크립트(javascript 등)로 쿠키에 접근하는 것을 차단할 수 있다. 이 설정을 함으로써 XSS(Cross Site Script) 공격에 대응이 가능하다.&lt;/p&gt;
+&lt;p&gt;추가로, 쿠키의 만료날짜를 설정할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const maxAge = 60 * 60 * 24 * 2;  // 60초 * 60분 * 24시간 * 2일
+
+res.cookie(&amp;#39;jwt&amp;#39;, token, { httpOnly: true, maxAge: maxAge * 1000 })&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h2&gt;7. JSON Web Tokens&lt;/h2&gt;
+&lt;p&gt;JWT(JSON Web Token)란 &lt;strong&gt;인증에 필요한 정보들을 암호화시킨 JSON 토큰&lt;/strong&gt;을 의미합니다.&lt;br/&gt;
+그리고 JWT 기반 인증은 JWT 토큰(Access Token)을 HTTP 헤더에 실어 서버가 클라이언트를 식별하는 방식입니다.&lt;br/&gt;
+JWT는 .을 구분자로 나누어지는 세 가지 문자열의 조합입니다.&lt;br/&gt;
+.을 기준으로 &lt;code&gt;Header&lt;/code&gt;, &lt;code&gt;Payload&lt;/code&gt;, &lt;code&gt;Signature&lt;/code&gt;로 구성되어 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a688b3536a0be435f268132ae32083a2/7e08f/jsonwebtoken.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.32911392405063%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB7ElEQVR42mWS204bMRBA+RhYjz2+7C3XTUIpIoQgQi5tIpUi9f9/4lTetISqD2dn5ZGPPeO5KsTxlxtxXIv9FM9c8vlfKaynsHrm0/7MVf6YP4KRSfwsOnZmzFsxZS1jHsKOlT+c0T3taku7OzE8vNFujkhquCnkX+H5RlmsrM2Qb2bC1owZ2Mg0PLAOJ+7Dhqne4b8uqQ+/KDcn0tOeQgPXxlyEWWZFiaJ4sSSjVOJJ4vHGEiUxkI5GRpSmxZuKpBOitERpiFITpMaI58ZYrnKppSRe3TObnnXPzr2wtU/Mxs9MZyduZ2/cdj/ouiOL6Yl5ZrRnMT3SDXdYCX2Pzz3UQOUbWh1QaoMLFdaXJD+mSh0xjZBYUsRA4T2mTEg7PFM3mOAR9eeSjVV8LJlpw522jLQiphrrPcM440taMYm3eF8SywoNJWEwo75/JU3v8NUAmx2hJLt6ofORoSQ6qZhIiQuR4GpGuqDVjrkuGegcq0pcrKhf3ilXR8L8kbBYYasRLlYXodXAoIjMTEljAoXmB6p58Fse/Z5teKeyY4wV3HBBevxOXB5IywNh8YQJNdaFi1B9xKjnRn0fNaS+xHyQ04TT2Pcol5Vvktetj30UI1iXq0yXOcwTb/7D9RR/+FgX95E74z9yeWx+AxitWTHNxlT2AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;jsonwebtoken&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a688b3536a0be435f268132ae32083a2/984b6/jsonwebtoken.png&quot;
+        srcset=&quot;/static/a688b3536a0be435f268132ae32083a2/4d6f2/jsonwebtoken.png 158w,
+/static/a688b3536a0be435f268132ae32083a2/3c1ae/jsonwebtoken.png 315w,
+/static/a688b3536a0be435f268132ae32083a2/984b6/jsonwebtoken.png 630w,
+/static/a688b3536a0be435f268132ae32083a2/e7d8e/jsonwebtoken.png 945w,
+/static/a688b3536a0be435f268132ae32083a2/7e08f/jsonwebtoken.png 1186w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Header&lt;/code&gt; 에는 JWT 에서 사용할 타입과 해시 알고리즘의 종류가 담겨있으며, &lt;code&gt;Payload&lt;/code&gt; 는 서버에서 첨부한 사용자 권한 정보와 데이터가 담겨있습니다. &lt;code&gt;Signature&lt;/code&gt;에는 Header, Payload 를 Base64 URL-safe Encode를 한 이후 Header에 명시된 해시함수를 적용하고, 개인키(Private Key)로 서명한 전자서명이 담겨있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// controllers/authController.js
+...
+const jwt = require(&amp;#39;jsonwebtoken&amp;#39;);
+...
+
+const maxAge = 3 * 24 * 60 * 60;  // three days
+const createToken = (id) =&amp;gt; {
+	return jwt.sign({ id }, config.secret, {
+		expiresIn: maxAge
+	});
+} 
+
+...
+
+module.exports.signup_post = async (req, res) =&amp;gt; {
+	const {email, password} = req.body;
+
+	try {
+		const user = await User.create({ email, password });
+		const token = createToken(user._id);
+		res.cookie(&amp;#39;jwt&amp;#39;, token, { httpOnly: true, maxAge: maxAge * 1000 })
+		res.status(201).json({ user: user._id });
+	}
+	catch (err) {
+		const errors = handleErrors(err);
+		res.status(400).json({errors})
+	}
+}
+...&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;JWT를 이용한 인증 과정&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;사용자가 ID, PW를 입력하여 서버에 로그인 인증을 요청한다.&lt;/li&gt;
+&lt;li&gt;서버에서 클라이언트로부터 인증 요청을 받으면, Header, PayLoad, Signature를 정의한다.Hedaer, PayLoad, Signature를 각각 Base64로 한 번 더 암호화하여 JWT를 생성하고 이를 쿠키에 담아 클라이언트에게 발급한다.&lt;/li&gt;
+&lt;li&gt;클라이언트는 서버로부터 받은 JWT를 로컬 스토리지에 저장한다. (쿠키나 다른 곳에 저장할 수도 있음)API를 서버에 요청할때 &lt;strong&gt;Authorization header에 Access Token을 담아&lt;/strong&gt;서 보낸다.&lt;/li&gt;
+&lt;li&gt;서버가 할 일은 클라이언트가 Header에 담아서 보낸 JWT가 내 서버에서 발행한 토큰인지 일치 여부를 확인하여 일치한다면 인증을 통과시켜주고 아니라면 통과시키지 않으면 된다.인증이 통과되었으므로 페이로드에 들어있는 유저의 정보들을 select해서 클라이언트에 돌려준다.&lt;/li&gt;
+&lt;li&gt;클라이언트가 서버에 요청을 했는데, 만일 액세스 토큰의 시간이 만료되면 클라이언트는 리프래시 토큰을 이용해서&lt;/li&gt;
+&lt;li&gt;서버로부터 새로운 엑세스 토큰을 발급 받는다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;라우트 보호하기&lt;/h3&gt;
+&lt;p&gt;요청에 jwt가 있는지 확인하고, jwt가 문제가 없는지 확인하는 과정입니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// middleware/authMiddleware.js
+
+const jwt = require(&amp;#39;jsonwebtoken&amp;#39;);
+
+const config = require(&amp;#39;../config.js&amp;#39;);
+
+const requireAuth = (req, res, next) =&amp;gt; {
+	const token = req.cookies.jwt;
+	
+	// check json web token exists &amp;amp; is verified
+	if (token) {
+		jwt.verify(token, config.secret, (err, decodedToken) =&amp;gt; {
+			if (err) {
+				console.log(err.message);
+				res.redirect(&amp;#39;/login&amp;#39;);
+			} else {
+				console.log(decodedToken);
+				next();
+			}
+		})
+	} else {
+		res.redirect(&amp;#39;/login&amp;#39;);
+	}
+}
+
+module.exports = { requireAuth }&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;jwt 토큰이 없거나, 유효하지 않은 경우 login 페이지로 넘어가도록 리다이렉트 해 줍니다.&lt;/p&gt;
+&lt;p&gt;유효한 토큰이 있는 경우에만 접근할 수 있는 페이지에 해당 middleware를 추가합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// app.js
+
+app.get(&amp;#39;/home&amp;#39;, requireAuth, (req, res) =&amp;gt; res.render(&amp;#39;home&amp;#39;));&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h2&gt;8. 로그아웃&lt;/h2&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// AuthController.js
+
+module.exports.logout_get = (req, res) =&amp;gt; {
+	res.cookie(&amp;#39;jwt&amp;#39;, &amp;#39;&amp;#39;, { maxAge: 1 });
+	res.redirect(&amp;#39;/&amp;#39;);
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;로그아웃은 controller에서 jwt라는 키를 가진 쿠키를 지워줍니다.&lt;/p&gt;
+&lt;h3&gt;현재 유저 확인&lt;/h3&gt;
+&lt;p&gt;ejs는 서버로부터 받은 데이터를 가공하여 클라이언트에서 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;이를 위해 변수를 초기화하는 미들웨어를 작성합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// authMiddleware.js
+
+...
+
+//check current user
+const checkUser = (req, res, next) =&amp;gt; {
+	const token = req.cookies.jwt;
+	
+	if (token) {
+		jwt.verify(token, config.secret, async (err, decodedToken) =&amp;gt; {
+			if (err) {
+				console.log(err.message);
+				res.locals.user = null;
+				next();
+			} else {
+				console.log(decodedToken);
+				let user = await User.findById(decodedToken.id);
+				res.locals.user = user;
+				next();
+			}
+		})
+	} else {
+		res.locals.user = null;
+		next();
+	}
+}
+
+module.exports = {requireAuth, checkUser};&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code&gt;res.locals.[variable]&lt;/code&gt; 을 통해 클라이언트에 변수를 전달할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// app.js
+const { requireAuth, checkUser } = require(&amp;#39;./middleware/authMiddleware&amp;#39;);
+
+...
+app.get(&amp;#39;*&amp;#39;, checkUser); // every single get request
+...&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;app.js에 checkUser를 가져와 모든(&lt;code&gt;*&lt;/code&gt;) get request에서 현재 유저를 확인하는 코드를 추가합니다.&lt;/p&gt;
+&lt;p&gt;여기서 생긴 궁금증!&lt;/p&gt;
+&lt;h3&gt;middleware란 무엇인가?&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;middleware의 사전적 정의&lt;/p&gt;
+&lt;p&gt;미들웨어는 양 쪽을 연결하여 데이터를 주고 받을 수 있도록 중간에서 매개 역할을 하는 소프트웨어, 네트워크를 통해서 연결된 여러 개의 컴퓨터에 있는 많은 프로세스들에게 어떤 서비스를 사용할 수 있도록 연결해 주는 소프트웨어를 말한다. 3계층 클라이언트/서버 구조에서 미들웨어가 존재한다. 웹 브라우저에서 데이터베이스로부터 데이터를 저장하거나 읽어올 수 있게 중간에 미들웨어가 존재하게 된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;광범위한 설명이지만 다음 2개의 키워드가 미들웨어의 역할이라고 생각합니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;양쪽을 연결&lt;/li&gt;
+&lt;li&gt;중간에서의 매개 역할&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;큰 범위로 보면 매개체 간 연결해주는 레이어로써, 매개체는 클라이언트(사용자) - 서버, 서버 - 서버 간의 통신이 될 수도 있습니다.&lt;br/&gt;
+통상적으로 기업에서 말하는 미들웨어 환경은 웹/어플리케이션 서버를 의미합니다.&lt;/p&gt;
+&lt;p&gt;ejs 템플릿을 사용한 프론트 단은 따로 내용에 작성하지 않았습니다.&lt;/p&gt;
+&lt;p&gt;모든 코드는 &lt;a href=&quot;https://github.com/kirahaa/auth-with-jwt&quot;&gt;github 레포지토리&lt;/a&gt; 참고 부탁드립니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;여기까지, JWT 인증 시스템 구현이 끝났습니다!&lt;br/&gt;
+JWT 인증은 해도 해도 어려운 것 같아요😥 다음에는 REACT 환경에서 JWT 인증을 구현해 보는 것도 도전해 보기로!&lt;/p&gt;
+&lt;p&gt;다음 포스팅에서는 AWS 프리티어를 이용해서 웹 호스팅 서버를 만드는 과정을 살펴보겠습니다.&lt;/p&gt;
+&lt;p&gt;가보자고~!💨&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Gatsby 블로그 꾸미기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/custom-gatsby-blog/</link><guid isPermaLink="false">https://kirahaa.github.io/custom-gatsby-blog/</guid><pubDate>Sat, 01 Jul 2023 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;자, 이제 본격적으로 나만의 블로그를 예쁘게 꾸며볼 시간입니다!😆&lt;/p&gt;
 &lt;p&gt;개츠비에는 워낙 다양한 플러그인들이 많아서 잘 활용해서 사용하면 많은 것들을 할 수 있습니다!&lt;br/&gt;
 여러 테크 블로그들을 돌아다니면서 블로그 구조, 폰트, 코드 블록 등 다양한 디자인들을 참고해서 나에게 맞는 기능들만 쏙쏙 골라서 꾸며봅시다!✨&lt;/p&gt;
 &lt;h2&gt;1. 코드 블록&lt;/h2&gt;
@@ -315,352 +1390,4 @@ github의 해당 블로그 repo에 들어가서 &lt;strong&gt;Setting &gt; Branc
 &lt;li&gt;&lt;a href=&quot;https://yeri-kim.github.io/posts/how-to-install-gatsby/&quot;&gt;https://yeri-kim.github.io/posts/how-to-install-gatsby/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://uzzam.dev/6&quot;&gt;https://uzzam.dev/6&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://pks2974.medium.com/jam-stack-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-17dd5c34edf7&quot;&gt;https://pks2974.medium.com/jam-stack-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-17dd5c34edf7&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[New Beginnings]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
-Consonantia, there live the blind texts. Separated they live in…]]></description><link>https://kirahaa.github.io/new-beginnings/</link><guid isPermaLink="false">https://kirahaa.github.io/new-beginnings/</guid><pubDate>Thu, 28 May 2015 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
-Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
-right at the coast of the Semantics, a large language ocean. A small river named
-Duden flows by their place and supplies it with the necessary regelialia.&lt;/p&gt;
-&lt;h2&gt;On deer horse aboard tritely yikes and much&lt;/h2&gt;
-&lt;p&gt;The Big Oxmox advised her not to do so, because there were thousands of bad
-Commas, wild Question Marks and devious Semikoli, but the Little Blind Text
-didn’t listen. She packed her seven versalia, put her initial into the belt and
-made herself on the way.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;This however showed weasel&lt;/li&gt;
-&lt;li&gt;Well uncritical so misled
-&lt;ul&gt;
-&lt;li&gt;this is very interesting&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Goodness much until that fluid owl&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;When she reached the first hills of the &lt;strong&gt;Italic Mountains&lt;/strong&gt;, she had a last
-view back on the skyline of her hometown &lt;em&gt;Bookmarksgrove&lt;/em&gt;, the headline of
-&lt;a href=&quot;http://google.com&quot;&gt;Alphabet Village&lt;/a&gt; and the subline of her own road, the Line
-Lane. Pityful a rhetoric question ran over her cheek, then she continued her
-way. On her way she met a copy.&lt;/p&gt;
-&lt;h3&gt;Overlaid the jeepers uselessly much excluding&lt;/h3&gt;
-&lt;p&gt;But nothing the copy said could convince her and so it didn’t take long until a
-few insidious Copy Writers ambushed her, made her drunk with
-&lt;a href=&quot;http://google.com&quot;&gt;Longe and Parole&lt;/a&gt; and dragged her into their agency, where
-they abused her for their projects again and again. And if she hasn’t been
-rewritten, then they are still using her.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
-Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
-right at the coast of the Semantics, a large language ocean.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It is a paradisematic country, in which roasted parts of sentences fly into your
-mouth. Even the all-powerful Pointing has no control about the blind texts it is
-an almost unorthographic life One day however a small line of blind text by the
-name of Lorem Ipsum decided to leave for the far World of Grammar.&lt;/p&gt;
-&lt;h3&gt;According a funnily until pre-set or arrogant well cheerful&lt;/h3&gt;
-&lt;p&gt;The Big Oxmox advised her not to do so, because there were thousands of bad
-Commas, wild Question Marks and devious Semikoli, but the Little Blind Text
-didn’t listen. She packed her seven versalia, put her initial into the belt and
-made herself on the way.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;So baboon this&lt;/li&gt;
-&lt;li&gt;Mounted militant weasel gregariously admonishingly straightly hey&lt;/li&gt;
-&lt;li&gt;Dear foresaw hungry and much some overhung&lt;/li&gt;
-&lt;li&gt;Rash opossum less because less some amid besides yikes jeepers frenetic
-impassive fruitlessly shut&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;When she reached the first hills of the Italic Mountains, she had a last view
-back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet
-Village and the subline of her own road, the Line Lane. Pityful a rhetoric
-question ran over her cheek, then she continued her way. On her way she met a
-copy.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The copy warned the Little Blind Text, that where it came from it would have
-been rewritten a thousand times and everything that was left from its origin
-would be the word &quot;and&quot; and the Little Blind Text should turn around and
-return to its own, safe country.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;But nothing the copy said could convince her and so it didn’t take long until a
-few insidious Copy Writers ambushed her, made her drunk with Longe and Parole
-and dragged her into their agency, where they abused her for their projects
-again and again. And if she hasn’t been rewritten, then they are still using
-her. Far far away, behind the word mountains, far from the countries Vokalia and
-Consonantia, there live the blind texts.&lt;/p&gt;
-&lt;h4&gt;Silent delightfully including because before one up barring chameleon&lt;/h4&gt;
-&lt;p&gt;Separated they live in Bookmarksgrove right at the coast of the Semantics, a
-large language ocean. A small river named Duden flows by their place and
-supplies it with the necessary regelialia. It is a paradisematic country, in
-which roasted parts of sentences fly into your mouth.&lt;/p&gt;
-&lt;p&gt;Even the all-powerful Pointing has no control about the blind texts it is an
-almost unorthographic life One day however a small line of blind text by the
-name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox
-advised her not to do so, because there were thousands of bad Commas, wild
-Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.&lt;/p&gt;
-&lt;h5&gt;Wherever far wow thus a squirrel raccoon jeez jaguar this from along&lt;/h5&gt;
-&lt;p&gt;She packed her seven versalia, put her initial into the belt and made herself on
-the way. When she reached the first hills of the Italic Mountains, she had a
-last view back on the skyline of her hometown Bookmarksgrove, the headline of
-Alphabet Village and the subline of her own road, the Line Lane. Pityful a
-rhetoric question ran over her cheek, then she continued her way. On her way she
-met a copy.&lt;/p&gt;
-&lt;h6&gt;Slapped cozy a that lightheartedly and far&lt;/h6&gt;
-&lt;p&gt;The copy warned the Little Blind Text, that where it came from it would have
-been rewritten a thousand times and everything that was left from its origin
-would be the word &quot;and&quot; and the Little Blind Text should turn around and return
-to its own, safe country. But nothing the copy said could convince her and so it
-didn’t take long until a few insidious Copy Writers ambushed her, made her drunk
-with Longe and Parole and dragged her into their agency, where they abused her
-for their projects again and again.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[This is my first post on my new fake blog! How exciting! I'm sure I'll write a lot more interesting things in the future. Oh, and here's a…]]></description><link>https://kirahaa.github.io/hello-world/</link><guid isPermaLink="false">https://kirahaa.github.io/hello-world/</guid><pubDate>Fri, 01 May 2015 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;This is my first post on my new fake blog! How exciting!&lt;/p&gt;
-&lt;p&gt;I&apos;m sure I&apos;ll write a lot more interesting things in the future.&lt;/p&gt;
-&lt;p&gt;Oh, and here&apos;s a great quote from this Wikipedia on
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Salted_duck_egg&quot;&gt;salted duck eggs&lt;/a&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A salted duck egg is a Chinese preserved food product made by soaking duck
-eggs in brine, or packing each egg in damp, salted charcoal. In Asian
-supermarkets, these eggs are sometimes sold covered in a thick layer of salted
-charcoal paste. The eggs may also be sold with the salted paste removed,
-wrapped in plastic, and vacuum packed. From the salt curing process, the
-salted duck eggs have a briny aroma, a gelatin-like egg white and a
-firm-textured, round yolk that is bright orange-red in color.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
-    &gt;
-      &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/09658/salty_egg.jpg&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-    &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75.31645569620254%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAMB/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAEEBf/aAAwDAQACEAMQAAABgik0dXC//8QAGRABAAMBAQAAAAAAAAAAAAAAAQACERIy/9oACAEBAAEFAkqW7B5Zox9t8n//xAAXEQEAAwAAAAAAAAAAAAAAAAAAERJB/9oACAEDAQE/AdVl/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEC/9oACAECAQE/AYun/8QAGxAAAQQDAAAAAAAAAAAAAAAAAAECESEiMTL/2gAIAQEABj8CvRjaHMkvIQo//8QAGxAAAwEBAAMAAAAAAAAAAAAAAREhAEGBobH/2gAIAQEAAT8hsTTH203YINmYDPHckkPzQiAnv//aAAwDAQACAAMAAAAQyC//xAAXEQEBAQEAAAAAAAAAAAAAAAABABEh/9oACAEDAQE/EBHDK6y//8QAGBEAAgMAAAAAAAAAAAAAAAAAAAERIVH/2gAIAQIBAT8QWiS0j//EABwQAQEAAgMBAQAAAAAAAAAAAAERADEhYYFB4f/aAAgBAQABPxBOzi0NHmChLtHkL9EcWZeCVJ1kcRoVp3lEYcnjEk0ES7/Jn//Z&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Chinese Salty Egg&quot;
-        title=&quot;&quot;
-        src=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/af1fa/salty_egg.jpg&quot;
-        srcset=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/ab180/salty_egg.jpg 158w,
-/static/8058f3f26913fea3b6a89a73344fe94a/ba98e/salty_egg.jpg 315w,
-/static/8058f3f26913fea3b6a89a73344fe94a/af1fa/salty_egg.jpg 630w,
-/static/8058f3f26913fea3b6a89a73344fe94a/23301/salty_egg.jpg 945w,
-/static/8058f3f26913fea3b6a89a73344fe94a/78e18/salty_egg.jpg 1260w,
-/static/8058f3f26913fea3b6a89a73344fe94a/09658/salty_egg.jpg 2048w&quot;
-        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-  &lt;/a&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;You can also write code blocks here!&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;const saltyDuckEgg = &amp;quot;chinese preserved food product&amp;quot;&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&quot;left&quot;&gt;Number&lt;/th&gt;
-&lt;th align=&quot;left&quot;&gt;Title&lt;/th&gt;
-&lt;th align=&quot;right&quot;&gt;Year&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;1&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;Harry Potter and the Philosopher’s Stone&lt;/td&gt;
-&lt;td align=&quot;right&quot;&gt;2001&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;2&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;Harry Potter and the Chamber of Secrets&lt;/td&gt;
-&lt;td align=&quot;right&quot;&gt;2002&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;3&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;Harry Potter and the Prisoner of Azkaban&lt;/td&gt;
-&lt;td align=&quot;right&quot;&gt;2004&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;a href=&quot;https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md&quot;&gt;View raw (TEST.md)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;This is a paragraph.&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;This is a paragraph.&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;h1&gt;Header 1&lt;/h1&gt;
-&lt;h2&gt;Header 2&lt;/h2&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;Header 1
-========
-
-Header 2
---------&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;h1&gt;Header 1&lt;/h1&gt;
-&lt;h2&gt;Header 2&lt;/h2&gt;
-&lt;h3&gt;Header 3&lt;/h3&gt;
-&lt;h4&gt;Header 4&lt;/h4&gt;
-&lt;h5&gt;Header 5&lt;/h5&gt;
-&lt;h6&gt;Header 6&lt;/h6&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;# Header 1
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
-###### Header 6&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;h1&gt;Header 1&lt;/h1&gt;
-&lt;h2&gt;Header 2&lt;/h2&gt;
-&lt;h3&gt;Header 3&lt;/h3&gt;
-&lt;h4&gt;Header 4&lt;/h4&gt;
-&lt;h5&gt;Header 5&lt;/h5&gt;
-&lt;h6&gt;Header 6&lt;/h6&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;# Header 1 #
-## Header 2 ##
-### Header 3 ###
-#### Header 4 ####
-##### Header 5 #####
-###### Header 6 ######&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;&amp;gt; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;blockquote&gt;
-&lt;h2&gt;This is a header.&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;This is the first list item.&lt;/li&gt;
-&lt;li&gt;This is the second list item.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Here&apos;s some example code:&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;Markdown.generate();&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;/blockquote&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;&amp;gt; ## This is a header.
-&amp;gt; 1. This is the first list item.
-&amp;gt; 2. This is the second list item.
-&amp;gt;
-&amp;gt; Here&amp;#39;s some example code:
-&amp;gt;
-&amp;gt;     Markdown.generate();&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;ul&gt;
-&lt;li&gt;Red&lt;/li&gt;
-&lt;li&gt;Green&lt;/li&gt;
-&lt;li&gt;Blue&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;Red&lt;/li&gt;
-&lt;li&gt;Green&lt;/li&gt;
-&lt;li&gt;Blue&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;Red&lt;/li&gt;
-&lt;li&gt;Green&lt;/li&gt;
-&lt;li&gt;Blue&lt;/li&gt;
-&lt;/ul&gt;
-&lt;deckgo-highlight-code language=&quot;markdown&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;- Red
-- Green
-- Blue
-
-* Red
-* Green
-* Blue
-
-- Red
-- Green
-- Blue&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;code goes&lt;/code&gt; here in this line&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;bold&lt;/strong&gt; goes here&lt;/li&gt;
-&lt;/ul&gt;
-&lt;deckgo-highlight-code language=&quot;markdown&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;- `code goes` here in this line
-- **bold** goes here&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;ol&gt;
-&lt;li&gt;Buy flour and salt&lt;/li&gt;
-&lt;li&gt;Mix together with water&lt;/li&gt;
-&lt;li&gt;Bake&lt;/li&gt;
-&lt;/ol&gt;
-&lt;deckgo-highlight-code language=&quot;markdown&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;1. Buy flour and salt
-1. Mix together with water
-1. Bake&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;code goes&lt;/code&gt; here in this line&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;bold&lt;/strong&gt; goes here&lt;/li&gt;
-&lt;/ol&gt;
-&lt;deckgo-highlight-code language=&quot;markdown&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;1. `code goes` here in this line
-1. **bold** goes here&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;Paragraph:&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;Code&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;!-- --&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;Paragraph:
-
-    Code&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;* * *
-
-***
-
-*****
-
-- - -
-
----------------------------------------&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;This is &lt;a href=&quot;http://example.com&quot; title=&quot;Example&quot;&gt;an example&lt;/a&gt; link.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://example.com&quot;&gt;This link&lt;/a&gt; has no title attr.&lt;/p&gt;
-&lt;p&gt;This is &lt;a href=&quot;http://example.com&quot; title=&quot;Optional Title&quot;&gt;an example&lt;/a&gt; reference-style link.&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;This is [an example](http://example.com &amp;quot;Example&amp;quot;) link.
-
-[This link](http://example.com) has no title attr.
-
-This is [an example] [id] reference-style link.
-
-[id]: http://example.com &amp;quot;Optional Title&amp;quot;&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;&lt;em&gt;single asterisks&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;single underscores&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;double asterisks&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;double underscores&lt;/strong&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;*single asterisks*
-
-_single underscores_
-
-**double asterisks**
-
-__double underscores__&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;This paragraph has some &lt;code&gt;code&lt;/code&gt; in it.&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;This paragraph has some `code` in it.&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;&lt;img src=&quot;https://via.placeholder.com/200x50&quot; alt=&quot;Alt Text&quot; title=&quot;Image Title&quot;&gt;&lt;/p&gt;
-&lt;deckgo-highlight-code   &gt;
-          &lt;code slot=&quot;code&quot;&gt;![Alt Text](https://via.placeholder.com/200x50 &amp;quot;Image Title&amp;quot;)&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;</content:encoded></item></channel></rss>
+&lt;/ul&gt;</content:encoded></item></channel></rss>
