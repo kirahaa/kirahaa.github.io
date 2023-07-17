@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 17 Jul 2023 01:01:01 GMT</lastBuildDate><item><title><![CDATA[Gatsby 블로그 꾸미기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/custom-gatsby-blog/</link><guid isPermaLink="false">https://kirahaa.github.io/custom-gatsby-blog/</guid><pubDate>Sat, 01 Jul 2023 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;자, 이제 본격적으로 나만의 블로그를 예쁘게 꾸며볼 시간입니다!😆&lt;/p&gt;
+&lt;p&gt;개츠비에는 워낙 다양한 플러그인들이 많아서 잘 활용해서 사용하면 많은 것들을 할 수 있습니다!&lt;br/&gt;
+여러 테크 블로그들을 돌아다니면서 블로그 구조, 폰트, 코드 블록 등 다양한 디자인들을 참고해서 나에게 맞는 기능들만 쏙쏙 골라서 꾸며봅시다!✨&lt;/p&gt;
+&lt;h2&gt;1. 코드 블록&lt;/h2&gt;
+&lt;p&gt;다양한 테마의 코드 블록들 중에서 저는 iOS UI의 vsCode를 고대로 옮겨놓은 듯한 코드 블록들이 눈길이 가더라구요!&lt;/p&gt;
+&lt;h3&gt;설치하기&lt;/h3&gt;
+&lt;p&gt;가장 간단한 방법은 &lt;a href=&quot;https://docs.deckdeckgo.com/?path=/docs/components-highlight-code--highlight-code&quot;&gt;해당 페이지&lt;/a&gt;를 참고하면 손쉽게 예쁜 코드 블록을 불러올 수 있습니다!&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ npm install @deckdeckgo/highlight-code&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;적용하기&lt;/h3&gt;
+&lt;p&gt;이제 &lt;code&gt;layout.js&lt;/code&gt;에서 해당 패키지를 불러오면 됩니다!&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;import { defineCustomElements as deckDeckGoHighlightElement } from &amp;quot;@deckdeckgo/highlight-code/dist/loader&amp;quot;
+
+// ... 생략
+
+deckDeckGoHighlightElement()&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h2&gt;2. 폰트&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.gatsbyjs.com/plugins/gatsby-omni-font-loader/&quot;&gt;gatsby-omni-font-loader&lt;/a&gt; 플러그인을 통해 웹폰트나 커스텀 폰트를 적용할 수 있습니다!&lt;/p&gt;
+&lt;h3&gt;설치하기&lt;/h3&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ npm install gatsby-omni-font-loader react-helmet&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;적용하기&lt;/h3&gt;
+&lt;p&gt;잘 설치가 되었다면, &lt;code&gt;gatsby-config.js&lt;/code&gt; 파일에 사용하고 싶은 폰트들을 가져오면 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;plugins: [
+    {
+      resolve: `gatsby-omni-font-loader`,
+      options:{
+        enableListener: true,
+        preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+        web: [
+          {
+            name: `Inter`,
+            file: `https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&amp;amp;display=swap`,
+          },
+          {
+            name: `Pretendard`,
+            file: `https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css`,
+          },
+        ]
+      }
+    },
+]&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;저는 &lt;strong&gt;Inter&lt;/strong&gt;, &lt;strong&gt;Pretendard&lt;/strong&gt; 폰트를 불러왔는데요, 적용해본 결과 &lt;strong&gt;Pretendard&lt;/strong&gt; 폰트가 더 깔끔하니 마음에 들어서 해당 폰트를 추가해 주었습니다!&lt;/p&gt;
+&lt;p&gt;이제 css 파일로 가서, 해당 폰트를 적용해 주면 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;css&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;--fontFamily-pretendard: Pretendard, -apple-system, BlinkMacSystemFont, &amp;quot;Noto Sans&amp;quot;, ...;
+--font-body: var(--fontFamily-pretendard);
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--fontSize-1);
+    color: var(--color-text);
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;</content:encoded></item><item><title><![CDATA[Gatsby로 Github 블로그 만들기]]></title><description><![CDATA[안녕하세요! 드디어 저의 깃허브 블로그 첫 포스팅입니다✨ 개발을 하면서 가장 중요하게 해 나가야 할 것 중 하나가 기록이 아닐까 싶은데요!
+저는 그동안 이런저런 블로그(velog, notion…]]></description><link>https://kirahaa.github.io/make-gatsby-blog/</link><guid isPermaLink="false">https://kirahaa.github.io/make-gatsby-blog/</guid><pubDate>Thu, 29 Jun 2023 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;안녕하세요! 드디어 저의 깃허브 블로그 첫 포스팅입니다✨&lt;/p&gt;
+&lt;p&gt;개발을 하면서 가장 중요하게 해 나가야 할 것 중 하나가 &lt;strong&gt;기록&lt;/strong&gt;이 아닐까 싶은데요!&lt;br/&gt;
+저는 그동안 이런저런 블로그(velog, notion 등..)들을 전전하면서 항상 구조, 테마 등의 아쉬움이 있었습니다.&lt;/p&gt;
+&lt;p&gt;그러다가 직접 나만의 블로그를 만들어보자! 해서 여기까지 왔습니다ㅎㅎㅎ&lt;br/&gt;
+(심지어 깃허브를 통해 배포하는 거라, 제 잔디까지 심고 일석이조?😆)&lt;/p&gt;
+&lt;h2&gt;What&apos;s Gatsby?&lt;/h2&gt;
+&lt;p&gt;우선! Gatsby가 무엇일까요?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 Gatsby는 프론트엔드 라이브러리 React를 기반으로 하는 JAM Stack 기반의 정적 사이트 생성 프레임워크 입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;JAM Stack?&lt;/h2&gt;
+&lt;p&gt;JAM Stack의 JAM은 &lt;code&gt;Javascript&lt;/code&gt;, &lt;code&gt;Api&lt;/code&gt;, &lt;code&gt;Markup&lt;/code&gt;의 약자입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/07739e60560cbfb946628208f160ff99/451a4/jamstack.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAJABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMBAgX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAHdi4LGB//EABgQAAIDAAAAAAAAAAAAAAAAAAEyAhAx/9oACAEBAAEFAgwyC3//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAYEAACAwAAAAAAAAAAAAAAAAAAAREgMf/aAAgBAQAGPwJjNmn/xAAZEAEAAwEBAAAAAAAAAAAAAAABABEhEEH/2gAIAQEAAT8hV6RVovuxjhUy3pP/2gAMAwEAAgADAAAAEDMP/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPxA//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPxA//8QAHRABAAICAgMAAAAAAAAAAAAAAQARIUEQYTFx8f/aAAgBAQABPxAQCaxWhPsuLSXIY6IBLKpRV7rjU8H3P//Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;JAM Stack&quot;
+        title=&quot;&quot;
+        src=&quot;/static/07739e60560cbfb946628208f160ff99/af1fa/jamstack.jpg&quot;
+        srcset=&quot;/static/07739e60560cbfb946628208f160ff99/ab180/jamstack.jpg 158w,
+/static/07739e60560cbfb946628208f160ff99/ba98e/jamstack.jpg 315w,
+/static/07739e60560cbfb946628208f160ff99/af1fa/jamstack.jpg 630w,
+/static/07739e60560cbfb946628208f160ff99/23301/jamstack.jpg 945w,
+/static/07739e60560cbfb946628208f160ff99/78e18/jamstack.jpg 1260w,
+/static/07739e60560cbfb946628208f160ff99/451a4/jamstack.jpg 2000w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;즉, Javascript &amp;#x26; Markup으로 정적 페이지를 표시하고, 필요 시에 API를 통해 데이터를 호출하는 것입니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;전통적 웹 사이트: 서버에 요청하면 SSR을 통해 HTML을 만들어 제공&lt;/li&gt;
+&lt;li&gt;SPA: 처음 요청받은 페이지만 SSR로 제공하고 나머지는 CSR로 제공&lt;/li&gt;
+&lt;li&gt;JAM Stack: 각 페이지를 HTML로 Pre-Render하여 캐싱 후 CDN에서 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;h4&gt;Javascript&lt;/h4&gt;
+&lt;p&gt;Client의 모든 처리는 Javascript에 맞긴다.&lt;/p&gt;
+&lt;h4&gt;API&lt;/h4&gt;
+&lt;p&gt;모든 기능 및 비즈니스 로직은 재사용 가능한 API로 추상화한다.&lt;/p&gt;
+&lt;h4&gt;Markup&lt;/h4&gt;
+&lt;p&gt;SSG (Static Site Generator)나 Template Engine(Webpack 등)을 이용하여 Markup을 미리 생성한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;여기서 제일 중요한 부분이 &lt;code&gt;Markup&lt;/code&gt;입니다.&lt;/p&gt;
+&lt;h3&gt;Markup&lt;/h3&gt;
+&lt;p&gt;Markup을 만들 수 있는 방법은 매우 다양한데,&lt;/p&gt;
+&lt;p&gt;HTML을 직접 작성하거나, &lt;a href=&quot;https://en.wikipedia.org/wiki/Comparison_of_web_template_engines&quot;&gt;Template Engine&lt;/a&gt; 같은 툴을 이용하거나,
+&lt;code&gt;Jekyll (ruby)&lt;/code&gt;, &lt;code&gt;Hugo (go)&lt;/code&gt;, &lt;code&gt;Nuxt (vue)&lt;/code&gt;, &lt;code&gt;Next (react)&lt;/code&gt;, &lt;code&gt;Gatsby&lt;/code&gt; 같은 &lt;strong&gt;정적 사이트 생성기 (Static Site Generator, SSG)&lt;/strong&gt; 를 이용해서,
+&lt;strong&gt;Static HTML&lt;/strong&gt;을 생성할 수도 있습니다.&lt;/p&gt;
+&lt;p&gt;그리고 미리 작성된 &lt;strong&gt;Static HTML&lt;/strong&gt;은 웹서버의 리소스를 쓸 필요 없이, 사용자에게 HTML만을 전달해주면 됩니다.&lt;/p&gt;
+&lt;p&gt;이는 매우 큰 장점을 가져오게 되는데, Static HTML을 CDN을 통해 Cache하고 배포하여, 빠른 속도를 유지합니다.&lt;/p&gt;
+&lt;p&gt;따로 동적으로 HTML을 생성하지 않기 때문에, 따로 웹서버가 필요 없어 서버 비용이 높지 않습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;자 그럼, 마크업은 뭘로 하는게 좋을까? 고민하신다면,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;원페이지, 위키, 블로그 등 정적 콘텐츠가 대부분이고 볼륨이 가볍다 ? =&gt; &lt;code&gt;Gatsby&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;동적 데이터 활용도가 많고 컨텐츠 양이 점점 많아질 것으로 예상된다 ? =&gt; &lt;code&gt;Next.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;저는 이러한 이유로 개츠비를 선택하게 되었습니다. 🙌&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2&gt;다뤄보기&lt;/h2&gt;
+&lt;h3&gt;프로젝트 생성&lt;/h3&gt;
+&lt;p&gt;요구조건: &lt;code&gt;Node.js 18.0.0+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;node 버전은 18 이상이어야 합니다. 저는 회사에서 버전 16을 사용하고 있었기 때문에, 버전을 변경해주어야 했습니다.
+&lt;code&gt;nvm&lt;/code&gt;을 이용하면 노드 버전을 스위칭하여 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;nvm(node version manager): 여러개의 노드 버전을 사용할 수있는 도구&lt;/strong&gt;&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ nvm list  # 사용가능한 node 버전 리스트 확인
+
+    18.16.0
+    18.15.0 
+    16.18.1
+  * 16.17.1 (Currently using 64-bit executable)
+    14.16.0
+
+# 원하는 버전이 없다면 설치
+$ nvm install {원하는 버전}
+
+# 원하는 버전으로 변경
+$ nvm use {원하는 버전}
+
+# 변경된 노드 버전 확인
+$ node -v 
+v18.15.0&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;자 이제 노드 버전을 변경해 줬으니, 본격적으로 개츠비를 설치해봅시다!&lt;/p&gt;
+&lt;h3&gt;설치&lt;/h3&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ npm install -g gatsby-cli&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;테마 선택하기&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.gatsbyjs.com/starters/&quot;&gt;Gatsby Starter&lt;/a&gt; 사이트에 다양한 테마들이 있는데요!
+저는 &lt;a href=&quot;https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog/&quot;&gt;gatsby-starter-blog&lt;/a&gt; 테마를 선택했습니다.&lt;br/&gt;
+gatsby 명령어를 사용하여 blog라는 디렉토리에 블로그의 소스코드를 가져옵니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ gatsby new blog https://github.com/gatsbyjs/gatsby-starter-blog&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;설치가 완료되면 현재 위치에 blog라는 디렉토리가 생성되고, 이 안에 각종 파일이 생성됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ cd blog # 생성된 디렉토리로 들어가서,
+
+$ npm develop # 로컬 서버를 띄워준다.&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이제 브라우저(chrome)을 열고 주소창에 localhost:8000으로 접속해보세요.&lt;br/&gt;
+아래와 같은 화면이 뜨면 성공입니다! 🎉&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/b1e503ec15caf002fdb3423f4a6a855a/efd2f/gatsby-starter-blog.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 114.55696202531647%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAXABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAECBf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAe3qU0CaAD//xAAXEAEAAwAAAAAAAAAAAAAAAAABABEw/9oACAEBAAEFAqgYf//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EABcQAQADAAAAAAAAAAAAAAAAACAxQaH/2gAIAQEABj8CnRZ//8QAGxAAAQQDAAAAAAAAAAAAAAAAAQAQITERQYH/2gAIAQEAAT8hMiggNnpbbsTT/wD/2gAMAwEAAgADAAAAEDPIAP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8QH//EAB4QAQACAgEFAAAAAAAAAAAAAAEAESFBEDFRcYGx/9oACAEBAAE/ELMwVwD+S1WWVlYXuN386uY7wdN+4ESC3fP/2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;gatsby-starter-blog&quot;
+        title=&quot;&quot;
+        src=&quot;/static/b1e503ec15caf002fdb3423f4a6a855a/af1fa/gatsby-starter-blog.jpg&quot;
+        srcset=&quot;/static/b1e503ec15caf002fdb3423f4a6a855a/ab180/gatsby-starter-blog.jpg 158w,
+/static/b1e503ec15caf002fdb3423f4a6a855a/ba98e/gatsby-starter-blog.jpg 315w,
+/static/b1e503ec15caf002fdb3423f4a6a855a/af1fa/gatsby-starter-blog.jpg 630w,
+/static/b1e503ec15caf002fdb3423f4a6a855a/efd2f/gatsby-starter-blog.jpg 757w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;Gatsby Blog 기본 세팅하기&lt;/h3&gt;
+&lt;p&gt;이제 복사해온 사이트의 정보를 저의 정보로 수정해 봅시다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gatsby-config.js&lt;/code&gt; - 블로그와 관련된 설정을 하는 파일&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;module.exports = {
+    siteMetadata: {
+        title: `Kirahaa`,
+        author: {
+            name: `Hayeong Kim`,
+            summary: `I believe the importance of experience`,
+        },
+        description: `kirahaa blog`,
+        siteUrl: `https://kirahaa.github.io/`,
+    },
+// ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code&gt;package.json&lt;/code&gt; - 프로젝트 정보 수정&lt;/p&gt;
+&lt;p&gt;package.json 파일 내에 기본 정보들을 수정해주고,
+&quot;scripts&quot; 내에 &lt;strong&gt;deploy&lt;/strong&gt; 명령어를 추가해서 다음과 같이 적어주세요.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;json&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;{
+  &amp;quot;name&amp;quot;: &amp;quot;kirahaa-blog&amp;quot;,
+  &amp;quot;private&amp;quot;: false,
+  &amp;quot;description&amp;quot;: &amp;quot;kirahaa blog&amp;quot;,
+  &amp;quot;version&amp;quot;: &amp;quot;0.1.0&amp;quot;,
+  &amp;quot;author&amp;quot;: &amp;quot;Hayeong Kim &amp;lt;khy4018@gmail.com&amp;gt;&amp;quot;,
+  &amp;quot;bugs&amp;quot;: {
+    &amp;quot;url&amp;quot;: &amp;quot;https://github.com/kirahaa/kirahaa.github.io/issues&amp;quot;
+  },
+  // ...
+  &amp;quot;scripts&amp;quot;: {
+    &amp;quot;deploy&amp;quot;: &amp;quot;gatsby build &amp;amp;&amp;amp; gh-pages -d public -b master&amp;quot;
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;앞으로 포스팅 작성을 완료하고, 로컬에서 잘 확인했으면 &lt;code&gt;npm run deploy&lt;/code&gt; 명령어로 배포합니다.&lt;/p&gt;
+&lt;p&gt;이때 소스코드 빌드 후의 public 폴더를 github master 브랜치에 push한다는 뜻이고, 이 소스 코드로 &lt;a href=&quot;https://kirahaa.github.io/&quot;&gt;https://kirahaa.github.io/&lt;/a&gt;에 배포됩니다.&lt;/p&gt;
+&lt;h3&gt;github.io repo 만들기&lt;/h3&gt;
+&lt;p&gt;이제 자신의 github에 소스코드를 올리면 됩니다!&lt;/p&gt;
+&lt;p&gt;github에 접속해서 새로운 repository(이하 repo)를 만들어주세요. 그런데 repo 이름에 유의하셔야 합니다!&lt;br/&gt;
+github의 &lt;strong&gt;usename&lt;/strong&gt; 뒤에 &lt;strong&gt;.github.io&lt;/strong&gt;을 붙여서 만들어주세요. 제 &lt;strong&gt;github username&lt;/strong&gt;은 kirahaa이기 때문에
+&lt;code&gt;kirahaa.github.io&lt;/code&gt;로 만들었습니다. &lt;br/&gt;
+공개범위는 &lt;strong&gt;Public&lt;/strong&gt;으로 만들어주세요😉&lt;/p&gt;
+&lt;h3&gt;배포하기&lt;/h3&gt;
+&lt;p&gt;먼저, 저희는 &lt;code&gt;gh-pages&lt;/code&gt;로 배포할 것이기 때문에 gh-pages package를 설치해줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ npm install gh-pages --save-dev&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이제 로컬에 있는 블로그 소스코드를 github에 올려봅시다!&lt;/p&gt;
+&lt;p&gt;블로그 root에서 git을 세팅합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ git init
+$ git remote add origin https://github.com/kirahaa/kirahaa.github.io.git&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;다음 명령어로 origin 주소가 잘 연결되었는지 확인해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ git remote -v&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;푸시를 해줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ git add .
+$ git commit -m &amp;quot;first commit&amp;quot;
+$ git push origin master&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;github에서 소스코드가 잘 올라갔는지 확인해 주세요.&lt;/p&gt;
+&lt;p&gt;잘 됐으면 배포 명령어를 실행합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ npm run deploy&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;정상적으로 배포가 되었다면, github 사이트의 블로그 repo에 가서 master에 올라온 소스코드를 확인해 주세요.&lt;br/&gt;
+저희가 원래 받았던 소스코드와 구조가 완전히 다르죠?! 여기서 놀라지 마시구,, 😁&lt;/p&gt;
+&lt;p&gt;해당 소스는 포스팅을 작성하고 커스터마이징 할 수 있는 개발 소스가 아니라 블로그 사이트에 배포될 수 있도록 .md 파일이 모두 html, js로 바뀐 빌드된 파일입니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;npm run deploy&lt;/code&gt; 명령어가 알아서 build도 해주고, git의 master 브랜치에 push도 해주고 배포도 해준 것입니다.&lt;/p&gt;
+&lt;p&gt;앞으로 항상 deploy만 해줘도 되지만, 다른 컴퓨터에서 포스팅을 작성할 경우를 대비하여 개발코드도 저장해주도록 합시다!&lt;br/&gt;
+develop이라는 브랜치를 따로 만들어서 여기에다만 올리도록 하겠습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ git branch develop  # develop 브랜치 생성
+
+$ git checkout develop  # develop 브랜치로 체크아웃&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;동일하게 소스코드를 git에 push해 줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;$ git add .
+$ git commit -m &amp;quot;blog posting~&amp;quot;
+$ git push -u origin develop&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;내 github의 develop repo에 들어가서 소스코드가 모두 잘 올라갔는지 확인해 주세요.&lt;/p&gt;
+&lt;p&gt;잘 올라갔다면 github default 브랜치를 develop으로 바꾸겠습니다.&lt;br/&gt;
+어차피 빌드 결과물인 master 브랜치의 빌드 파일들을 파악할 필요도 없으니까요.&lt;br/&gt;
+github의 해당 블로그 repo에 들어가서 &lt;strong&gt;Setting &gt; Branches&lt;/strong&gt; 메뉴에서 Default branch를 devleop으로 바꾸고 update 버튼을 눌러주세요!&lt;/p&gt;
+&lt;p&gt;이제 각자의 &lt;strong&gt;username.github.io&lt;/strong&gt;에 들어가서 배포된 블로그를 확인해 보세요!&lt;/p&gt;
+&lt;br/&gt;
+&lt;p&gt;여기까지, 가장 기본적인 블로그 세팅이 끝났습니다!&lt;br/&gt;
+다음 포스팅에서는 &lt;strong&gt;개츠비 플러그인을 사용해 블로그 커스텀하는 법&lt;/strong&gt;을 더 자세히 살펴보겠습니다!&lt;/p&gt;
+&lt;p&gt;다음 포스팅도 기대해주세욧 😉✨&lt;/p&gt;
+&lt;br/&gt;
+&lt;hr&gt;
+&lt;h4&gt;참고 자료&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://anneslab.tistory.com/116&quot;&gt;https://anneslab.tistory.com/116&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://yeri-kim.github.io/posts/how-to-install-gatsby/&quot;&gt;https://yeri-kim.github.io/posts/how-to-install-gatsby/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://uzzam.dev/6&quot;&gt;https://uzzam.dev/6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://pks2974.medium.com/jam-stack-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-17dd5c34edf7&quot;&gt;https://pks2974.medium.com/jam-stack-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-17dd5c34edf7&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[New Beginnings]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
+Consonantia, there live the blind texts. Separated they live in…]]></description><link>https://kirahaa.github.io/new-beginnings/</link><guid isPermaLink="false">https://kirahaa.github.io/new-beginnings/</guid><pubDate>Thu, 28 May 2015 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
+Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
+right at the coast of the Semantics, a large language ocean. A small river named
+Duden flows by their place and supplies it with the necessary regelialia.&lt;/p&gt;
+&lt;h2&gt;On deer horse aboard tritely yikes and much&lt;/h2&gt;
+&lt;p&gt;The Big Oxmox advised her not to do so, because there were thousands of bad
+Commas, wild Question Marks and devious Semikoli, but the Little Blind Text
+didn’t listen. She packed her seven versalia, put her initial into the belt and
+made herself on the way.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This however showed weasel&lt;/li&gt;
+&lt;li&gt;Well uncritical so misled
+&lt;ul&gt;
+&lt;li&gt;this is very interesting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Goodness much until that fluid owl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When she reached the first hills of the &lt;strong&gt;Italic Mountains&lt;/strong&gt;, she had a last
+view back on the skyline of her hometown &lt;em&gt;Bookmarksgrove&lt;/em&gt;, the headline of
+&lt;a href=&quot;http://google.com&quot;&gt;Alphabet Village&lt;/a&gt; and the subline of her own road, the Line
+Lane. Pityful a rhetoric question ran over her cheek, then she continued her
+way. On her way she met a copy.&lt;/p&gt;
+&lt;h3&gt;Overlaid the jeepers uselessly much excluding&lt;/h3&gt;
+&lt;p&gt;But nothing the copy said could convince her and so it didn’t take long until a
+few insidious Copy Writers ambushed her, made her drunk with
+&lt;a href=&quot;http://google.com&quot;&gt;Longe and Parole&lt;/a&gt; and dragged her into their agency, where
+they abused her for their projects again and again. And if she hasn’t been
+rewritten, then they are still using her.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
+Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
+right at the coast of the Semantics, a large language ocean.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It is a paradisematic country, in which roasted parts of sentences fly into your
+mouth. Even the all-powerful Pointing has no control about the blind texts it is
+an almost unorthographic life One day however a small line of blind text by the
+name of Lorem Ipsum decided to leave for the far World of Grammar.&lt;/p&gt;
+&lt;h3&gt;According a funnily until pre-set or arrogant well cheerful&lt;/h3&gt;
+&lt;p&gt;The Big Oxmox advised her not to do so, because there were thousands of bad
+Commas, wild Question Marks and devious Semikoli, but the Little Blind Text
+didn’t listen. She packed her seven versalia, put her initial into the belt and
+made herself on the way.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;So baboon this&lt;/li&gt;
+&lt;li&gt;Mounted militant weasel gregariously admonishingly straightly hey&lt;/li&gt;
+&lt;li&gt;Dear foresaw hungry and much some overhung&lt;/li&gt;
+&lt;li&gt;Rash opossum less because less some amid besides yikes jeepers frenetic
+impassive fruitlessly shut&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;When she reached the first hills of the Italic Mountains, she had a last view
+back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet
+Village and the subline of her own road, the Line Lane. Pityful a rhetoric
+question ran over her cheek, then she continued her way. On her way she met a
+copy.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The copy warned the Little Blind Text, that where it came from it would have
+been rewritten a thousand times and everything that was left from its origin
+would be the word &quot;and&quot; and the Little Blind Text should turn around and
+return to its own, safe country.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;But nothing the copy said could convince her and so it didn’t take long until a
+few insidious Copy Writers ambushed her, made her drunk with Longe and Parole
+and dragged her into their agency, where they abused her for their projects
+again and again. And if she hasn’t been rewritten, then they are still using
+her. Far far away, behind the word mountains, far from the countries Vokalia and
+Consonantia, there live the blind texts.&lt;/p&gt;
+&lt;h4&gt;Silent delightfully including because before one up barring chameleon&lt;/h4&gt;
+&lt;p&gt;Separated they live in Bookmarksgrove right at the coast of the Semantics, a
+large language ocean. A small river named Duden flows by their place and
+supplies it with the necessary regelialia. It is a paradisematic country, in
+which roasted parts of sentences fly into your mouth.&lt;/p&gt;
+&lt;p&gt;Even the all-powerful Pointing has no control about the blind texts it is an
+almost unorthographic life One day however a small line of blind text by the
+name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox
+advised her not to do so, because there were thousands of bad Commas, wild
+Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.&lt;/p&gt;
+&lt;h5&gt;Wherever far wow thus a squirrel raccoon jeez jaguar this from along&lt;/h5&gt;
+&lt;p&gt;She packed her seven versalia, put her initial into the belt and made herself on
+the way. When she reached the first hills of the Italic Mountains, she had a
+last view back on the skyline of her hometown Bookmarksgrove, the headline of
+Alphabet Village and the subline of her own road, the Line Lane. Pityful a
+rhetoric question ran over her cheek, then she continued her way. On her way she
+met a copy.&lt;/p&gt;
+&lt;h6&gt;Slapped cozy a that lightheartedly and far&lt;/h6&gt;
+&lt;p&gt;The copy warned the Little Blind Text, that where it came from it would have
+been rewritten a thousand times and everything that was left from its origin
+would be the word &quot;and&quot; and the Little Blind Text should turn around and return
+to its own, safe country. But nothing the copy said could convince her and so it
+didn’t take long until a few insidious Copy Writers ambushed her, made her drunk
+with Longe and Parole and dragged her into their agency, where they abused her
+for their projects again and again.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[This is my first post on my new fake blog! How exciting! I'm sure I'll write a lot more interesting things in the future. Oh, and here's a…]]></description><link>https://kirahaa.github.io/hello-world/</link><guid isPermaLink="false">https://kirahaa.github.io/hello-world/</guid><pubDate>Fri, 01 May 2015 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;This is my first post on my new fake blog! How exciting!&lt;/p&gt;
+&lt;p&gt;I&apos;m sure I&apos;ll write a lot more interesting things in the future.&lt;/p&gt;
+&lt;p&gt;Oh, and here&apos;s a great quote from this Wikipedia on
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Salted_duck_egg&quot;&gt;salted duck eggs&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A salted duck egg is a Chinese preserved food product made by soaking duck
+eggs in brine, or packing each egg in damp, salted charcoal. In Asian
+supermarkets, these eggs are sometimes sold covered in a thick layer of salted
+charcoal paste. The eggs may also be sold with the salted paste removed,
+wrapped in plastic, and vacuum packed. From the salt curing process, the
+salted duck eggs have a briny aroma, a gelatin-like egg white and a
+firm-textured, round yolk that is bright orange-red in color.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/09658/salty_egg.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75.31645569620254%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAMB/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAEEBf/aAAwDAQACEAMQAAABgik0dXC//8QAGRABAAMBAQAAAAAAAAAAAAAAAQACERIy/9oACAEBAAEFAkqW7B5Zox9t8n//xAAXEQEAAwAAAAAAAAAAAAAAAAAAERJB/9oACAEDAQE/AdVl/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEC/9oACAECAQE/AYun/8QAGxAAAQQDAAAAAAAAAAAAAAAAAAECESEiMTL/2gAIAQEABj8CvRjaHMkvIQo//8QAGxAAAwEBAAMAAAAAAAAAAAAAAREhAEGBobH/2gAIAQEAAT8hsTTH203YINmYDPHckkPzQiAnv//aAAwDAQACAAMAAAAQyC//xAAXEQEBAQEAAAAAAAAAAAAAAAABABEh/9oACAEDAQE/EBHDK6y//8QAGBEAAgMAAAAAAAAAAAAAAAAAAAERIVH/2gAIAQIBAT8QWiS0j//EABwQAQEAAgMBAQAAAAAAAAAAAAERADEhYYFB4f/aAAgBAQABPxBOzi0NHmChLtHkL9EcWZeCVJ1kcRoVp3lEYcnjEk0ES7/Jn//Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Chinese Salty Egg&quot;
+        title=&quot;&quot;
+        src=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/af1fa/salty_egg.jpg&quot;
+        srcset=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/ab180/salty_egg.jpg 158w,
+/static/8058f3f26913fea3b6a89a73344fe94a/ba98e/salty_egg.jpg 315w,
+/static/8058f3f26913fea3b6a89a73344fe94a/af1fa/salty_egg.jpg 630w,
+/static/8058f3f26913fea3b6a89a73344fe94a/23301/salty_egg.jpg 945w,
+/static/8058f3f26913fea3b6a89a73344fe94a/78e18/salty_egg.jpg 1260w,
+/static/8058f3f26913fea3b6a89a73344fe94a/09658/salty_egg.jpg 2048w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;You can also write code blocks here!&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const saltyDuckEgg = &amp;quot;chinese preserved food product&amp;quot;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;left&quot;&gt;Number&lt;/th&gt;
+&lt;th align=&quot;left&quot;&gt;Title&lt;/th&gt;
+&lt;th align=&quot;right&quot;&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;1&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;Harry Potter and the Philosopher’s Stone&lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt;2001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;2&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;Harry Potter and the Chamber of Secrets&lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt;2002&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;3&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;Harry Potter and the Prisoner of Azkaban&lt;/td&gt;
+&lt;td align=&quot;right&quot;&gt;2004&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&quot;https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md&quot;&gt;View raw (TEST.md)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;This is a paragraph.&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h1&gt;Header 1&lt;/h1&gt;
+&lt;h2&gt;Header 2&lt;/h2&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;Header 1
+========
+
+Header 2
+--------&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h1&gt;Header 1&lt;/h1&gt;
+&lt;h2&gt;Header 2&lt;/h2&gt;
+&lt;h3&gt;Header 3&lt;/h3&gt;
+&lt;h4&gt;Header 4&lt;/h4&gt;
+&lt;h5&gt;Header 5&lt;/h5&gt;
+&lt;h6&gt;Header 6&lt;/h6&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h1&gt;Header 1&lt;/h1&gt;
+&lt;h2&gt;Header 2&lt;/h2&gt;
+&lt;h3&gt;Header 3&lt;/h3&gt;
+&lt;h4&gt;Header 4&lt;/h4&gt;
+&lt;h5&gt;Header 5&lt;/h5&gt;
+&lt;h6&gt;Header 6&lt;/h6&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;# Header 1 #
+## Header 2 ##
+### Header 3 ###
+#### Header 4 ####
+##### Header 5 #####
+###### Header 6 ######&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;gt; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;blockquote&gt;
+&lt;h2&gt;This is a header.&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;This is the first list item.&lt;/li&gt;
+&lt;li&gt;This is the second list item.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here&apos;s some example code:&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;Markdown.generate();&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;/blockquote&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;gt; ## This is a header.
+&amp;gt; 1. This is the first list item.
+&amp;gt; 2. This is the second list item.
+&amp;gt;
+&amp;gt; Here&amp;#39;s some example code:
+&amp;gt;
+&amp;gt;     Markdown.generate();&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;ul&gt;
+&lt;li&gt;Red&lt;/li&gt;
+&lt;li&gt;Green&lt;/li&gt;
+&lt;li&gt;Blue&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;Red&lt;/li&gt;
+&lt;li&gt;Green&lt;/li&gt;
+&lt;li&gt;Blue&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;Red&lt;/li&gt;
+&lt;li&gt;Green&lt;/li&gt;
+&lt;li&gt;Blue&lt;/li&gt;
+&lt;/ul&gt;
+&lt;deckgo-highlight-code language=&quot;markdown&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;- Red
+- Green
+- Blue
+
+* Red
+* Green
+* Blue
+
+- Red
+- Green
+- Blue&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;code goes&lt;/code&gt; here in this line&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;bold&lt;/strong&gt; goes here&lt;/li&gt;
+&lt;/ul&gt;
+&lt;deckgo-highlight-code language=&quot;markdown&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;- `code goes` here in this line
+- **bold** goes here&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;ol&gt;
+&lt;li&gt;Buy flour and salt&lt;/li&gt;
+&lt;li&gt;Mix together with water&lt;/li&gt;
+&lt;li&gt;Bake&lt;/li&gt;
+&lt;/ol&gt;
+&lt;deckgo-highlight-code language=&quot;markdown&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;1. Buy flour and salt
+1. Mix together with water
+1. Bake&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;code goes&lt;/code&gt; here in this line&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;bold&lt;/strong&gt; goes here&lt;/li&gt;
+&lt;/ol&gt;
+&lt;deckgo-highlight-code language=&quot;markdown&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;1. `code goes` here in this line
+1. **bold** goes here&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Paragraph:&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;Code&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;!-- --&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;Paragraph:
+
+    Code&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;* * *
+
+***
+
+*****
+
+- - -
+
+---------------------------------------&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;This is &lt;a href=&quot;http://example.com&quot; title=&quot;Example&quot;&gt;an example&lt;/a&gt; link.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://example.com&quot;&gt;This link&lt;/a&gt; has no title attr.&lt;/p&gt;
+&lt;p&gt;This is &lt;a href=&quot;http://example.com&quot; title=&quot;Optional Title&quot;&gt;an example&lt;/a&gt; reference-style link.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;This is [an example](http://example.com &amp;quot;Example&amp;quot;) link.
+
+[This link](http://example.com) has no title attr.
+
+This is [an example] [id] reference-style link.
+
+[id]: http://example.com &amp;quot;Optional Title&amp;quot;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;em&gt;single asterisks&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;single underscores&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;double asterisks&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;double underscores&lt;/strong&gt;&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;*single asterisks*
+
+_single underscores_
+
+**double asterisks**
+
+__double underscores__&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;This paragraph has some &lt;code&gt;code&lt;/code&gt; in it.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;This paragraph has some `code` in it.&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;img src=&quot;https://via.placeholder.com/200x50&quot; alt=&quot;Alt Text&quot; title=&quot;Image Title&quot;&gt;&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;![Alt Text](https://via.placeholder.com/200x50 &amp;quot;Image Title&amp;quot;)&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;</content:encoded></item></channel></rss>
