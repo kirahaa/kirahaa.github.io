@@ -614,3 +614,15 @@ JWT 인증은 해도 해도 어려운 것 같아요😥 다음에는 REACT 환�
 다음 포스팅에서는 AWS 프리티어를 이용해서 웹 호스팅 서버를 만드는 과정을 살펴보겠습니다.
 
 가보자고~!💨
+
+---
+
+#### 참고 자료
+
+- https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp
+
+- https://velopert.com/2448
+
+- [https://inpa.tistory.com/entry/WEB-📚-JWTjson-web-token-란-💯-정리](https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-JWTjson-web-token-%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC)
+
+- https://www.daleseo.com/js-jwt/

@@ -218,3 +218,10 @@ aws 서버 만들기 완료입니다!!🎉🎉🎉
 
 그래도 데이터베이스도 직접 만져보고, aws 인스턴스도 만들어보고 찍먹러로써는 정말 좋은 경험이었습니다! <br/>
 하나의 프로젝트의 처음부터 끝까지 경험해보고 싶다면 추천합니다! 👍
+
+---
+
+#### 참고 자료
+
+- https://www.youtube.com/watch?v=_bu6etIS_bo
+- https://makethree.tistory.com/4
