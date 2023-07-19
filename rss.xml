@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 17 Jul 2023 07:25:02 GMT</lastBuildDate><item><title><![CDATA[AWS 프리티어 EC2 인스턴스 생성]]></title><description><![CDATA[AWS는 Amazon Web Service의 약어로 대표적인 클라우드 플랫폼입니다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 19 Jul 2023 06:04:15 GMT</lastBuildDate><item><title><![CDATA[AWS 프리티어 EC2 인스턴스 생성]]></title><description><![CDATA[AWS는 Amazon Web Service의 약어로 대표적인 클라우드 플랫폼입니다.
 AWS는 계정 생성 후 1년 동안 일정 무료 사용량을 제공하는 프리티어 서비스를 제공합니다. 시작하기 1) AWS 계정 생성, region…]]></description><link>https://kirahaa.github.io/aws-ec2-hosting/</link><guid isPermaLink="false">https://kirahaa.github.io/aws-ec2-hosting/</guid><pubDate>Sat, 15 Jul 2023 13:57:56 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 310px; &quot;
@@ -375,7 +375,13 @@ $ vi 파일명.확장자명&lt;/code&gt;
 &lt;h3&gt;에필로그&lt;/h3&gt;
 &lt;p&gt;여기까지 node.js의 express를 활용한 jwt 인증 구현을 해보았는데요, 사실 이번에는 튜토리얼 영상을 보며 코드를 따라친 느낌이라 그냥 찍먹한 느낌입니다..ㅎㅎ&lt;/p&gt;
 &lt;p&gt;그래도 데이터베이스도 직접 만져보고, aws 인스턴스도 만들어보고 찍먹러로써는 정말 좋은 경험이었습니다! &lt;br/&gt;
-하나의 프로젝트의 처음부터 끝까지 경험해보고 싶다면 추천합니다! 👍&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Node.js + Express + JWT 인증 시스템 구현하기(feat. MongoDB)]]></title><description><![CDATA[Node.js와 Express, Mongodb를 이용한 JWT 토큰 기반 인증 시스템을 구현 한 뒤, AWS ec2를 통해 배포한 내용을 정리하였습니다. 1. 프로젝트 생성 및 설정하기 새로운 디렉토리를 만든 후, package.json…]]></description><link>https://kirahaa.github.io/node-express-jwt-auth/</link><guid isPermaLink="false">https://kirahaa.github.io/node-express-jwt-auth/</guid><pubDate>Fri, 14 Jul 2023 13:57:56 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+하나의 프로젝트의 처음부터 끝까지 경험해보고 싶다면 추천합니다! 👍&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4&gt;참고 자료&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=_bu6etIS_bo&quot;&gt;https://www.youtube.com/watch?v=_bu6etIS_bo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://makethree.tistory.com/4&quot;&gt;https://makethree.tistory.com/4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Node.js + Express + JWT 인증 시스템 구현하기(feat. MongoDB)]]></title><description><![CDATA[Node.js와 Express, Mongodb를 이용한 JWT 토큰 기반 인증 시스템을 구현 한 뒤, AWS ec2를 통해 배포한 내용을 정리하였습니다. 1. 프로젝트 생성 및 설정하기 새로운 디렉토리를 만든 후, package.json…]]></description><link>https://kirahaa.github.io/node-express-jwt-auth/</link><guid isPermaLink="false">https://kirahaa.github.io/node-express-jwt-auth/</guid><pubDate>Fri, 14 Jul 2023 13:57:56 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;Node.js와 Express, Mongodb를 이용한 JWT 토큰 기반 인증 시스템을 구현 한 뒤, AWS ec2를 통해 배포한 내용을 정리하였습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
@@ -1073,7 +1079,23 @@ app.get(&amp;#39;*&amp;#39;, checkUser); // every single get request
 &lt;p&gt;여기까지, JWT 인증 시스템 구현이 끝났습니다!&lt;br/&gt;
 JWT 인증은 해도 해도 어려운 것 같아요😥 다음에는 REACT 환경에서 JWT 인증을 구현해 보는 것도 도전해 보기로!&lt;/p&gt;
 &lt;p&gt;다음 포스팅에서는 AWS 프리티어를 이용해서 웹 호스팅 서버를 만드는 과정을 살펴보겠습니다.&lt;/p&gt;
-&lt;p&gt;가보자고~!💨&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Gatsby 블로그 꾸미기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/custom-gatsby-blog/</link><guid isPermaLink="false">https://kirahaa.github.io/custom-gatsby-blog/</guid><pubDate>Sat, 01 Jul 2023 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;자, 이제 본격적으로 나만의 블로그를 예쁘게 꾸며볼 시간입니다!😆&lt;/p&gt;
+&lt;p&gt;가보자고~!💨&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4&gt;참고 자료&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=SnoAwLP1a-0&amp;#x26;list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp&quot;&gt;https://www.youtube.com/watch?v=SnoAwLP1a-0&amp;#x26;list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://velopert.com/2448&quot;&gt;https://velopert.com/2448&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-JWTjson-web-token-%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC&quot;&gt;https://inpa.tistory.com/entry/WEB-📚-JWTjson-web-token-란-💯-정리&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.daleseo.com/js-jwt/&quot;&gt;https://www.daleseo.com/js-jwt/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Gatsby 블로그 꾸미기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/custom-gatsby-blog/</link><guid isPermaLink="false">https://kirahaa.github.io/custom-gatsby-blog/</guid><pubDate>Sat, 01 Jul 2023 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;자, 이제 본격적으로 나만의 블로그를 예쁘게 꾸며볼 시간입니다!😆&lt;/p&gt;
 &lt;p&gt;개츠비에는 워낙 다양한 플러그인들이 많아서 잘 활용해서 사용하면 많은 것들을 할 수 있습니다!&lt;br/&gt;
 여러 테크 블로그들을 돌아다니면서 블로그 구조, 폰트, 코드 블록 등 다양한 디자인들을 참고해서 나에게 맞는 기능들만 쏙쏙 골라서 꾸며봅시다!✨&lt;/p&gt;
 &lt;h2&gt;1. 코드 블록&lt;/h2&gt;
