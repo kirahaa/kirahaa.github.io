@@ -30,7 +30,7 @@ module.exports = {
       options: {
         host: 'https://kirahaa.github.io/',
         sitemap: 'https://kirahaa.github.io/sitemap.xml',
-        policy: [{ useragent: '*', allow: '/' }]
+        policy: [{ userAgent: '*', allow: '/' }]
       }
     },
     {
