@@ -6,6 +6,7 @@ category: "gatsby"
 tags:
   - "Gatsby"
   - "blog"
+  - "Github"
 ---
 
 안녕하세요! 드디어 저의 깃허브 블로그 첫 포스팅입니다✨

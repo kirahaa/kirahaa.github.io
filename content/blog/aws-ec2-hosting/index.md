@@ -1,12 +1,13 @@
 ---
-title: AWS 프리티어 EC2 인스턴스 생성
+title: AWS 프리티어 EC2와 Github 연동하기
 date: "2023-07-15T13:57:56.284Z"
-description: "AWS ec2 인스턴스를 생성하는 과정을 정리하였습니다."
+description: "AWS ec2 인스턴스를 생성해 Github 프로젝트와 연동하는 과정을 정리하였습니다."
 category: "auth"
 tags:
   - "AWS"
   - "prettier"
   - "EC2"
+  - "Github"
 ---
 
 ![aws](./aws_0.png)
