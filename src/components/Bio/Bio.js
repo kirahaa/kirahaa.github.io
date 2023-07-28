@@ -6,7 +6,7 @@
  */
 
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import {useStaticQuery, graphql, Link} from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import Icon from "../Icon"
 import {getContactHref, getIcon} from "../../utils"
@@ -62,20 +62,22 @@ const Bio = ({showTags}) => {
 
   return (
     <div className="bio">
-      <StaticImage
-        className="bio-avatar"
-        layout="fixed"
-        formats={["auto", "webp", "avif"]}
-        src="../../images/profile.png"
-        width={75}
-        height={75}
-        quality={95}
-        alt="Profile picture"
-      />
+      <Link to="/">
+        <StaticImage
+          className="bio-avatar"
+          layout="fixed"
+          formats={["auto", "webp", "avif"]}
+          src="../../images/profile.png"
+          width={75}
+          height={75}
+          quality={95}
+          alt="Profile picture"
+        />
+      </Link>
       {author?.name && (
         <>
           <h1>
-            <strong>{author.name}</strong>
+            <Link to="/"><strong>{author.name}</strong></Link>
           </h1>
           <p>{author?.summary || null}</p>
           <ul className={styles['contacts__list']}>
