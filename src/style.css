@@ -380,8 +380,11 @@ code {
 /* Media queries */
 /* 672px */
 @media (max-width: 42rem) {
-  .home {
+  .wrap {
     flex-direction: column;
+  }
+  .right {
+    padding-left: 0;
   }
   blockquote {
     padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4);
