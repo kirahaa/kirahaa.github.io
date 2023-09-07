@@ -1,4 +1,783 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 28 Jul 2023 07:17:37 GMT</lastBuildDate><item><title><![CDATA[Typescript - type과 interface 차이]]></title><description><![CDATA[typescript를 공부해보셨다면 type과 interface의 차이점에 대해 궁금증을 가져보셨을 텐데요!
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 07 Sep 2023 08:20:15 GMT</lastBuildDate><item><title><![CDATA[웹 성능 최적화 - 브라우저는 어떻게 렌더링을 할까]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/web-perform-optimization/</link><guid isPermaLink="false">https://kirahaa.github.io/web-perform-optimization/</guid><pubDate>Tue, 05 Sep 2023 13:57:56 GMT</pubDate><content:encoded>&lt;p&gt;최적화! 왠지 중요하고 챙겨야할 것 같지만 막상 설명하라고 하면 말이 안나오는 그것!
+저도 어디선가 줍줍한 지식들로 대략적으로는 알고 있지만 막상 정리하려니 참 어렵게 느껴지더라고요..?!&lt;br/&gt;
+사실 꼭 면접에 대비하기 위함이 아니더라도, 사용자에게 좋은 UX를 남겨주기 위해서는 웹 사이트를 사용자에게 빠르고 쾌적하게 보여주는 것이 좋겠죠?&lt;/p&gt;
+&lt;p&gt;우선 웹 브라우저가 어떻게 화면을 그려내는가(=렌더링)에 대해 살펴보려고 합니다.&lt;br/&gt;
+저처럼 UI 개발을 하는 분들은 사용자에게 보여질 View를 자주 다루실텐데, 항상 헷갈리는 이 개념에 대해 자세히 파헤쳐봅시다!!&lt;/p&gt;
+&lt;p&gt;혹시 맞지 않는 내용이 있다면 언제든 말씀 부탁드립니다😉&lt;/p&gt;
+&lt;h2&gt;브라우저: 탐색을 시작합니다&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;browse: 둘러보다[훑어보다], 대강 읽다&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;웹 브라우저는 웹의 다양한 콘텐츠를 탐색할 수 있게 만들어주는 프로그램입니다. 여기에는 크롬이나 엣지 같은 익숙한 이름부터, 브레이브나 토어 같이 다소 낯선 이름들까지,
+정말 다양한 브라우저가 존재합니다.&lt;/p&gt;
+&lt;h3&gt;웹 브라우저 인기 랭킹 in 한국 (2023년 8월)&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://gs.statcounter.com/browser-market-share/all/south-korea/#monthly-202208-202308&quot;&gt;출처: statcounter&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Chrome - 50.7%&lt;/li&gt;
+&lt;li&gt;Safari - 18.15%&lt;/li&gt;
+&lt;li&gt;Samsung Internet - 15.49%&lt;/li&gt;
+&lt;li&gt;Whale Browser - 7.82%&lt;/li&gt;
+&lt;li&gt;Edge - 5.85%&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;예상했던 대로 Chrome이 가장 많은 비중을 차지하고, Safari가 그 다음입니다. 삼성 인터넷도 꽤나 비중이 크네요!&lt;/p&gt;
+&lt;p&gt;2018년까지만 해도 사용률 2위가 무려 &apos;IE&apos;입니다..! 그만큼 국내에서는 IE의 비중이 굉장히 높았습니다. 그래서 신경을 쓰지 않을 수 없었던 참 얄미운 녀석이었죠..&lt;br/&gt;
+하지만 모바일 시장의 확대, 액티브엑스 탈피 등의 시장 변화와 함께 마침내 2022년 IE가 잠들면서 이전에 비하면 스트레스가 줄었다고 할 수 있겠네요.&lt;/p&gt;
+&lt;h3&gt;웹 브라우저의 동작&lt;/h3&gt;
+&lt;p&gt;웹 브라우저에 접속해 주소창에 도메인을 입력하면 아주 짧은 순간에 많은 일이 일어납니다. DNS를 통해 IP 주소를 획득하고, TCP를 통해 연결하고, HTTP 요청을 보내 응답을 받습니다.
+이 과정에는 캐싱이 포함됩니다. 이 일련의 과정들은 다음에 더 자세히 알아보도록 하고😋 아무튼, 안전한 HTML 파일을 잘 받아왔다고 가정해봅시다😉&lt;/p&gt;
+&lt;h4&gt;웹 브라우저의 구조&lt;/h4&gt;
+&lt;p&gt;웹 브라우저는 다음과 같은 구조로 이루어져 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f20076b46244a8af02020cf7fd166890/b7baf/structure.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 72.78481012658227%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAECBf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAdulQwD/xAAVEAEBAAAAAAAAAAAAAAAAAAAQEf/aAAgBAQABBQJj/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFRABAQAAAAAAAAAAAAAAAAAAIOH/2gAIAQEABj8Cq//EABsQAAEEAwAAAAAAAAAAAAAAAAEAECFxMUHw/9oACAEBAAE/ISLQdLUW8N//2gAMAwEAAgADAAAAEKvP/8QAFREBAQAAAAAAAAAAAAAAAAAAECH/2gAIAQMBAT8Qh//EABURAQEAAAAAAAAAAAAAAAAAABAR/9oACAECAQE/EKf/xAAbEAEBAQACAwAAAAAAAAAAAAABEQBBUSEx4f/aAAgBAQABPxBJ8sJUtnNY9Gro+eXAkTOzBCG//9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;웹 브라우저 구조&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f20076b46244a8af02020cf7fd166890/af1fa/structure.jpg&quot;
+        srcset=&quot;/static/f20076b46244a8af02020cf7fd166890/ab180/structure.jpg 158w,
+/static/f20076b46244a8af02020cf7fd166890/ba98e/structure.jpg 315w,
+/static/f20076b46244a8af02020cf7fd166890/af1fa/structure.jpg 630w,
+/static/f20076b46244a8af02020cf7fd166890/23301/structure.jpg 945w,
+/static/f20076b46244a8af02020cf7fd166890/b7baf/structure.jpg 1088w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;여기서 집중해서 볼 부분은 바로 &apos;렌더링 엔진&apos;으로, 우리가 만든 마크업과 스타일을 해석해서 그려내는 역할을 합니다.&lt;br/&gt;
+물론 두루두루 친해지고 싶지만 일단 여기선 렌더링에 집중해 봅시다!&lt;/p&gt;
+&lt;h4&gt;렌더링 엔진의 종류&lt;/h4&gt;
+&lt;p&gt;어떤 렌더링 엔진을 쓰는지는 웹 브라우저마다 조금씩 다릅니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Webkit (Safari)
+&lt;ul&gt;
+&lt;li&gt;Apple에서 개발, 컨커러 브라우저의 KHTML을 기반으로 만든 엔진&lt;/li&gt;
+&lt;li&gt;Safari, iOS 브라우저에서 사용하며, 크롬도 Blink 탑재 전에는 해당 엔진을 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Blink (Chrome, Whale, Samsung Internet, Edge)
+&lt;ul&gt;
+&lt;li&gt;Google에서 개발, Webkit에서 파생된 엔진 (Chromium 28 버전부터 적용)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Trident (Internet Explorer)
+&lt;ul&gt;
+&lt;li&gt;Microsoft에서 개발, Internet Explorer에서 사용되었지만 웹 표준 미준수 + 각종 버그 + 보안 문제 등으로 이젠 안-녕&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;EdgeHTML (Edge)
+&lt;ul&gt;
+&lt;li&gt;Microsoft에서 개발, Trident에서 벗어나 Edge에서 사용되던 엔진이었지만, 2019년부터 Edge 브라우저를 Chromium 기반으로 재구축하면서 이젠 안-녕(2)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Gecko (Firefox)
+&lt;ul&gt;
+&lt;li&gt;Mozilla에서 개발&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;사실 웹 브라우저를 만드는 비법은 제조사마다 다르고, 각 엔진도 저마다 고유한 개성이 있어 동작 과정이 조금씩 다릅니다.&lt;/p&gt;
+&lt;p&gt;그롬(그리고 아마 대부분의 최신 브라우저)의 경우 각 탭마다 별도의 렌더러 프로세스가 돌아가고 있어서, 여러 개의 탭을 열면 각가 렌더링 엔진이 동작해 해당 탭의 내용을 표시합니다.&lt;br/&gt;
+그래서 하나의 탭이 죽어도 다른 탭은 멀쩡히 살아남을 수 있습니다.&lt;/p&gt;
+&lt;h2&gt;웹 브라우저가 화면을 그려내는 과정&lt;/h2&gt;
+&lt;p&gt;그렇다면 HTML, CSS, Javascript를 어쩜 그리 찰떡같이 해석해서 화면을 그려내는 것인가!가 이 글의 제일 궁금한 포인트이기에 그 일련의 흐름을 알아봅시다.&lt;/p&gt;
+&lt;h3&gt;(1) 삐빅, HTML 읽는 중··· 🔍&lt;/h3&gt;
+&lt;p&gt;HTML 문서를 받기 시작하면 우선 이를 &lt;strong&gt;파싱(Parsing)하는 작업&lt;/strong&gt;을 시작합니다.&lt;br/&gt;
+파싱이란 문서를 해석하고 구조화된 데이터로 바꾸는 것으로, 말하자면 마크업을 렌더링하기 위한 형태로 바꾸는 단계입니다.&lt;/p&gt;
+&lt;p&gt;렌더러 프로세스의 메인 스레드는 HTML 문서의 원시 바이트를 읽은 다음, 정해진 파일 인코딩에 맞춰 각각을 문자로 전환합니다. 그러면 아래와 같이 꺽쇄로 묶인 문자열을 읽게 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;html&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+   &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;/&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+Hello
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code&gt;&amp;#x3C;html&gt;&lt;/code&gt;이나 &lt;code&gt;&amp;#x3C;head&gt;&lt;/code&gt;는 W3C HTML5 표준에 규정된 문자열이므로 각각의 의미와 규칙을 이해할 수 있습니다. 브라우저는 이것들을 쪼개서 &apos;토큰(Token)&apos;으로 만듭니다.&lt;br/&gt;
+예를 들어, &lt;code&gt;&amp;#x3C;html&gt;&lt;/code&gt;을 보면 html 시작 토큰을 만들고, &lt;code&gt;&amp;#x3C;/html&gt;&lt;/code&gt;를 보면 html 종료 토큰을 만들어 냅니다. 여기에는 태그 뿐만 아니라 속성(&lt;code&gt;class&lt;/code&gt; 등)이나, 텍스트 같은 HTML 요소가 포함돼요.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ea20ce432bfadb1bbab87c587a99270d/bbbf7/htmlToToken.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 34.177215189873415%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA0ElEQVR42qWQMW/CMBCF/f9/AhILrLR0YChOooRWAXXP1I2mjRqB4uDajuTL3VV2paKqiIVPN91773R6gm9AMLP3vmmaruvatjXGXHGr6HHWnsOI2Pe91lopZaNA/2JEjMTWDZ+H45d1GDcCAPKiuFsssjRNk8C+rn8uUgQRmfAEXL6Z2WO53FX322r37hyyMFoX67WUMpEyz/NNlr1WFTMDwBjxAIyjAn6u7eQhm66e5slL+TGE8IX/LoHEw8hA7OO4MWwEBeEvVxoLIv128g0mD4+Bzf1S8AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;html to token&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ea20ce432bfadb1bbab87c587a99270d/984b6/htmlToToken.png&quot;
+        srcset=&quot;/static/ea20ce432bfadb1bbab87c587a99270d/4d6f2/htmlToToken.png 158w,
+/static/ea20ce432bfadb1bbab87c587a99270d/3c1ae/htmlToToken.png 315w,
+/static/ea20ce432bfadb1bbab87c587a99270d/984b6/htmlToToken.png 630w,
+/static/ea20ce432bfadb1bbab87c587a99270d/e7d8e/htmlToToken.png 945w,
+/static/ea20ce432bfadb1bbab87c587a99270d/58c38/htmlToToken.png 1260w,
+/static/ea20ce432bfadb1bbab87c587a99270d/bbbf7/htmlToToken.png 1280w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이렇게 문서를 토큰화했으면, 만든 토큰을 가지고 구조화시킵니다.
+&lt;code&gt;&amp;#x3C;html&gt;&amp;#x3C;head&gt;&amp;#x3C;/head&gt;&amp;#x3C;/html&gt;&lt;/code&gt;에서 head 종료 토큰은 html 종료 토큰 전에 존재합니다. 따라서 head는 html의 자식이구나! 하고 판단할 수 있어요.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7469ba2e10846111c028ab452820e128/bbbf7/htmlToNode.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 30.37974683544304%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAIAAABM9SnKAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA2UlEQVR42qWPPWsCQRCG73+FYJHflcJKC9MFUioq2AmCMWlSiLWNjeLH+X2eaLzLnt7e7O7MyOpVgjZ5mmFe5mF4Hb6gtU4A0Bi+DxECgAJAMszEzA6RHUFwGI+GYRA8lGm13kzceSzlNXEU8VRgfxsNdse+L1yBJ5OepiDaPVlG80roVkK3LGZFFF0rnwx3PPVW+3x9L2U/qm1P/SrrapMCIK19qPcaL9XCczH/9FPK8DJHxI4m9mJeRXohYPEH65jlbXHbi9Re7b6TbUv6X4nfxHhsP/M/OAODo1Kn/lTyewAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;html to node&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7469ba2e10846111c028ab452820e128/984b6/htmlToNode.png&quot;
+        srcset=&quot;/static/7469ba2e10846111c028ab452820e128/4d6f2/htmlToNode.png 158w,
+/static/7469ba2e10846111c028ab452820e128/3c1ae/htmlToNode.png 315w,
+/static/7469ba2e10846111c028ab452820e128/984b6/htmlToNode.png 630w,
+/static/7469ba2e10846111c028ab452820e128/e7d8e/htmlToNode.png 945w,
+/static/7469ba2e10846111c028ab452820e128/58c38/htmlToNode.png 1260w,
+/static/7469ba2e10846111c028ab452820e128/bbbf7/htmlToNode.png 1280w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;토큰을 파싱해 구조를 만들었으면 각 토큰은 해당하는 &apos;노드(Node)&apos;로 변환됩니다. 노드는 부모-자식이라는 계층적 관계를 통해 문서의 구조를 표현해내는 요소입니다.&lt;br/&gt;
+사실 HTML 문서의 모든 것은 노드가 되어 구조를 형성합니다. 태그는 요소 노드(Element Node)가 되고, 그 안에 적은 건 텍스트 노드가 되죠. 속성은 물론, 독타입 선언이나 주석도 모두 노드가 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c1c25a24b1e0b01f3562def5cc8cd3a1/668eb/dom.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 136.70886075949366%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAbCAIAAADzvTiPAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC2klEQVR42o2Uy08TURSH+c+Mj8hCl8alIVFjjAs3GBPDAiI7IwujGN1pBBGMok2U+FgAJYBRkClQwNSUR2tpOwzQedx7z0tn2kJLC3JmNnPO+e6593fPnBZpZq7rFquWz+cBoGlay4FvIhKReDze1dnZ29vb3d19q709lUrthY6CmVlEcrlcIpFIJpOWZc3MzLiuuxeqg5kZG4wI99YiIkRozGHmFiICOBADrY1SWmujtVZKG2MO8ABQgRvWFBYhprW11UxmI6ovSHIcGHS2b2nsznK8M/2ta3GsY3mi8/dUh958F/FwGBwGCE2w+mh0qO1T/+WJt9e+Dlz+MnBl9uNVnXl+NFwRC9EwloRdhF3CXWaXsRRh9P9thw+gNlxyteeDAQYghGMKVt6b3squWn/WLILdfed/YDBAwm4iPXF9dLBtbOhSbua2mE1AqeUP3zYJBeni4v2F8bvzo107qSdkthH5OHClxSi829CQpVaqo2ClVBAEKnx9z/M831OBr5TyfV9rfQQMkdNEDlOvnymHyjlNYGIOtMnmtmynxCK1RwDifHEnt+kAMUb5NTCEIqEq7GQ+F1Lv7XRMb1vROaPGAOUVJu10LLsyrLcm0JQQeR8G0MAi9vt4/8k3va1vHp7ITt8Q8iDsFxGVTo5ciD0929dzyoqdF98CEgBdUxkZtRMUp+2NuJMZN6Vf1crh+dW25WTGi+vjbuEHYYBIjYKFYwYAowEgdffGUk5jEUBqLpiv9EZms2g7JHUwIxfzW7lsnoAJmwoWbHiZt7ml/vxKHzhT1XYiQ17aGfm5+uJ76tm6+0HBNjUKxnZs+vXZVw9ahx+fLszeFPRCrUF8Tr+bv3jv5Zmewda+yXMOzAkeFIzQuHpnwbcTvj1nvPUawWDXpOzAKniWEywD6jrBqgOQACX8e0K16kcqCIEQClX9Fbg8XKmsG+jySwi0b+FtAeqwZtS8Ze8/+C8xNvmCqVWUqQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Dom&quot;
+        title=&quot;&quot;
+        src=&quot;/static/c1c25a24b1e0b01f3562def5cc8cd3a1/984b6/dom.png&quot;
+        srcset=&quot;/static/c1c25a24b1e0b01f3562def5cc8cd3a1/4d6f2/dom.png 158w,
+/static/c1c25a24b1e0b01f3562def5cc8cd3a1/3c1ae/dom.png 315w,
+/static/c1c25a24b1e0b01f3562def5cc8cd3a1/984b6/dom.png 630w,
+/static/c1c25a24b1e0b01f3562def5cc8cd3a1/e7d8e/dom.png 945w,
+/static/c1c25a24b1e0b01f3562def5cc8cd3a1/668eb/dom.png 1008w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;주요 포인트는 &lt;strong&gt;HTML 문서를 읽어 노드로 만들고 계층 형태로 구조화한다는 것!&lt;/strong&gt;&lt;br/&gt;
+이걸 트리 구조라고도 하는데 말 그대로 나무처럼 생겼어요. 뿌리가 있고 가지가 있으며 거기서 잎이 돋아난 나무를 거꾸로 배치한 것이 트리 구조입니다.&lt;br/&gt;
+이렇게 구성된 노드 트리를 &lt;strong&gt;DOM(Document Object Model) 트리&lt;/strong&gt;라고도 불러요.&lt;/p&gt;
+&lt;p&gt;그중에서도 처음으로 생성되는 가장 상위에 있는 노드인 &lt;code&gt;document&lt;/code&gt;를 루트(Root)라고 부릅니다. 루트 = 뿌리, 노드 = 가지라는 걸 생각하면 귀여운 이름이죠!
+참고로 텍스트 노드처럼 자식을 가질 수 없는 노드는 리프(leaf)라고 부릅니다 🌿&lt;br/&gt;
+개발자들은 뿌리(document node)를 진입점으로 문서 내 다른 DOM 요소들을 탐색하고 조작할 수 있습니다.&lt;/p&gt;
+&lt;h4&gt;DOM?&lt;/h4&gt;
+&lt;p&gt;아까부터 DOM이라는 단어가 몇 번 언급되었는데, DOM은 말그대로, 문서(Document)를 객체(Object) 기반으로 표현한 모델(Model)입니다.&lt;/p&gt;
+&lt;p&gt;이 모델은 HTML, XML 등의 문서 내 요소를 객체로 표현해 프로그래밍 언어에서 조작할 수 있게 하는 인터페이스를 제공합니다. 우리는 DOM API를 통해 DOM 객체를 조작할 수 있어요.&lt;br/&gt;
+만약 span 텍스트를 바꾸고 싶다면 &lt;code&gt;document.body.getElementByTagName(&apos;span&apos;)[0].innerText = &apos;Hello&apos;&lt;/code&gt;로 접근해 조작하면 됩니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;DOM Object
+DOM에서 문서와 관련된 객체를 뜻하며, 접근하고 조작하기 위한 인터페이스를 제공합니다.&lt;br/&gt;
+프로그래밍적으로 접근하고 조작할 수 있는 객체의 개념입니다.&lt;/li&gt;
+&lt;li&gt;DOM Node
+DOM Tree(=Node Tree)를 구성하는 온갖 노드들을 말합니다.
+트리 구조를 통해 서로 간의 계층적 관계를 나타내요. 문서를 표현하는 각 콘텐츠를 지칭하는 개념입니다.&lt;/li&gt;
+&lt;li&gt;DOM Element
+DOM Node 중에서도 태그로 표현되는 요소들(&lt;code&gt;div&lt;/code&gt; 등)을 Element Node라고 합니다.
+이들을 부르는 다른 말이 DOM Element에요.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이렇듯 DOM은 트리 구조로 웹 페이지를 표현하며, 이 DOM 트리를 이루는 구성요소가 바로 노드입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c184587551d3e12c11835cbc6963cfab/21062/cssom.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 18.354430379746837%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA10lEQVR42k2P607CQBBG+/5PZNQoqUoRGjAWrNDWEvAWNNGYLktnL8dsa4JfMsnMd/7MicRYnPcY67DWEeI9iHFY74/MHZk+BA7Gggi00t+hj7avn6SzjLyoUVowIrRieP/45i7LSaf3PBZrmr1grbDXUK6FeFgxuFqRjDeM0i3xsKSohWjzsiO5nTLPS5S2KKXQuuVt90U6m3OdTFgsq441zQ+Ncqxq4ezygZPzjPimYjR55vRiwfKpJRL5Uzb/lT1d73y/G9dphwTz8GVQDBN0D22/h/4XNYYvGCEiVb4AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;cssdom&quot;
+        title=&quot;&quot;
+        src=&quot;/static/c184587551d3e12c11835cbc6963cfab/984b6/cssom.png&quot;
+        srcset=&quot;/static/c184587551d3e12c11835cbc6963cfab/4d6f2/cssom.png 158w,
+/static/c184587551d3e12c11835cbc6963cfab/3c1ae/cssom.png 315w,
+/static/c184587551d3e12c11835cbc6963cfab/984b6/cssom.png 630w,
+/static/c184587551d3e12c11835cbc6963cfab/21062/cssom.png 926w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;DOM은 후술할 CSSOM이라는 것과 결합해 렌더(Render) 트리를 만들며, 브라우저는 이걸 통해 화면을 그려냅니다.&lt;br/&gt;
+따라서 &lt;strong&gt;DOM은 실제로 화면에 보여지는 것과 일치하지 않다&lt;/strong&gt;고 할 수 있습니다. 예를 들어, &lt;code&gt;display: none&lt;/code&gt; 처리한 요소는 화면에 보이지 않지만 DOM에는 존재하며, &lt;code&gt;:after&lt;/code&gt; 같은 가상요소는 렌더링되었지만 DOM 객체가 아니므로 자바스크립트로 조작하는 것이 불가합니다.&lt;/p&gt;
+&lt;p&gt;또한, HTML 문서를 보고 만들긴 했지만 DOM이 HTML과 완전히 일치한다고 할 수도 없습니다. 브라우저는 우리가 닫는 태그를 빼먹고 썼더라도 친절하게 DOM을 구성해주니까요.&lt;/p&gt;
+&lt;p&gt;한편, DOM은 자바스크립트의 영향을 받을 수 있습니다. 예를 들면 &lt;code&gt;appendChild()&lt;/code&gt; 메서드로 돔을 추가하는 것도 가능하죠! 그래서 자바스크립트에 의해 DOM 파싱은 &apos;방해받을 수&apos; 있습니다.
+이에 대한 내용은 다음 글에서 좀 더 살펴보겠습니다.&lt;/p&gt;
+&lt;h3&gt;(2) 삐빅, CSS 읽는 중··· 🔍&lt;/h3&gt;
+&lt;p&gt;CSSOM은 이름에서 유추할 수 있듯, CSS Object Model의 약자로 CSS 문서를 객체로 나타내고 조작하기 위한 인터페이스를 제공하는 웹 표준입니다.&lt;br/&gt;
+렌더링 엔진이 HTML을 쫙- 스캔할 때, 아마 대부분 &lt;code&gt;&amp;#x3C;head&gt;&lt;/code&gt;에서 스타일시트를 만나게 될 거에요. 렌더링에 이 CSS가 필요하다고 생각되면 요청해서 스타일시트 내용을 받아오게 됩니다.&lt;br/&gt;
+CSS도 파싱 과정을 거쳐서 Bytes -&gt; Characters -&gt; Tokens -&gt; Nodes -&gt; Object Model로 만들어집니다. 이걸 CSSOM이라고 부르고요. 마찬가지로 트리 형태로 구조화되어 있어요.&lt;/p&gt;
+&lt;p&gt;CSS의 C는 캐스케이딩이죠. 즉, 스타일 규칙은 계단식으로 상속됩니다. 브라우저는 트리 구조를 따라 각 노드에 적용할 수 있는 가장 일반적인 규칙부터 시작해 추가적인 스타일을 적용합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;css&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;body { font-size: 16px; }
+p { font-weight: bold; }
+span { display: none; }&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;예를 들면, &lt;code&gt;&amp;#x3C;p&gt;&lt;/code&gt;는 &lt;code&gt;&amp;#x3C;body&gt;&lt;/code&gt;의 자식이니까 &lt;code&gt;&amp;#x3C;body&gt;&lt;/code&gt;에 적용된 스타일인 &lt;code&gt;font-size: 16px;&lt;/code&gt;가 적용됩니다. 그 다음에는 자기 자신의 스타일인 &lt;code&gt;font-weight: bold;&lt;/code&gt;가 추가로 적용됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/bb73360d8dd76d980020bd9ef7593cd1/bbbf7/css.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 37.34177215189873%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABHUlEQVR42o2QbWvCMBSF+/9/lmyDwdQPzpXZrXRSa9WZ2DTNe3LGjSAMhuxCPtyXPJxzCtyplBKmaYK1FsYYaK2gXcTuJNF0DM2OozsphJhuf4p7wBBCBlVVhbqu4azBkU1YvDM8r3ZYlD3KZoB1/wTGGKGUAmMMwzBAqQnOB0iToB05oJuUndwF0gGpk1JmoNY6KyX71APpSvujiiO3eN30WFd7rKoDum9zg3DOM4gydM5hHEe0bZv39PZni9Vmj3XV460+4yw8iu1B42G5xezlE0/LL3y0IisjgBAC3vsMpf5yuaAsy9yPo0TdaczmDR4XDeblET3zKMQU0PMIoRJ8TDAu/oKQUrJPM1JKudKOZlx69PyaqQ8RxgX8ANIpHMsSVyDUAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;css tree&quot;
+        title=&quot;&quot;
+        src=&quot;/static/bb73360d8dd76d980020bd9ef7593cd1/984b6/css.png&quot;
+        srcset=&quot;/static/bb73360d8dd76d980020bd9ef7593cd1/4d6f2/css.png 158w,
+/static/bb73360d8dd76d980020bd9ef7593cd1/3c1ae/css.png 315w,
+/static/bb73360d8dd76d980020bd9ef7593cd1/984b6/css.png 630w,
+/static/bb73360d8dd76d980020bd9ef7593cd1/e7d8e/css.png 945w,
+/static/bb73360d8dd76d980020bd9ef7593cd1/58c38/css.png 1260w,
+/static/bb73360d8dd76d980020bd9ef7593cd1/bbbf7/css.png 1280w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;다만 아직 위의 트리는 완전한 CSSOM 트리가 아니에요! 사실 브라우저들은 저마다 기본으로 제공하는 스타일이 있습니다. 개발자 도구를 열어보면 우리가 정의하지 않은 속성이 user agent stylesheet에서 적용된 걸 볼 수 있어요.&lt;/p&gt;
+&lt;h4&gt;CSS 속독 비법: 오른쪽부터 읽기&lt;/h4&gt;
+&lt;p&gt;참, 브라우저는 CSS를 빠르게 파싱하기 위해 오른쪽에서 왼쪽으로 읽는다는 사실 아셨나요?! RTL(right-to-left) 파싱 또는 상향식 파싱이라고 하며 말 그대로 셀렉터의 오른쪽(자식)부터 왼쪽(부모)으로 거슬러 올라가며 읽습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;css&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;header div h1 p span { color: red; }
+header span.text { color: red; }&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;위와 같은 두 개의 규칙이 있습니다. 스타일을 계산할 때 어느 쪽이 더 빠를까요?&lt;/p&gt;
+&lt;p&gt;사실 웬만한 모던 브라우저는 CSS 선택자 매칭 최적화가 되어 있어 이 정도로 큰 차이는 없겠지만 일단 이론상으로는 후자가 좀 더 빠릅니다.&lt;/p&gt;
+&lt;p&gt;전자는 span부터 시작해, p, h1 등을 거슬러 올라가 header까지 일치하는지 확인해야 합니다. 브라우저가 DOM 트리를 순회하며 요소를 확인해야 하는데, DOM 트리가 크거나 복잡한 경우 속도가 느려질 수 있어요.&lt;br/&gt;
+후자는 클래스 셀렉터를 쓰고 있는데, 이렇게 하면 DOM 트리를 탐색할 필요 없이 렌더링 엔진이 알아서 빠르게 인덱싱을 하기 때문에 상대적으로 더 빠릅니다.&lt;/p&gt;
+&lt;p&gt;이렇게 오른쪽부터 읽는 이유는 스타일을 계산해야 하는 요소는 하나인데 읽어야 하는 규칙은 산더미처럼 많기 때문입니다. 가장 오른쪽부터 시작해서 일치하는지 않는지 먼저 빠르게 판단하면 나머지 셀렉터는 읽지 않고 다음 판단으로 넘어갈 수 있습니다.
+왼쪽부터 읽어야 한다면 DOM 트리 탐색을 위해 전체 HTML을 스캔해서 갖고 있어야 할 수도 있겠죠.&lt;/p&gt;
+&lt;p&gt;또, 각 브라우저별 렌더링 엔진이 가진 최적화 기술도 RTL 파싱에 적합한 매커니즘을 갖고 있다고 합니다. 하지만 이제 모던 브라우저는 성능이 짱짱하기에 셀렉터 최적화에 너무 매달릴 필요는 없을 것 같네요.&lt;/p&gt;
+&lt;h3&gt;(3) 삐빅, 렌더 트리 구성하는 중··· 🌳&lt;/h3&gt;
+&lt;p&gt;HTML과 CSS를 읽어 DOM 트리와 CSSOM 트리를 구성했으면, 이제 둘을 결합시켜 렌더 트리를 만들 차례입니다. 렌더 트리는 화면에 실제로 표시되는 시각적 요소를 계층적으로 나타낸 것으로, 얘도 ROM(Render Object Model)이라 부르기도 합니다.&lt;/p&gt;
+&lt;p&gt;브라우저는 아래와 같은 단계를 거쳐 렌더 트리를 구성합니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;DOM 트리의 루트(document)에서 시작해서 렌더링할 노드를 찾아냅니다.&lt;/li&gt;
+&lt;li&gt;각 노드에 일치하는 CSSOM 규칙을 찾아 적용합니다.&lt;/li&gt;
+&lt;li&gt;이제 콘텐츠와 스타일을 결합해 가시적인(visible) 노드를 구성합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d339153b6e64d8decde5b9606a9193b9/53c9c/tree.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 86.70886075949367%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAARABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAECBf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAHvLgNgIor/xAAXEAADAQAAAAAAAAAAAAAAAAABEDEA/9oACAEBAAEFAkELjF//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAEDAQE/AR//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/AR//xAAUEAEAAAAAAAAAAAAAAAAAAAAw/9oACAEBAAY/Ah//xAAaEAACAwEBAAAAAAAAAAAAAAAAAREhMRBB/9oACAEBAAE/IfZHaGoeEqS3zQWc/9oADAMBAAIAAwAAABAT4ID/xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAEDAQE/EB//xAAVEQEBAAAAAAAAAAAAAAAAAAAQQf/aAAgBAgEBPxAp/8QAHxAAAgIBBAMAAAAAAAAAAAAAAREAITEQQVFxocHw/9oACAEBAAE/EDxYq+IqtjRmKEgUPnM9qooiAW4HoaeAZg60/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;dom cssom rom&quot;
+        title=&quot;&quot;
+        src=&quot;/static/d339153b6e64d8decde5b9606a9193b9/af1fa/tree.jpg&quot;
+        srcset=&quot;/static/d339153b6e64d8decde5b9606a9193b9/ab180/tree.jpg 158w,
+/static/d339153b6e64d8decde5b9606a9193b9/ba98e/tree.jpg 315w,
+/static/d339153b6e64d8decde5b9606a9193b9/af1fa/tree.jpg 630w,
+/static/d339153b6e64d8decde5b9606a9193b9/23301/tree.jpg 945w,
+/static/d339153b6e64d8decde5b9606a9193b9/53c9c/tree.jpg 1045w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;핵심은 눈에 보이는 시각적 요소만 포함한다는 점&lt;/strong&gt;입니다. 예를 들어, &lt;code&gt;display: none&lt;/code&gt;이 적용된 DOM 요소는 화면에 렌더링되지 않으므로 렌더 트리에 포함되지 않습니다.
+마찬가지로 &lt;code&gt;&amp;#x3C;html&gt;&lt;/code&gt;이나 &lt;code&gt;&amp;#x3C;head&gt;&lt;/code&gt;도 시각적인 내용이 없기 때문에 생략됩니다.&lt;br/&gt;
+위 이미지에서도 &lt;code&gt;&amp;#x3C;span&gt;&lt;/code&gt;은 &lt;code&gt;display: none&lt;/code&gt;이 적용됐기에 자식인 텍스트 노드(&quot;World&quot;)는 렌더 트리에서 제외됐어요. 마찬가지로 &lt;code&gt;&amp;#x3C;html&gt;&lt;/code&gt;이나 &lt;code&gt;&amp;#x3C;head&gt;&lt;/code&gt;도 시각적인 내용이 없기 때문에 생략된 걸 볼 수 있습니다.&lt;/p&gt;
+&lt;p&gt;덧붙여 &lt;code&gt;:before&lt;/code&gt; 및 &lt;code&gt;:after&lt;/code&gt;로 만든 가상 요소는 DOM 요소는 아니지만 화면에 렌더링되므로 렌더 트리에 포함됩니다.&lt;/p&gt;
+&lt;h3&gt;(4) 삐빅, 설계도 만드는 중··· 📐&lt;/h3&gt;
+&lt;p&gt;지금까지의 흐름을 거쳐 &apos;그려내야 할 것&apos;을 알아냈습니다. 그럼 이제 이대로 화면에 그리면 되는 걸까요? 사실··· 할 일이 더 있습니다.
+구체적으로 어디에 얼마만큼 그려야 하는지 아직 모르기 때문입니다.&lt;br/&gt;
+예를 들어 &lt;code&gt;width: 50%&lt;/code&gt;는 어떤 부모를 기준으로 한 건지, &lt;code&gt;font-size: 4em&lt;/code&gt;은 어디서부터 계산해야 하는지 아직은 알 수 없어요. 그래서 브라우저는 렌더 트리의 루트부터 시작해
+각각의 정확한 위치와 크기를 알아내야 합니다. &quot;width: 50%는 250px이고, font-size: 4em은 22px이군&quot;하고 정확하게 파악하는 거죠.&lt;/p&gt;
+&lt;p&gt;이 과정을 &lt;strong&gt;&apos;Layout(레이아웃)&apos; 또는 &apos;Reflow(리플로우)&apos;&lt;/strong&gt; 라고 부릅니다. 최종적인 설계도를 그리는 단계라 할 수 있겠네요!&lt;/p&gt;
+&lt;p&gt;브라우저는 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model&quot;&gt;box model&lt;/a&gt;에 따라 페이지에서 노드가 차지하는 박스를 만들고, 이를 트리 형태로 구조화합니다.
+그리고 각 박스의 크기와 위치를 계산해서 페이지의 레이아웃을 구성합니다.&lt;/p&gt;
+&lt;h3&gt;(5) 삐빅, 화면을 그리는 중··· 🎨&lt;/h3&gt;
+&lt;p&gt;드디어 웹 페이지에 화면을 그릴 수 있습니다! (마침내!)&lt;br/&gt;
+레이아웃 단계가 끝나면 &lt;strong&gt;렌더링 트리를 화면의 픽셀로 변환하는 &apos;페인트(Paint)&apos; 이벤트가 실행됩니다.&lt;/strong&gt; 여기서도 브라우저는 화면에 그려낼 요소를 트리 형태로 구조화하며, 이를 페인트 트리라고 부릅니다.&lt;/p&gt;
+&lt;h4&gt;합성 단계&lt;/h4&gt;
+&lt;p&gt;화면에 그려내야 하는 단계인 만큼, &apos;페인트&apos; 단계는 렌더링 엔진이 가장 바쁜 구간입니다. 특히 그림자나 그라디언트 같은 렌더링은 페인팅하는 데 시간이 걸리는 비싼 작업이죠.&lt;br/&gt;
+그래서 이때 보다 &lt;strong&gt;효율적인 렌더링을 위해 &apos;합성(Composite)&apos; 이라는 과정&lt;/strong&gt;을 거칩니다.&lt;/p&gt;
+&lt;p&gt;합성은 렌더링 파이프라인의 레이아웃 및 페인팅 단계 후에 발생합니다. 최종적으로 보여질 화면을 위해 웹 페이지의 여러 요소를 결합하거나 투명도 효과를 적용합니다. &lt;code&gt;z-index&lt;/code&gt;, &lt;code&gt;opacity&lt;/code&gt; 같은 값을 렌더링에 적용하는 거죠.
+크롬의 경우, 컴포지터 스레드(compositor thread)라는 별도 스레드가 합성을 담당합니다.&lt;/p&gt;
+&lt;h4&gt;레이어로 나누면 편하니까&lt;/h4&gt;
+&lt;p&gt;이때 요소를 &lt;strong&gt;&apos;레이어&apos;로 분리하여 관리하기 위해 레이터 트리(Layer Tree)를 생성&lt;/strong&gt;합니다.&lt;/p&gt;
+&lt;p&gt;어도비 포토샵을 써보셨으면 레이어 패널에서 눈을 끄거나 켜면서 레이어를 관리한 경험이 있으실 텐데 그것과 비슷합니다!
+예를 들어 사이드 네비게이션 바가 열린 화면을 그려야 하는 경우를 생각해 봅시다.
+기존 메인 화면 위에 그려도 되지만, 레이어 위에 네비게이션 바를 그려서 합성하는 게 훨씬 효율적입니다.
+네비게이션을 닫는다고 해도 해당 레이어에만 변화가 일어나니 전체를 다시 렌더링 할 필요도 없죠!&lt;/p&gt;
+&lt;p&gt;이렇게 웹 페이지를 몇 개의 레이어로 나눈 뒤 컴포지터 스레드에서 각각을 칠하고 합성하면 빠르고 효율적으로 작업을 끝낼 수 있습니다.&lt;/p&gt;
+&lt;p&gt;레이어 분리 상황을 보고 싶다면 크롬 개발자 도구의 Layers 탭에서 확인할 수 있습니다. 세부사항을 보면 합성 원인도 확인할 수 있어요.
+만약 해당 패널이 보이지 않는다면, &lt;code&gt;Cmd(Ctl)+P&lt;/code&gt;로 검색 창을 띄운 뒤 &lt;code&gt;&gt;Layers&lt;/code&gt;를 입력하세요!&lt;/p&gt;
+&lt;h4&gt;하드웨어··· 가속!!!&lt;/h4&gt;
+&lt;p&gt;혹시 하드웨어 가속에 대해 들어보셨나요?? 여기서는 CPU가 처리하기 어려운 복잡한 작업을 &lt;strong&gt;GPU에서 처리하도록 하여 성능 향상을 끌어내는 것&lt;/strong&gt;을 말합니다.
+GPU는 그래픽 렌더링과 병렬 처리에 최적화되어 있기 때문에 복잡한 그래픽 작업을 보다 효율적으로 처리합니다.
+&lt;strong&gt;CSS 속성으로 transfrom, opcity 속성을 사용하면 GPU에서 처리되어 더 부드럽게 애니메이션을 표현할 수 있습니다.&lt;/strong&gt;
+그 외에 canvas나 WebGL도 하드웨어 가속으로 처리됩니다.&lt;/p&gt;
+&lt;p&gt;사실 레리어도 세분화해서 나뉘어지지만, 여기서는 하드웨어 가속을 사용하여 처리하는 그래픽 레이어를 가리킵니다.
+레이어가 생성되면 일반적으로 하드웨어 가속이 발생하고, GPU에서 레이어들을 합성하여 최종 이미지를 생성합니다.&lt;br/&gt;
+하지만 trnasform, opacity 속성을 쓴다고 항상 레이어가 생성되어 하드웨어 가속이 발생하는 것은 아닙니다. 레이어를 관리하는 데는 비용이 들기 때문에
+브라우저는 자기 마음대로(=최적화 상황에 따라) 레이어를 만들지 않거나 서로 합치기도 합니다. 하지만 대부분의 경우는 렌더링 성능을 향상시킬 수 있기에 최대한
+하드웨어 가속 속성을 써서 전환 효과를 만드는 것이 좋습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;css&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;.slide {
+   will-change: transform;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;만약 필요하다면 &lt;code&gt;will-change&lt;/code&gt;라는 속성을 써서 브라우저에게 해당 요소를 레이어로 승격시키고 하드웨어 가속을 쓰고 싶다고 말할 수도 있습니다.
+하지만 이 경우에도 적용할지 여부는 브라우저 마음이라는 점!&lt;/p&gt;
+&lt;h4&gt;최적화 = 일 덜 시키기&lt;/h4&gt;
+&lt;p&gt;화면을 그리기 위해 렌더링 엔진은 &lt;strong&gt;Layout =&gt; Paint =&gt; Composite&lt;/strong&gt; 이라는 과정을 거친다는 것을 알았습니다.
+그렇다는 건 화면에 변화가 일어났을 때 해당 영역에서 저 과정을 반복한다는 셈이죠.
+그래서 &lt;strong&gt;성능 최적화를 위해서는 레이아웃이나 페인트를 발생시키는 상황을 줄이는 것이 좋습니다&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;이른바 리플로우/리페인트라고 부르는, &apos;다시 그리는 비용&apos;을 줄이려면 위 파이프라인에서 합성만 발생하는 것이 가장 좋고요!
+즉, 렌더링 엔진에게 일을 덜 시키면 됩니다. 요 내용은 나중에 프레임 최적화를 배울 때 더 살펴보겠습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;요약&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;국내 브라우저 TOP3 : 1) 크롬  2) 사파리  3) 삼성 인터넷&lt;/li&gt;
+&lt;li&gt;브라우저의 렌더링 엔진이 HTML과 CSS를 해석해서 화면을 그려준다.
+&lt;ul&gt;
+&lt;li&gt;크롬은 Blink, 사파리는 Webkit, 파이어폭스는 Gecko 엔진을 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;렌더링 과정&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;① HTML 해석 후 DOM 트리 구성&lt;br/&gt;&lt;/li&gt;
+&lt;li&gt;② CSS 해석 후 CSSOM 트리 구성&lt;br/&gt;&lt;/li&gt;
+&lt;li&gt;③ DOM + CSSOM 결합하여 렌더 트리 구성&lt;br/&gt;&lt;/li&gt;
+&lt;li&gt;④ 레이아웃 계산&lt;br/&gt;&lt;/li&gt;
+&lt;li&gt;⑤ 페인트 및 레이어 합성&lt;br/&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3&gt;에필로그&lt;/h3&gt;
+&lt;p&gt;브라우저가 웹 페이지를 표시하려면 제법 긴 과정을 거쳐야 한다는 걸 알았습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;① 리소스 가져오기&lt;br/&gt;
+② 파싱&lt;br/&gt;
+③ DOM 트리 &amp;#x26; CSSOM 트리 구성&lt;br/&gt;
+④ 렌더 트리 구성&lt;br/&gt;
+⑤ 레이아웃 계산&lt;br/&gt;
+⑥ 페인팅 &amp;#x26; 합성&lt;br/&gt;
+⑦ 렌더링&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이를 &lt;strong&gt;&apos;주요 렌더링 경로(CRP; Critical Rendering Path)&apos;&lt;/strong&gt; 라고도 부릅니다. 말그대로 사용자에게 꼭 필요한 화면을 렌더링하는 데 필요한 흐름입니다.&lt;/p&gt;
+&lt;p&gt;그럼 이쯤 드는 생각:
+&quot;브라우저가 렌더링을 하는 방법을 알았으니, 이제 어떻게 렌더링 최적화를 할 수 있을지 궁금한데...&quot;&lt;/p&gt;
+&lt;p&gt;그래서 CRP를 최적화하는 것을 포함해 브라우저가 이미지, 애니메이션 등 리소스를 표현할 때 어떻게 성능 최적화를 할 수 있을지 이제부터 알아봅니다!(빠밤)&lt;br/&gt;
+결국 우리의 목적은 웹 페이지를 빠르게 그려내고 상호 작용할 수 있도록 해서 유저의 체감 성능을 높이는 거니까요.😉&lt;/p&gt;
+&lt;p&gt;그럼, 다음 포스팅도 기대해주세요! 끝까지 읽어주셔서 감사합니다 🙇‍♀️&lt;/p&gt;</content:encoded></item><item><title><![CDATA[프론트엔드 면접 준비 노트 (JavaScript)]]></title><description><![CDATA[Reference: 지금까지 받았던 신입 프론트엔드 면접 질문들 by arthur 개인 스터디 글로, 맞지 않는 내용이 있다면 피드백은 대 환영입니다 👼✨ 자바스크립트는 무슨 언어인가요? 자바스크립트는 본래 브라우저를 제어하는 언어였으나, Node…]]></description><link>https://kirahaa.github.io/fe-interview-js/</link><guid isPermaLink="false">https://kirahaa.github.io/fe-interview-js/</guid><pubDate>Tue, 01 Aug 2023 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;Reference: &lt;a href=&quot;https://velog.io/@arthur/%EC%A7%80%EA%B8%88%EA%B9%8C%EC%A7%80-%EB%B0%9B%EC%95%98%EB%8D%98-%EC%8B%A0%EC%9E%85-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%93%A4#%EC%82%AC%EC%84%A4&quot;&gt;지금까지 받았던 신입 프론트엔드 면접 질문들 by arthur&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;개인 스터디 글로, 맞지 않는 내용이 있다면 피드백은 대 환영입니다 👼✨&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;자바스크립트는 무슨 언어인가요?&lt;/h3&gt;
+&lt;p&gt;자바스크립트는 본래 브라우저를 제어하는 언어였으나, &lt;strong&gt;Node.js&lt;/strong&gt;라는 새로운 실행환경과 구글 V8엔진의 등장으로 자체 어플리케이션을 만들 수 있게 된 언어입니다.&lt;br/&gt;
+또한 자바스크립트는 명령형, 함수형, 객체지향 프로그래밍이 모두 가능한 멀티 패러다임 언어입니다.&lt;/p&gt;
+&lt;h3&gt;변수 선언, 초기화, 할당의 차이점에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;변수는 &lt;strong&gt;선언 =&gt; 초기화 =&gt; 할당&lt;/strong&gt; 단계를 거칩니다.&lt;/p&gt;
+&lt;p&gt;변수 선언은 변수를 생성하는 것을 의미합니다. 변수명(식별자)을 등록하여 스코프가 참조할 대상을 만듭니다.&lt;br/&gt;
+초기화는 메모리에 변수 저장을 위한 공간을 확보하는 단계입니다. 기본값으로 &lt;strong&gt;undefined&lt;/strong&gt;가 할당됩니다.&lt;br/&gt;
+할당은 &lt;strong&gt;=&lt;/strong&gt; 연산자를 사용하여 값을 할당하는 단계로, &lt;strong&gt;undefined&lt;/strong&gt;로 초기화된 변수에 실제 값을 할당해주는 단계입니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;var name;  // 변수 선언
+var name;  // 변수 선언 =&amp;gt; 초기화
+console.log(name);  // undefined
+
+name = &amp;#39;hayeong&amp;#39;;  // 변수 할당
+console.log(name);  // hayeong&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;데이터 타입에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;Javascript의 타입은 &lt;strong&gt;원시 타입&lt;/strong&gt;과 &lt;strong&gt;객체 타입&lt;/strong&gt;으로 나뉩니다.&lt;/p&gt;
+&lt;p&gt;원시 타입은 불변값이라고도 부르며, &lt;strong&gt;string&lt;/strong&gt;, &lt;strong&gt;number&lt;/strong&gt;, &lt;strong&gt;boolean&lt;/strong&gt;, &lt;strong&gt;undefined&lt;/strong&gt;, &lt;strong&gt;null&lt;/strong&gt;, &lt;strong&gt;symbol&lt;/strong&gt; 총 6가지 데이터 타입이 있습니다.&lt;br/&gt;
+객체는 원시 타입을 제외한 나머지 값들(배열, 함수, 정규표현식 등) 모두 객체에 해당되며, 참조형 타입이라고도 부릅니다.&lt;/p&gt;
+&lt;h3&gt;생성자에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;생성자 함수란 &lt;strong&gt;new&lt;/strong&gt; 연산자와 함께 호출하여 객체를 생성하는 함수를 의미합니다.&lt;br/&gt;
+생성자 함수에 의해 생성된 객체를 인스턴스라하며, 자바스크립트는 &lt;strong&gt;Object&lt;/strong&gt; 외에도 다양한 타입의 빌트인 생성자 함수를 제공합니다.&lt;br/&gt;
+생성자 함수는 일반 함수와 동일한 방법으로 정의하지만, 파스칼 케이스를 사용하는 관례를 따릅니다.&lt;/p&gt;
+&lt;h3&gt;this에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;this&lt;/strong&gt; 키워드는 자신이 속한 객체를 가리키는 식별자를 참조할 수 있는 키워드입니다.&lt;br/&gt;
+&lt;strong&gt;this&lt;/strong&gt;는 함수가 호출되는 방식에 따라 달라집니다.&lt;br/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;일반 함수 호출을 사용할 경우 기본적으로 전역 객체가 바인딩됩니다.&lt;/li&gt;
+&lt;li&gt;메서드 호출을 할 경우, 마침표 연산자 앞에 기술한 객체가 바인딩됩니다.&lt;/li&gt;
+&lt;li&gt;생성자 함수 호출을 할 경우, 미래에 생성할 인스턴스가 바인딩됩니다.&lt;/li&gt;
+&lt;li&gt;화살표 함수는 &lt;strong&gt;this&lt;/strong&gt;가 없기 때문에, 선언될 시점에서의 상위 스코프가 바인딩됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;call, apply, bind에 대해 설명해주세요.&lt;/h4&gt;
+&lt;p&gt;이 세가지 메서드는 강제로 &lt;strong&gt;this&lt;/strong&gt;를 바꿀 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;call&lt;/strong&gt;은 커스텀 this를 지정할 수 있고, &lt;strong&gt;apply&lt;/strong&gt;는 call과 유사하지만 인자로 배열을 받는다는 점에서 차이가 있습니다.&lt;br/&gt;
+&lt;strong&gt;bind&lt;/strong&gt;는 커스텀 this를 영구히 가지는 함수를 만들 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;콜백 함수에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;콜백 함수는 다른 함수의 인자로 넘겨지는 함수를 말합니다.&lt;br/&gt;
+콜백 함수는 일반적으로 비동기적인 상황에서 사용되며, 어떤 작업이 완료되거나 특정 이벤트가 발생했을 때 호출됩니다.&lt;/p&gt;
+&lt;h4&gt;콜백 지옥을 해결하는 방법을 설명해주세요.&lt;/h4&gt;
+&lt;p&gt;콜백 지옥은 비동기 처리 로직을 위해 콜백 함수를 연속으로 중첩하여 사용할 때 발생하는 문제입니다.&lt;br/&gt;
+콜백 지옥을 해결하는 방법에는 &lt;strong&gt;Promise&lt;/strong&gt;나 &lt;strong&gt;Async&lt;/strong&gt;가 있습니다.&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Promise&lt;/strong&gt;는 비동기 연산이 종료된 이후에 결과를 알기 위해 사용하는 객체입니다.&lt;br/&gt;
+&lt;strong&gt;Promise&lt;/strong&gt;의 &lt;strong&gt;.then&lt;/strong&gt;을 사용해 함수 실행 순서를 정할 수 있습니다.&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;ES8에서 도입된 &lt;strong&gt;async&lt;/strong&gt;, &lt;strong&gt;await&lt;/strong&gt;을 사용하면 비동기 함수를 마치 동기적 코드인 것처럼 동작하도록 구현이 가능합니다.&lt;br/&gt;
+&lt;strong&gt;async&lt;/strong&gt;함수는 &lt;strong&gt;async&lt;/strong&gt; 함수 안에서만 동작하며, &lt;strong&gt;await&lt;/strong&gt; 키워드를 쓰게 되면 해당 값이 반환 되기 전까지 기다리는 동안 &lt;strong&gt;async&lt;/strong&gt; 내부 함수는 일시 중단이 됩니다.&lt;/p&gt;
+&lt;h3&gt;Promise에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Promise&lt;/strong&gt;는 비동기 처리를 간편하게 처리할 수 있도록 도와주는 객체로, 성공 또는 실패 상태를 가집니다.&lt;br/&gt;
+비동기 작업이 완료되면 &lt;strong&gt;resolve(성공)&lt;/strong&gt; 또는 &lt;strong&gt;reject(실패)&lt;/strong&gt; 로 결과를 처리할 수 있습니다. 이렇게 처리된 결과는 &lt;strong&gt;then&lt;/strong&gt;과 &lt;strong&gt;catch&lt;/strong&gt; 메서드를 이용하여 다음 동작을 연결할 수 있습니다.
+이를 통해 비동기 코드를 더 구조적이고 유지보수하기 좋게 작성할 수 있으며, 에러 처리 등을 통해 안정적인 프로그래밍을 할 수 있습니다.&lt;/p&gt;
+&lt;h4&gt;Promise.all()에 대해 설명해주세요.&lt;/h4&gt;
+&lt;p&gt;Promise.all()은 자바스크립트의 Promise 메서드로, 여러 개의 Promise 객체를 받아 모든 Promise가 완료될 때까지 기다린 뒤, 그 결과들을 배열로 반환합니다.&lt;br/&gt;
+모든 Promise가 성공적으로 처리되면 배열에는 각 Promise의 성공 결과 값이 순서대로 들어가며, 하나라도 실패하면 첫 번째 실패한 Promise의 에러를 반환합니다.&lt;/p&gt;
+&lt;h3&gt;Promise와 Callback을 비교 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;Callback은 비동기 작업 완료 후 실행되는 함수로, 가독성과 유지보수에 어려움이 있을 수 있습니다.&lt;br/&gt;
+Promise는 ES6에서 도입된 비동기 처리 객체로, 콜백 지옥을 피하고 더 편리한 비동기 작업을 가능하게 해줍니다.&lt;br/&gt;
+성공 또는 실패 시 다른 처리를 할 수 있고, 여러 개의 비동기 작업을 체이닝하여 순차적 또는 병렬로 실행할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;Promise와 Async, Await의 차이를 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;Promise는 비동기 작업을 처리하는 객체로, then과 catch를 사용하여 결과를 다룹니다.&lt;br/&gt;
+Async/Await은 Promise를 더 간결하고 직관적으로 사용하기 위한 문법으로, async 함수와 await 키워드를 사용합니다.&lt;br/&gt;
+비동기 작업의 결과를 변수에 할당하거나 다른 함수에서 사용하기 용이하며, try-catch 문으로 예외 처리를 간편하게 할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;AJAX에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;AJAX는 웹 페이지에서 비동기적으로 서버와 데이터를 주고받는 기술로, 페이지 새로고침 없이 동적으로 내용을 갱신하거나 데이터를 로드할 수 있게 해주는 기술입니다.
+Javascript를 사용하여 비동기 통신을 수행하며, 사용자 경험을 향상시키고 웹 페이지의 속도와 효율성을 개선합니다.&lt;/p&gt;
+&lt;h3&gt;var, let, const 차이를 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;var&lt;/strong&gt;는 함수 스코프를 가집니다. 변수를 중복 선언해도 오류가 발생하지 않고, 똑같은 이름으로 여러번 선언되면 마지막 선언이 유효합니다.
+호이스팅 현상이 발생하여 변수가 선언되기 전에도 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;let&lt;/strong&gt;과 &lt;strong&gt;const&lt;/strong&gt;는 중복 선언이 불가능 하며, 블록 스코프를 가집니다. &lt;br/&gt;
+&lt;strong&gt;let&lt;/strong&gt;은 값이 변경될 수 있는 변수를 선언할 때 사용하고, &lt;strong&gt;const&lt;/strong&gt;는 값이 변경되지 않을 변수를 선언할 때 사용합니다.&lt;/p&gt;
+&lt;p&gt;일반적으로 let과 const를 사용하여 변수를 선언하고, var는 최신 버전의 Javascript에서는 피하는 것이 좋습니다.&lt;/p&gt;
+&lt;h4&gt;TDZ에 대해 설명해주세요.&lt;/h4&gt;
+&lt;p&gt;TDZ(Temporal Dead Zone)의 약어로, 변수가 선언되었지만 해당 변수를 사용할 수 없는 현상을 가리킵니다.
+TDZ는 변수가 선언되고 초기화되기 전까지의 영역을 의미하는데, ES6의 let과 const는 변수를 블록의 상단으로 호이스팅하지만 초기화하지는 않기 때문에 이런 현상이 발생합니다.&lt;/p&gt;
+&lt;h3&gt;함수 선언문과 함수 표현식의 차이에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;함수 선언문은 &lt;code&gt;function add(x, y){}&lt;/code&gt;의 형태로 쓰여지며, 완료시 undefined가 출력됩니다. 이때, 이름을 생략할 수 없습니다.&lt;/p&gt;
+&lt;p&gt;함수 표현식은 &lt;code&gt;const add = function(x, y) {}&lt;/code&gt;의 형태로 쓸 수 있으며, 함수 리터럴의 함수 이름을 생략할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;또한 함수 표현식으로 함수를 정의하면 변수 호이스팅이 발생하기 때문에 표현식 이전에 호출할 수 없지만, 함수 선언문으로 정의하면 함수 선언문 이전에 호출할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;이벤트 버블링과 캡처링에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;이벤트 버블링과 이벤트 캡처링은 브라우저에서 이벤트가 발생했을 때 이벤트가 어떻게 전달되는지를 설명하는 개념입니다.&lt;/p&gt;
+&lt;p&gt;이벤트 버블링은 자식 요소에 등록된 이벤트 핸들러가 먼저 실행된 후 부모 요소의 핸들러가 실행하는 것을 말합니다. 가장 일반적으로 사용됩니다.&lt;/p&gt;
+&lt;p&gt;이벤트 캡쳐링은 이벤트가 발생한 부모 요소의 핸들러가 먼저 실행된 후 자식 요소에 등록된 핸들러가 실행됩니다.&lt;/p&gt;
+&lt;p&gt;이벤트 버블링과 캡쳐링은 이벤트의 전파 방향이 다르므로 이를 이용하여 이벤트를 효율적으로 처리할 수 있습니다. 만약 이벤트 전파를 중단하고 싶다면, &lt;code&gt;event.stopPropagation()&lt;/code&gt; 메서드를 사용하면 됩니다.&lt;/p&gt;
+&lt;h4&gt;이벤트 위임에 대해서 설명해주세요.&lt;/h4&gt;
+&lt;p&gt;이벤트 위임은 상위 요소에 하나의 이벤트 핸들러를 등록하여 하위 요소들의 이벤트를 한 번에 처리하는 기술입니다.
+많은 수의 하위 요소에 각각 이벤트 핸들러를 등록하는 것보다 메모리 사용을 줄이고 코드를 간결하게 만들어줍니다.
+상위 요소에서 이벤트가 발생하면 이벤트가 해당 요소의 하위 요소들까지 전파되어 처리됩니다.
+이를 통해 동적으로 생성된 하위 요소들에 대해서도 하나의 핸들러로 처리할 수 있습니다.&lt;/p&gt;
+&lt;h4&gt;이벤트 위임의 동작 방식에 대해서 설명해주세요.&lt;/h4&gt;
+&lt;p&gt;우선 상위 요소에 이벤트 핸들러를 등록합니다. 하위 요소에서 이벤트가 발생하면 이벤트는 먼저 해당 요소에서 시작하여 상위 요소로 전파됩니다.
+이벤트가 상위 요소까지 전파되면 상위 요소에 등록된 이벤트 핸들러가 이벤트를 캐치하여 처리합니다. 이때 &lt;strong&gt;event.target&lt;/strong&gt; 속성을 사용하여 이벤트가 발생한 실제 요소를 식별할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;호이스팅과 발생하는 이유에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;호이스팅은 Javascript 엔진이 코드를 실행하기 전에 변수와 함수 선언을 스코프의 상단으로 끌어올리는 현상입니다.
+호이스팅이 발생하는 이유는 Javascript 엔진이 코드를 실행하기 전에  선언된 변수와 함수의 선언부를 미리 메모리에 할당하기 때문입니다.
+이렇게 선언들이 끌어올려지는 동작으로 인해 해당 변수와 함수를 선언 이전에 사용할 수 있게 되는데, 이것이 호이스팅의 원리입니다.
+이러한 동작은 실행 컨텍스트(Execution Context)가 형성되는 과정에서 일어나며, 변수와 함수의 선언부를 메모리에 먼저 올려놓는 것으로 이해할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;스코프(Scope)에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;스코프는 변수와 함수에 접근할 수 있는 유효한 영역을 나타냅니다. 즉, 변수와 함수가 어디에서 정의되고 어디에서 참조될 수 있는지를 결정하는 규칙입니다.&lt;br/&gt;
+Javascript에는 전역 스코프와 지역 스코프가 있습니다. 변수와 함수가 스코프에 따라 유효한 영역이 결정되므로, 스코프의 관리는 변수의 생명주기와 충돌을 방지하는 데 중요한 역할을 합니다.&lt;/p&gt;
+&lt;h3&gt;클로저(Closure)에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;클로저(Closure)는 반환된 내부 함수가 자신이 선언되었을 때의 환경(렉시컬 환경)인 스코프를 기억하여, 그 밖에서 호출되어도 해당 환경에 접근할 수 있는 함수를 의미합니다.&lt;/p&gt;
+&lt;p&gt;이를 통해 전역 변수를 사용하지 않고도 함수 밖에서 해당 변수에 접근할 수 있는 방법을 만들어 주며, 이는 반환된 함수를 제외하면 외부에서 접근할 수 없으므로 마치 private 변수처럼 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;클로저는 다음 예시에서 처럼 내부에 선언된 함수가 외부 함수의 지역변수를 사용해줬을 때만 클로저라고 선언됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;function outer() {
+  let name = &amp;quot;hayeong&amp;quot;;
+  if (true) {
+    let city = &amp;quot;seoul&amp;quot;;
+    console.log(city);
+    console.log(name);
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const btn = document.querySelector(&amp;#39;button&amp;#39;)
+
+btn.addEventListener(&amp;#39;click&amp;#39;, handleClick())
+
+function handleClick() {
+  let count = 0;
+  return function() {
+    count++
+    return count
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;실행 컨텍스트에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;실행 컨텍스트는 자바스크립트 코드가 실행되는 환경을 말합니다. 자바스크립트 엔진이 코드를 실행할 때, 실행 컨텍스트를 생성하여 코드를 평가하고 실행합니다.
+실행 컨텍스트는 코드 실행에 필요한 여러 정보들을 담고 있으며, 함수 실행, 변수 및 함수 선언, 스코프 체인 등을 관리하는데 사용됩니다.&lt;/p&gt;
+&lt;h4&gt;렉시컬 환경(Lexical Environment)에 대해 설명해주세요.&lt;/h4&gt;
+&lt;p&gt;렉시컬 환경은 자바스크립트의 변수와 함수의 이름을 관리하는 공간이라고 생각하면 됩니다.
+렉시컬 환경은 &lt;strong&gt;환경 레코드&lt;/strong&gt;와 &lt;strong&gt;외부 렉시컬 환경&lt;/strong&gt;으로 구성되어 있습니다.&lt;/p&gt;
+&lt;p&gt;환경 레코드는 모든 지역변수를 프로퍼티로 저장하고 있는 객체입니다. this, 함수일 경우 매개변수도 포함됩니다.
+외부 렉시컬 환경은 현재 렉시컬 환경보다 더 상위의 렉시컬 환경입니다.
+현재 렉시컬 환경에서 원하는 변수를 찾지 못하면 현재 렉시컬 환경이 참조하는 외부 렉시컬 환경으로 검색 범위를 확장하며, 이는 전역 렉시컬 환경까지 반복됩니다.&lt;/p&gt;
+&lt;h3&gt;자바스크립트에서 일어나는 데이터 형변환에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;함수와 연산자에 전달되는 값은 대부분 적절한 자료형으로 자동 변환되며, 이를 형 변환이라고 합니다.&lt;/p&gt;
+&lt;p&gt;이는 원시값이 아닌 객체간에도 동작하는데, &lt;code&gt;Symbol.toPrimitive&lt;/code&gt;를 사용하면 객체를 모든 종류로 형변환할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;또한 &lt;code&gt;toString()&lt;/code&gt;이나 &lt;code&gt;valueof()&lt;/code&gt;를 사용해서도 객체를 정해진 몇몇 타입으로 변환할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;자바스크립트가 동적 언어인 이유는 무엇인가요?&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;여기서 동적 언어란 실행 중에 변수의 데이터 타입을 명시적으로 선언하지 않고도 변수의 타입이 자동으로 결정되며, 변수의 타입이 실행 도중에도 동적으로 변경될 수 있는 언어를 말합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;자바스크립트는 &lt;strong&gt;런타임 시 변수의 타입이 결정&lt;/strong&gt;됩니다.&lt;/p&gt;
+&lt;p&gt;즉, 소스가 빌드될 때 자료형이 결정되는 것이 아닌 실행 시 결정됩니다. 이를 통해 런타임까지 타입에 대한 결정을 끌고 갈 수 있지만,
+실행 도중 변수에 예상치 못한 타입이 들어와 TypeError가 발생할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;프로토타입에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;자바스크립트의 모든 객체들은 메서드와 속성들을 상속받기 위한 템플릿으로써 프로토타입 객체를 갖습니다.
+정확히 말하자면 상속되는 속성과 메서드들은 각 객체가 아니라 객체의 생성자의 &lt;strong&gt;prototype&lt;/strong&gt;이라는 속성에 정의되어 있습니다.
+자바스크립트에서는 객체 인스턴스와 프로토타입간에 연결이 구성되며, 이 연결을 따라 프로토타입 체인을 타고 올라가며 속성과 메서드를 탐색합니다.&lt;/p&gt;
+&lt;h3&gt;깊은 복사와 얕은 복사에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;깊은 복사와 얕은 복사는 자바스크립트에서 객체를 복사할 때 발생하는 두 가지 다른 복사 방법을 의미합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;깊은 복사&lt;/strong&gt;는 원본 객체의 내용을 완전히 새로운 객체에 복사하는 것을 말합니다.
+원본 객체와 복사된 객체가 완전히 분리되어 있어, 한쪽을 수정해도 다른 쪽에 영향을 주지 않습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;얕은 복사&lt;/strong&gt;는 원본객체의 참조를 복사하는 것을 의미합니다. 원본 객체와 복사된 객체가 같은 객체를 참조하게 될 수 있으므로 한쪽을 수정하면
+다른 쪽에도 영향을 줄 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;불변성을 유지하려면 어떻게 해야하나요?&lt;/h3&gt;
+&lt;p&gt;불변성을 유지하기 위해서는 기존의 데이터를 변경하지 않고 새로운 데이터를 생성하고 조작해야 합니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Spread 문법 사용: Spread 문법(...)을 활용하여 배열이나 객체를 새로운 배열이나 객체로 복사하고 수정합니다.&lt;/li&gt;
+&lt;li&gt;Object.assign() 사용: &lt;code&gt;Object.assign()&lt;/code&gt; 함수를 사용하여 객체를 복사하고 수정합니다.&lt;/li&gt;
+&lt;li&gt;JSON.parse(JSON.stringify(obj)) 사용: JSON.stringify는 객체를 json 문자열로 변환하는데, 이 과정에서 원본 객체와의 참조가 모두 끊어지기 때문에 깊은 복사가 가능해집니다. 이후 JSON.parse()를 통해 다시 자바스크립트 객체로 만들어주면 복사가 완료됩니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Blocking과 Non-Blocking에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Blocking&lt;/strong&gt; : 블로킹은 어떤 작업이 실행 중일 때, 다른 작업이 대기해야 하는 상황을 의미합니다. 즉, 하나의 작업이 끝날 때까지 다른 작업들은 대기해야 합니다.
+일반적으로 동기적인 코드 실행 방식에서 블로킹이 발생합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Non-Blocking&lt;/strong&gt; : 논블로킹은 어떤 작업이 실행 중일 때, 다른 작업들이 기다리지 않고 독립적으로 실행될 수 있는 상황을 의미합니다.
+다른 작업들이 블로킹되지 않고 계속 진행될 수 있기 때문에 시스템의 응답성과 처리량이 향상될 수 있습니다. 일반적으로 비동기적인 코드 실행 방식에서 논블로킹이 나타납니다.&lt;/p&gt;
+&lt;h3&gt;동기와 비동기에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;동기 작업&lt;/strong&gt;은 순차적으로 실행되며, 하나의 작업이 끝날 때까지 다음 작업이 실행되지 않습니다.
+&lt;strong&gt;비동기 작업&lt;/strong&gt;은 작업이 완료되지 않아도 다음 작업을 실행하며, 작업의 완료는 콜백 함수나 프로미스 등을 통해 처리합니다.
+여러 작업들이 동시에 실행될 수 있어 응답성이 향상되고 복잡한 작업을 처리할 때 유용합니다.&lt;/p&gt;
+&lt;p&gt;자바스크립트에서는 비동기적이고 논블로킹된 코드를 사용하여 여러 작업을 효율적으로 처리하고, 응답성을 향상시키는 것이 중요합니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&quot;블로킹 vs 논 블로킹&quot;과 &quot;동기 vs 비동기&quot;의 차이점은?&lt;/p&gt;
+&lt;p&gt;비동기와 동기는 간단하게 &apos;&lt;strong&gt;코드의 순서랑 실행 순서가 일치하느냐&lt;/strong&gt;&apos;로 볼 수 있습니다.
+블로킹과 논블로킹은 &apos;&lt;strong&gt;코드의 실행이 다른 코드의 실행을 막느냐&lt;/strong&gt;&apos;로 볼 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;ES6에서 새로 생긴 기능을 아는대로 말씀해주세요.&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;블록 스코프, let, const&lt;/li&gt;
+&lt;li&gt;클래스&lt;/li&gt;
+&lt;li&gt;모듈&lt;/li&gt;
+&lt;li&gt;화살표 함수&lt;/li&gt;
+&lt;li&gt;매개변수 기본값&lt;/li&gt;
+&lt;li&gt;템플릿 리터럴&lt;/li&gt;
+&lt;li&gt;구조분해 할당(디스트럭처링)&lt;/li&gt;
+&lt;li&gt;스프레드 연산자&lt;/li&gt;
+&lt;li&gt;프로미스&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;undefined, null, undeclared를 비교해주세요.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;undefined&lt;/strong&gt;는 값이 할당되지 않았음을 의미합니다. 변수가 초기화 단계를 거치면 &lt;strong&gt;undefined&lt;/strong&gt;로 남아있게 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;undeclared&lt;/strong&gt;는 변수 선언조차 되어있지 않은 상태를 의미합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;null&lt;/strong&gt;은 의도적으로 &lt;strong&gt;null&lt;/strong&gt;이라는 빈 값을 할당한 경우를 의미합니다.&lt;/p&gt;
+&lt;h3&gt;자바스크립트를 멀티 스레드처럼 사용하는 방법이 뭔가요? / 자바스크립트에서 비동기 로직이 어떻게 동작하는지 설명해주세요. (이벤트 루프)&lt;/h3&gt;
+&lt;p&gt;Web API, Callback Queue, Event Loop 등을 통해 멀티 스레드처럼 보이게 하는 방법을 사용합니다.&lt;/p&gt;
+&lt;p&gt;자바스크립트는 싱글 스레드로 동작하며, 모든 작업이 하나의 메인 스레드에서 처리됩니다. 그러나 네트워크 요청, 파일 입출력, 타이머와 같은 작업은 시간이 걸리는 경우가 많습니다.
+이를 위해 비동기 로직이 필요한데, 이를 통해 시간이 걸리는 작업을 백그라운드에서 처리하고, 동시에 다른 작업을 수행할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;자바스크립트 엔진 내부에는 콜스택과 메모리힙이 잇고 그 외부에 브라우저일때 사용하는 webapi와 이벤트 루프, 콜백 큐가 추가되어 있습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;코드가 콜스택에 쌓이고 실행되면, 자바스크립트의 엔진은 비동기 작업을 webapi에 위임합니다.&lt;/li&gt;
+&lt;li&gt;webapi는 해당 작업을 수행하고 콜백 함수를 이벤트 루프를 통해 태스크 큐에게 넘겨줍니다.&lt;/li&gt;
+&lt;li&gt;이벤트 루프는 콜스택에 쌓인 함수가 없을 때, 태스크 큐에 대기하던 콜백 함수를 콜스택으로 넘겨줍니다.&lt;/li&gt;
+&lt;li&gt;콜스택에 쌓인 콜백함수를 실행하고 콜스택에서 제거합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;만약 promise를 사용한다면, 마이크로태스크 큐를 사용합니다. 마이크로 태스크 큐는 태스크 큐보다 우선순위가 높은 큐로, 태스크 큐에 대기중인 함수가 있더라도,
+마이크로 태스크 큐가 비어있지 않다면, 마이크로 태스크 큐에 대기중인 함수부터 콜스택으로 전달합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/9060ff03638b21ebada26e9d108f9854/3e3fe/async.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 66.45569620253164%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC0UlEQVR42l2S347bVBDG8xo8QivEBRdVr5CoxJ9KRSpFRUgsV0hQCQlueYrecAPXPACttIu6JdnuJtk0yTaCpYm79rETO7bj/Fk5ceLYJ+vYPxTvkhZG+o7mjOZ8Z2a+KSTmr8TlD5HPP0fWPrvCPeTxp7m/evE1q9Y3rFoPkI0dZO3u65w385/fJ4tcCon2kGj3LeKn7xDvX2NVusFF5Tby6ANk6Sby2XvI6ifI47vIyh3k4S3iw1tEh+8T/fEuyyfXWT65xnL/bdKwRyFb+WRhl3RpQmjj+3/S8w8g8liHFlnYIwvNSywtssiG2Aa5gQWRCbF56WcJBbaWQQpm2OMg+P0qkvGm/XvzL8CRIPwVDcPnbBLl9zCBgjtwMQwdwxD0ugZ6V0O3VSzTRAgNx+nn8cVisaX9ubPm/tOEH+sJP1QTvq8m3NtPKDkZBcdxGI1HmLqFrgl0Xcf3fUzTRFE6jIYj7FEftf8KbzlgTcAvCnxZWvNdNeXb8poHlZQviinFDeFwNER9pdI0y5zLGcPhmKOjQ6bTKfPFHKfvUlaKNCbPqAb7dOMX/PQSPtpb89VByk4pY6eU8vFeyp6VUfA8D0PTMVOT1csTwuGI+snJdm5BEHB2phLMgm3LrUnGIzOj6Kbs9pcUHfjNzOjNNxV6HkIXrJwQNJX5+Yh6s/k/wjNmweySLnstlD/3aAS7V9+k+ZlXKAyduGOjzDJGiyWNWo1gPs+FGAwGqKqK70/zh+t0TXql91ROOZ4V/7MLOaGqaaTJBW0fxrOQ42oFsRFICDrtNpoQWJaVixVFEUmS5L4QOobazTsYDodIKS8JNU1DxjL/IQxDKpUKhq7n2BBuFD89PeXxo8d4kY3oq5z+9XdO1G63883YjMZ1XQq2bdNqtWg06tSbJzSaTWq1GpVyeQtFUTAMA6WjcB6OsVwTfVOdYSCEoNfrMR6PmUwm/ANtzp+cozrmLAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;비동기로직&quot;
+        title=&quot;&quot;
+        src=&quot;/static/9060ff03638b21ebada26e9d108f9854/984b6/async.png&quot;
+        srcset=&quot;/static/9060ff03638b21ebada26e9d108f9854/4d6f2/async.png 158w,
+/static/9060ff03638b21ebada26e9d108f9854/3c1ae/async.png 315w,
+/static/9060ff03638b21ebada26e9d108f9854/984b6/async.png 630w,
+/static/9060ff03638b21ebada26e9d108f9854/3e3fe/async.png 860w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;태스크 큐(Task Queue)와 마이크로태스크 큐(Microtask Queue)는 자바스크립트의 비동기 처리 매커니즘에서 중요한 개념입니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;태스크 큐&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;태스크 큐는 자바스크립트 엔진이 비동기 작업의 콜백 함수들을 기다리는 대기열입니다.&lt;/li&gt;
+&lt;li&gt;비동기 작업의 콜백 함수나 이벤트 핸들러가 실행되어야 할 때, 해당 작업은 태스크 큐에 추가됩니다.&lt;/li&gt;
+&lt;li&gt;이벤트 루프는 메인 스레드의 작업이 끝날 때마다 태스크 큐에서 콜백 함수를 꺼내와 실행시킵니다.&lt;/li&gt;
+&lt;li&gt;대표적으로 &lt;strong&gt;setTimeout&lt;/strong&gt;, &lt;strong&gt;이벤트 핸들러&lt;/strong&gt;, &lt;strong&gt;AJAX 요청&lt;/strong&gt; 등이 태스크 큐에 추가됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;&lt;strong&gt;마이크로태스크 큐&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;마이크로태스크 큐는 태스크 큐와 유사하지만, 태스크 큐보다 우선순위가 높은 작업을 처리하는 대기열입니다.&lt;/li&gt;
+&lt;li&gt;Promise의 &lt;strong&gt;then, catch, finally, await&lt;/strong&gt; 등과 같이 비동기 작업이 끝나면 가장 먼저 실행되어야 하는 작업들이 여기에 추가됩니다.&lt;/li&gt;
+&lt;li&gt;마이크로태스크 큐의 작업이 모두 실행된 후에야 태스크 큐의 작업이 실행됩니다.&lt;/li&gt;
+&lt;li&gt;이는 이벤트 루프에서 마이크로태스크 큐의 작업을 우선적으로 처리하는 원리입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;requestAnimationFrame에 대해 설명해주세요.&lt;/h4&gt;
+&lt;p&gt;requestAnimationFrame은 브라우저 환경에서 사용되는 비동기적 웹 애니메이션을 실행하기 위한 메서드입니다.
+이를 사용하면 브라우저의 리플로우와 리페인트 사이클에 맞게 애니메이션을 실행할 수 있어 부드럽고 성능 좋은 애니메이션을 구현할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;map, forEach, reduce에 대해 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;map&lt;/strong&gt; 메서드는 배열의 각 요소를 변환하여 새로운 배열을 반환합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;reduce&lt;/strong&gt; 메서드는 배열의 각 요소를 순회하면서 주어진 함수를 적용하여 하나의 결과값을 반환합니다. 초기값을 설정하여 특정 인덱스부터 실행할 수도 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;forEach&lt;/strong&gt; 메서드는 배열의 각 요소에 주어진 함수를 실행하고 반환값은 없습니다. 주로 반복문을 대체하는 용도로 사용되며, 배열을 순회하면서 각 요소에 대한 작업을 수행할 때 유용합니다.&lt;/p&gt;
+&lt;h3&gt;자바스크립트의 메모리 관리에 대해 아는 대로 설명해주세요.&lt;/h3&gt;
+&lt;p&gt;자바스크립트는 &lt;strong&gt;가비지 컬렉션&lt;/strong&gt;이라는 메모리 관리 방법을 사용합니다.
+대표적인 가비지 컬렉션 알고리즘으로 Mark and sweep 알고리즘이 있으며, 현재 모든 최신 엔진은 이 알고리즘을 사용한 가비지 컬렉션을 제공합니다.&lt;/p&gt;
+&lt;p&gt;이 알고리즘은 더 이상 필요 없는 오브젝트를 닿을 수 없는 오브젝트로 정의합니다.&lt;/p&gt;
+&lt;p&gt;이 알고리즘은 &lt;code&gt;roots&lt;/code&gt;라는 오브젝트의 집합을 가지고 있으며, 주기적으로 가비지 컬렉터는 &lt;strong&gt;roots&lt;/strong&gt;부터 시작하여, &lt;strong&gt;roots&lt;/strong&gt;가 참조하는 오브젝트들, &lt;strong&gt;roots&lt;/strong&gt;가 참조하는 오브젝트가 참조하는 오브젝트들을 찾습니다.&lt;/p&gt;
+&lt;p&gt;이를 통해 모든 닿을 수 있는 오브젝트를 찾고 닿을 수 없는 모든 오브젝트들의 메모리를 해제합니다.&lt;/p&gt;
+&lt;p&gt;이 가비지 컬렉션은 수동으로 조작할 수 없습니다.&lt;/p&gt;
+&lt;h3&gt;클래스에 대해 설명해 주세요.&lt;/h3&gt;
+&lt;p&gt;자바스크립트에서 클래스는 함수의 한 종류입니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;class는 new 연산자 없이 호출이 불가능 합니다.&lt;/li&gt;
+&lt;li&gt;class는 extends와 super 키워드를 제공하여 상속이 가능합니다.
+extends는 상속과 관련된 키워드이고, super는 수퍼클래스의 constructor 호출과 수퍼클래스의 메서드 호출을 가능하게 하는 키워드입니다.&lt;/li&gt;
+&lt;li&gt;class에 정의된 메서드는 열거할 수 없으며, 항상 strict mode로 실행됩니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;즉시 실행 함수(IIFE)에 대해 설명해 주세요.&lt;/h3&gt;
+&lt;p&gt;즉시 실행함수는 정의되자마자 즉시 실행되는 함수를 말하며, 소괄호로 함수를 감싸서 실행하는 문법을 말합니다.
+이를 통해 필요없는 전역 변수의 생성을 줄일 수 있고, 자체적인 스코프를 가지게 되기 때문에 private한 변수를 만들 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;엄격 모드에 대해 설명해 주세요.&lt;/h3&gt;
+&lt;p&gt;엄격 모드는 &apos;use strict&apos;를 스크립트 최상단에 작성하여 사용합니다.
+이는 ES5에서 기존 스펙을 변경하며 하위 호환성 문제가 발생했기 때문에 도입된 문법으로, 엄격 모드를 활성화 했을 때에만 변경사항이 활성화되도록 해두었습니다.
+또한 코드를 클래스와 모듈을 사용해 구성한다면 use strict를 사용하지 않아도 자동으로 엄격모드가 활성화됩니다.&lt;/p&gt;
+&lt;h3&gt;콜 스택(Call Stack)과 힙(Heap)에 대해 설명해 주세요.&lt;/h3&gt;
+&lt;p&gt;콜 스택은 코드가 실행되면서 생성되는 실행 컨텍스트를 저장하는 자료구조입니다 이를 통해 변수 식별자, 스코프 체인 및 this 관리, 코드 실행 순서 관리 등을 수행하게 됩니다.
+또한 콜 스택은 원시 타입의 값과 참조 타입의 메모리 힙 주소값이 저장되는 공간입니다.
+메모리 힙은 원시 타입이 아닌 타입의 데이터가 저장되는 공간으로, 메모리 할당이 일어나게 됩니다.&lt;/p&gt;
+&lt;h3&gt;Rest 연산자와 Spread 연산자에 대해 설명해 주세요.&lt;/h3&gt;
+&lt;p&gt;Spread 연산자를 사용하면 객체 혹은 배열을 개별 요소로 분리할 수 있습니다. 이를 통해 객체의 프로퍼티들을 기존 객체를 건드리지 않으면서 객체 혹은 배열을 복사할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;Rest 연산자는 객체, 배열, 그리고 함수의 파라미터에서 사용이 가능합니다.
+객체나 배열에서 Rest 연산자를 사용하면 디스트럭처링 된 값들을 다시 객체나 배열로 묶을 수 있습니다.
+함수의 파라미터에서는 파라미터가 몇개가 될지 모르는 상황에서 이 파라미터들을 배열로 묶어주는 역할을 수행합니다.&lt;/p&gt;
+&lt;h3&gt;제너레이터에 대해 설명해 주세요.&lt;/h3&gt;
+&lt;p&gt;제너레이터는 &lt;code&gt;function*&lt;/code&gt;로 만들어지는 제너레이터 함수를 통해 만들 수 있으며, 해당 함수는 본문을 실행하지 않고 제너레이터 객체를 반환합니다.&lt;/p&gt;
+&lt;p&gt;그 후, &lt;code&gt;next()&lt;/code&gt;를 수행할 때마다, 함수에서 &lt;code&gt;yield&lt;/code&gt;한 값들을 하나씩 반환합니다.
+&lt;code&gt;next()&lt;/code&gt;를 사용할 수 있는 것으로 짐작할 수 있듯, 제너레이터 객체는 이터레이터이자 이터러블입니다.&lt;/p&gt;
+&lt;p&gt;따라서 제너레이터에서도 &lt;code&gt;for ... of&lt;/code&gt;이나 Spread 문법, 배열 디스트럭쳐링과 같은 기능을 사용할 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;이터러블과 이터레이터 프로토콜에 대해 설명해 주세요.&lt;/h3&gt;
+&lt;p&gt;이터레이션 프로토콜은 순회 가능한 데이터 컬렉션을 만들기 위해 ES6에서 도입된 규칙입니다.
+이터레이션 프로토콜에는 이터러블 프로토콜과 이터레이터 프로토콜이 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Symbol.iterator&lt;/code&gt;를 프로퍼티 키로 사용한 메서드를 직접 구현하거나 프로토타입 체인을 통해 상속받은 &lt;code&gt;Symbol.iterator&lt;/code&gt; 메서드를 호출하면 이터레이터 프로토콜을 준수한 이터레이터를 반환합니다.&lt;/p&gt;
+&lt;p&gt;이러한 규약을 이터러블 프로토콜이라 하며, 이터러블 프로토콜을 준수한 객체를 이터러블이라 합니다.&lt;/p&gt;
+&lt;p&gt;이터러블의 &lt;code&gt;Symbol.iterator&lt;/code&gt; 메서드를 호출하면 이터레이터 프로토콜을 준수한 이터레이터를 반환합니다. 이터레이터는 &lt;code&gt;next&lt;/code&gt; 메서드를 소유하며 &lt;code&gt;next&lt;/code&gt; 메서드를 호출하면 이터러블을 순회하며
+&lt;code&gt;value&lt;/code&gt;와 &lt;code&gt;done&lt;/code&gt; 프로퍼티를 갖는 이터레이터 리절트 객체를 반환합니다.&lt;/p&gt;
+&lt;p&gt;이러한 규약을 이터레이터 프로토콜이라 하며, 이터레이터 프로토콜을 준수한 객체를 이터레이터라 합니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Typescript - type과 interface 차이]]></title><description><![CDATA[typescript를 공부해보셨다면 type과 interface의 차이점에 대해 궁금증을 가져보셨을 텐데요!
 이번 기회에 확실히 정리해 봅시다! 🙌 📌 상속 받는 법 interface는 extends를 type…]]></description><link>https://kirahaa.github.io/ts-type-interface/</link><guid isPermaLink="false">https://kirahaa.github.io/ts-type-interface/</guid><pubDate>Sat, 22 Jul 2023 13:57:56 GMT</pubDate><content:encoded>&lt;p&gt;&lt;strong&gt;typescript&lt;/strong&gt;를 공부해보셨다면 &lt;code&gt;type&lt;/code&gt;과 &lt;code&gt;interface&lt;/code&gt;의 차이점에 대해 궁금증을 가져보셨을 텐데요!&lt;br/&gt;
 이번 기회에 확실히 정리해 봅시다! 🙌&lt;/p&gt;
 &lt;h3&gt;📌 상속 받는 법&lt;/h3&gt;
