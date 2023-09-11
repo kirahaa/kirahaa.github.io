@@ -9,7 +9,7 @@ import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 const Seo = ({ description, title, children }) => {
-  const { site } = useStaticQuery(
+  const { site, allMarkdownRemark } = useStaticQuery(
     graphql`
       query {
         site {
@@ -21,20 +21,28 @@ const Seo = ({ description, title, children }) => {
             }
           }
         }
+        allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+          group(field: {frontmatter: {tags: SELECT}}) {
+            fieldValue
+          }
+        }
       }
     `
   )
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const {group: tags} = allMarkdownRemark
 
   return (
     <>
       <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
       <meta name="description" content={metaDescription} />
+      <meta name="keywords" content={tags.map((tag) => tag.fieldValue)} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://kirahaa.github.io/" />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
