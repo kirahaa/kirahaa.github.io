@@ -1,4 +1,165 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 19 Sep 2023 05:37:58 GMT</lastBuildDate><item><title><![CDATA[리액트(React)는 왜 쓰는 걸까?]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/why-use-react/</link><guid isPermaLink="false">https://kirahaa.github.io/why-use-react/</guid><pubDate>Fri, 15 Sep 2023 13:57:56 GMT</pubDate><content:encoded>&lt;p&gt;프론트엔드 시장에서 가장 많이 사용되는 라이브러리 중 하나는 리액트입니다.&lt;br/&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 30 Oct 2023 08:58:25 GMT</lastBuildDate><item><title><![CDATA[타입스크립트의 꽃, 제네릭]]></title><description><![CDATA[타입스크립트는 자바스크립트의 상위 집합 언어로, 정적 타입을 지원하여 코드의 안정성과 생산성을 향상시켜줍니다. 그 중에서도 제네릭(Generic…]]></description><link>https://kirahaa.github.io/ts-generic/</link><guid isPermaLink="false">https://kirahaa.github.io/ts-generic/</guid><pubDate>Mon, 30 Oct 2023 13:57:56 GMT</pubDate><content:encoded>&lt;p&gt;타입스크립트는 자바스크립트의 상위 집합 언어로, 정적 타입을 지원하여 코드의 안정성과 생산성을 향상시켜줍니다.&lt;/p&gt;
+&lt;p&gt;그 중에서도 제네릭(Generic)은 타입스크립트의 핵심 기능 중 하나입니다. 오늘은 제네릭의 개념, 사용법, 그리고 실제 활용 방법에 대해 알아봅시다!&lt;/p&gt;
+&lt;h2&gt;제네릭이란?&lt;/h2&gt;
+&lt;p&gt;제네릭은 타입스크립트에서 코드의 일반화(generic)를 가능하게 해주는 기능입니다.
+제네릭을 사용하면 함수, 클래스, 인터페이스 등 다양한 타입에 대해 작동하도록 만들 수 있습니다.&lt;/p&gt;
+&lt;p&gt;제네릭을 사용하면&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;컴파일 시점에서 타입 체크를 할 수 있어 런타임 에러를 사전에 방지할 수 있고,&lt;strong&gt;(타입 안정성)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;한 번 작성한 제네릭 코드를 다양한 타입에 대해 재사용할 수 있고,&lt;strong&gt;(재사용성)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;제네릭을 통해 일반적인 동작을 정의하고, 구체적인 타입은 사용하는 곳에서 결정할 수 있습니다.&lt;strong&gt;(추상화)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;그렇다면 실제로 어떻게 제네릭을 사용하는지 살펴봅시다!&lt;/p&gt;
+&lt;h3&gt;1. 함수 제네릭&lt;/h3&gt;
+&lt;p&gt;함수를 정의할 때, 입력값과 반환값에 대해 제네릭 타입을 지정할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const reverse = &amp;lt;T&amp;gt;(items: T[]): T[] =&amp;gt; {
+  return items.reverse();
+};
+
+const numbers = [1, 2, 3, 4, 5];
+const reversedNumbers = reverse(numbers); // [5, 4, 3, 2, 1]
+
+const names = [&amp;#39;Alice&amp;#39;, &amp;#39;Bob&amp;#39;, &amp;#39;Charlie&amp;#39;];
+const reversedNames = reverse(names); // [&amp;#39;Charlie&amp;#39;, &amp;#39;Bob&amp;#39;, &amp;#39;Alice&amp;#39;]&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;프로미스(Promise)나 콜백(callback) 함수에서도 제네릭을 유용하게 사용할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const fetchData = &amp;lt;T&amp;gt;(url: string): Promise&amp;lt;T&amp;gt; =&amp;gt; {
+  return fetch(url)
+    .then((response) =&amp;gt; response.json())
+    .then((data: T) =&amp;gt; data);
+};
+
+fetchData&amp;lt;{ id: number; name: string }&amp;gt;(&amp;#39;/api/users/1&amp;#39;)
+  .then((user) =&amp;gt; {
+    console.log(user.id, user.name);
+  })
+  .catch((error) =&amp;gt; {
+    console.log(&amp;#39;Error:&amp;#39;, error);
+  })&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;2. 클래스 제네릭&lt;/h3&gt;
+&lt;p&gt;클래스를 정의할 때, 인스턴스 변수에 대해 제네릭 타입을 지정할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;class Box&amp;lt;T&amp;gt; {
+  private item: T;
+
+  constructor(item: T) {
+    this.item = item;
+  }
+  
+  getItem(): T {
+    return this.item;
+  }
+}
+
+const numberBox = new Box&amp;lt;number&amp;gt;(18);
+console.log(numberBox.getItem()); // 18
+
+const stringBox = new Box&amp;lt;string&amp;gt;(&amp;#39;Hello&amp;#39;);
+console.log(stringBox.getItem());  // &amp;#39;Hello&amp;#39;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;배열, 맵, 집합 등과 같은 컬렉션 데이터 구조에서 제네릭을 사용하여 다양한 타입의 요소를 저장하고 처리할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;class Collection&amp;lt;T&amp;gt; {
+  private items: T[] = [];
+  
+  addItem(item: T): void {
+    this.items.push(item);
+  }
+  
+  getItems(): T[] {
+    return this.items;
+  }
+}
+
+const numberCollection = new Collection&amp;lt;number&amp;gt;();
+numberCollection.addItem(1);
+numberCollection.addItem(&amp;#39;Apple&amp;#39;); // Error: Argument of type &amp;#39;string&amp;#39; is not assignable to parameter of type &amp;#39;number&amp;#39;.
+
+const stringCollection = new Collection&amp;lt;string&amp;gt;();
+stringCollection.addItem(&amp;#39;Apple&amp;#39;);
+stringCollection.addItem(1); // Error: Argument of type &amp;#39;number&amp;#39; is not assignable to parameter of type &amp;#39;string&amp;#39;.&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;3. 컴포넌트 제네릭&lt;/h3&gt;
+&lt;p&gt;컴포넌트에서도 제네릭을 사용하여 타입 안정성을 확보하고 재사용성을 높일 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const ListComponent = &amp;lt;T extends ReactNode&amp;gt;({ data }: { data: T[] }) =&amp;gt; (
+  &amp;lt;ul&amp;gt;
+    {data.map((item, index) =&amp;gt; (
+      &amp;lt;li key={index}&amp;gt;{item}&amp;lt;/li&amp;gt;
+    ))}
+  &amp;lt;/ul&amp;gt;
+);
+
+const stringList: string[] = [&amp;#39;Apple&amp;#39;, &amp;#39;Banana&amp;#39;, &amp;#39;Orange&amp;#39;];
+const numberList: number[] = [1, 2, 3];
+
+const RenderListComponents = () =&amp;gt; {
+  &amp;lt;&amp;gt;
+    {/* data: string[] */}
+    &amp;lt;ListComponent data={stringList} /&amp;gt;
+  
+    {/* data: number[] */}
+    &amp;lt;ListComponent data={numberList} /&amp;gt;
+
+    {/* Error: Type &amp;#39;number[]&amp;#39; is not assignable to type &amp;#39;string[]&amp;#39;. */}
+    &amp;lt;ListComponent&amp;lt;string&amp;gt; data={numberList} /&amp;gt;
+  &amp;lt;/&amp;gt;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;strong&gt;&quot;어라, 저 extends는 뭔가요?🙄&quot;&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;제네릭 제약(Constraints)&lt;/h2&gt;
+&lt;p&gt;제네릭을 제한해서 사용할 순 없을까요? 이럴 때 사용할 수 있는 것이 &lt;strong&gt;제네릭 제약&lt;/strong&gt;입니다.
+제네릭 제약은 extends 키워드를 사용하여 설정됩니다.
+&lt;code&gt;T extends SomeType&lt;/code&gt;에서 &lt;code&gt;T&lt;/code&gt;는 &lt;code&gt;SomeType&lt;/code&gt; 타입 또는 &lt;code&gt;SomeType&lt;/code&gt;을 상속하는 타입으로 제한됩니다.&lt;/p&gt;
+&lt;p&gt;제네릭 제약은 제네릭 타입을 특정 타입으로 제한하기 위해 사용되는 기능입니다.
+제네릭을 사용하여 범용적인 코드를 작성하면서도, 특정 타입에 대해서만 동작하도록 제약을 걸 수 있습니다.
+이를 통해 코드의 타입 안정성을 더욱 높일 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const getProperty = &amp;lt;T, K extends keyof T&amp;gt;(obj: T, key: K): T[K] =&amp;gt; {
+  return obj[key];
+}
+
+const person = { name: &amp;#39;Alice&amp;#39;, age: 30 };
+getProperty(person, &amp;#39;name&amp;#39;); // &amp;#39;Alice&amp;#39;
+getProperty(person, &amp;#39;age&amp;#39;); // 30
+getProperty(person, &amp;#39;address&amp;#39;); // Error: Argument of type &amp;#39;&amp;quot;address&amp;quot;&amp;#39; is not assignable to parameter of type &amp;#39;&amp;quot;name&amp;quot; | &amp;quot;age&amp;quot;&amp;#39;.&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;위의 예시와 같이, 제네릭 제약을 사용하여 key의 타입이 obj의 키로 제한하는 것을 볼 수 있습니다.&lt;/p&gt;
+&lt;p&gt;타입스크립트의 제네릭은 코드의 재사용성과 유연성을 높여주는 강력한 기능입니다. 제네릭을 통해 타입 안정성을 강화하고, 재사용 가능한 유연한 코드를 작성할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/441693e668b4a2655e0e0507110b6f79/40619/ts.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 89.87341772151898%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAASABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAIBBf/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEAMQAAAB7WzWVCskKB//xAAZEAADAQEBAAAAAAAAAAAAAAAAAQIRMRD/2gAIAQEAAQUCqlJuoffGVw//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAEDAQE/AR//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/AR//xAAXEAEAAwAAAAAAAAAAAAAAAAAgASEx/9oACAEBAAY/ArkYf//EABoQAQEBAQEBAQAAAAAAAAAAAAEAIRExQVH/2gAIAQEAAT8h1OEbCHJBjX7IBOB4QPyHYeX/2gAMAwEAAgADAAAAEBAHPP/EABURAQEAAAAAAAAAAAAAAAAAACAh/9oACAEDAQE/EKP/xAAaEQABBQEAAAAAAAAAAAAAAAAAARARQWGR/9oACAECAQE/EJ1q6If/xAAcEAEAAwACAwAAAAAAAAAAAAABABEhMXFBUWH/2gAIAQEAAT8QJVA9+YiXHcZDfP2Z0NwEslO0XwRyAEzNL6gaA9xrqf/Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;typescript jjang&quot;
+        title=&quot;&quot;
+        src=&quot;/static/441693e668b4a2655e0e0507110b6f79/af1fa/ts.jpg&quot;
+        srcset=&quot;/static/441693e668b4a2655e0e0507110b6f79/ab180/ts.jpg 158w,
+/static/441693e668b4a2655e0e0507110b6f79/ba98e/ts.jpg 315w,
+/static/441693e668b4a2655e0e0507110b6f79/af1fa/ts.jpg 630w,
+/static/441693e668b4a2655e0e0507110b6f79/40619/ts.jpg 700w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리액트(React)는 왜 쓰는 걸까?]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/why-use-react/</link><guid isPermaLink="false">https://kirahaa.github.io/why-use-react/</guid><pubDate>Fri, 15 Sep 2023 13:57:56 GMT</pubDate><content:encoded>&lt;p&gt;프론트엔드 시장에서 가장 많이 사용되는 라이브러리 중 하나는 리액트입니다.&lt;br/&gt;
 저도 남들 다한다는 리액트를 따라 배우기 시작했는데 왜 리액트를 쓰는지, 리액트를 잘 사용하고 있는지, 리액트에 들어간 나의 코드는 적절한가?라는 의문이 들었고,
 이러한 질문에 답하기 위해 리액트를 사용하는 이유에 대해 정리해 보기로 하였습니다.✨&lt;/p&gt;
 &lt;br/&gt;
@@ -85,10 +246,13 @@ export default App;&lt;/code&gt;
 &lt;hr&gt;
 &lt;br/&gt;
 &lt;p&gt;이렇게 리액트가 등장하게 된 배경과 다양한 프론트엔드 라이브러리 / 프레임워크 중에서 리액트 만의 장점과 특징을 정리해 보았는데요!
-앞으로는 이 특징들을 기억하며, 리액트를 사용하는 것도 좋을 것 같네요ㅎㅎ😊&lt;/p&gt;</content:encoded></item><item><title><![CDATA[프론트엔드 면접 준비하기]]></title><description><![CDATA[Reference: 신입 프론트엔드 개발자가 면접 전 꼭 알아야 할 기본 질문 11가지 Part 1. 웹 기본 지식 HTTP와 HTTPS의 차이와 https를 사용했을 때의 장점은 무엇일까요? HTTPS(HyperText Transfer…]]></description><link>https://kirahaa.github.io/fe-interview-web/</link><guid isPermaLink="false">https://kirahaa.github.io/fe-interview-web/</guid><pubDate>Thu, 14 Sep 2023 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+앞으로는 이 특징들을 기억하며, 리액트를 사용하는 것도 좋을 것 같네요ㅎㅎ😊&lt;/p&gt;</content:encoded></item><item><title><![CDATA[프론트엔드 면접 준비하기]]></title><description><![CDATA[Reference: 신입 프론트엔드 개발자가 면접 전 꼭 알아야 할 기본 질문 11가지 Part…]]></description><link>https://kirahaa.github.io/fe-interview-web/</link><guid isPermaLink="false">https://kirahaa.github.io/fe-interview-web/</guid><pubDate>Thu, 14 Sep 2023 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;Reference: &lt;a href=&quot;https://zero-base.co.kr/event/media_FE_school_qna&quot;&gt;신입 프론트엔드 개발자가 면접 전 꼭 알아야 할 기본 질문 11가지&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;Part 1. 웹 기본 지식&lt;/h2&gt;
+&lt;h3&gt;프로그래밍이란 뭐라고 생각하나요?&lt;/h3&gt;
+&lt;p&gt;프로그래밍이란 컴퓨터에게 실행을 요구하는 일종의 커뮤니케이션입니다. 해결해야 할 문제(요구사항)를 명확히 이해한 후 적절한 문제 해결 방안을 정의할 필요가 있다.
+0과 1밖에 알지 못하는 기계가 실행할 수 있을 정도로 정확하고 상세하게 요구를 설명하는 작업이며, 그 결과물이 바로 코드다&lt;/p&gt;
 &lt;h3&gt;HTTP와 HTTPS의 차이와 https를 사용했을 때의 장점은 무엇일까요?&lt;/h3&gt;
 &lt;p&gt;HTTPS(HyperText Transfer Protocol Secure)는 기존 프로토콜(컴퓨터 사이의 데이터 교환 방식 규칙 정의)에서 데이터가 쉽게 도난 당할 수 있는 것을
 방지하기 위해서 SSL(보안 소켓)을 사용하면서 브라우저와 서버 사이에 안전하게 암호화된 연결을 만들 수 있게 도와줍니다.
@@ -173,6 +337,14 @@ React에서는 주로 Redux를 사용하며, Vue에서는 Vuex를 사용합니�
 &lt;p&gt;&lt;strong&gt;큐&lt;/strong&gt;&lt;br/&gt;
 큐는 먼저 들어온 데이터가 먼저 처리되는 구조로 되어있습니다. 입구와 출구가 있는 이벤트 루프를 생각하면 쉽습니다. FIFO(First-In-First-Out) 구조라고 합니다.&lt;/p&gt;
 &lt;h3&gt;컴파일러와 인터프리터의 차이는 무엇일까요?&lt;/h3&gt;
+&lt;p&gt;우리가 코드를 통해 내린 명령을 수행할 주체는 컴퓨터입니다. 따라서 사람이 이해할 수 있는 자연어가 아니라 컴퓨터가 이해할 수 있는 언어, 즉 기계어로 명령을 전달해야 합니다.&lt;br/&gt;
+기계어는 우리가 사용하는 언어와는 너무나도 체계가 다르기 때문에 기계어로 직접 명령을 전달하는 것을은 매우 어렵습니다. 기계어로 직접 명령을 전달하는 것을 대신할 가장 유용한 대안은
+사람이 이해할 수 있는 약속된 구문으로 구성된 프로그래밍 언어를 사용해 프로그램을 작성한 후, 그것을 컴퓨터가 이해할 수 있는 기계어로 변환하는 일종의 번역기를 이용하는 것입니다.&lt;br/&gt;
+이 일종의 번역기를 컴파일러(compiler) 혹은 인터프리터(interpreter)라고 합니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;compile: 변환하다&lt;br/&gt;
+interpret: 해석하다&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;컴파일러&lt;/strong&gt;&lt;br/&gt;
 전체 코드를 보고 명령어를 수집하고 재구성 합니다. C, C++ 등이 해당합니다.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;인터프리터&lt;/strong&gt;&lt;br/&gt;
@@ -656,15 +828,313 @@ GPU는 그래픽 렌더링과 병렬 처리에 최적화되어 있기 때문에 
 &quot;브라우저가 렌더링을 하는 방법을 알았으니, 이제 어떻게 렌더링 최적화를 할 수 있을지 궁금한데...&quot;&lt;/p&gt;
 &lt;p&gt;그래서 CRP를 최적화하는 것을 포함해 브라우저가 이미지, 애니메이션 등 리소스를 표현할 때 어떻게 성능 최적화를 할 수 있을지 이제부터 알아봅니다!(빠밤)&lt;br/&gt;
 결국 우리의 목적은 웹 페이지를 빠르게 그려내고 상호 작용할 수 있도록 해서 유저의 체감 성능을 높이는 거니까요.😉&lt;/p&gt;
-&lt;p&gt;그럼, 다음 포스팅도 기대해주세요! 끝까지 읽어주셔서 감사합니다 🙇‍♀️&lt;/p&gt;</content:encoded></item><item><title><![CDATA[프론트엔드 면접 준비 노트 (JavaScript)]]></title><description><![CDATA[Reference: 지금까지 받았던 신입 프론트엔드 면접 질문들 by arthur 개인 스터디 글로, 맞지 않는 내용이 있다면 피드백은 대 환영입니다 👼✨ 자바스크립트는 무슨 언어인가요? 자바스크립트는 본래 브라우저를 제어하는 언어였으나, Node…]]></description><link>https://kirahaa.github.io/fe-interview-js/</link><guid isPermaLink="false">https://kirahaa.github.io/fe-interview-js/</guid><pubDate>Tue, 01 Aug 2023 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;그럼, 다음 포스팅도 기대해주세요! 끝까지 읽어주셔서 감사합니다 🙇‍♀️&lt;/p&gt;</content:encoded></item><item><title><![CDATA[주소창에 www.google.com을 입력했을 때 일어나는 과정]]></title><description><![CDATA[개발자로서 주소창에 특정 웹 페이지의 주소를 입력했을 때, 어떤 과정을 통해 데이터가 전달되고, 화면에 렌더링되는지를 확실하게 알아봅시다.
+(면접에서 나오는 단골 질문이기도 하고..^^) 데이터를 받아오는 과정 1. www.google.com…]]></description><link>https://kirahaa.github.io/when-searching-google/</link><guid isPermaLink="false">https://kirahaa.github.io/when-searching-google/</guid><pubDate>Fri, 01 Sep 2023 13:57:56 GMT</pubDate><content:encoded>&lt;p&gt;개발자로서 주소창에 특정 웹 페이지의 주소를 입력했을 때, 어떤 과정을 통해 데이터가 전달되고, 화면에 렌더링되는지를 확실하게 알아봅시다.&lt;br/&gt;
+(면접에서 나오는 단골 질문이기도 하고..^^)&lt;/p&gt;
+&lt;h3&gt;데이터를 받아오는 과정&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;1. &lt;a href=&quot;http://www.google.com&quot;&gt;www.google.com&lt;/a&gt; 입력하면 입력한 URL 주소 중, 도메인 이름에 해당하는 google.com을 DNS 서버에서 검색을 합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;웹 브라우저는 DNS 서버에 검색하기 전에 캐싱된 DNS 기록들을 먼저 확인합니다.&lt;br/&gt;
+만약 해당 도메인 이름에 맞는 IP 주소가 존재하면, DNS 서버에 해당 도메인 이름에 해당하는 IP주소를 요청하지 않고 캐싱된 IP주소를 바로 반환합니다.&lt;br/&gt;
+일치하는 IP 주소가 존재하지 않는다면, 다음 과정인 DNS 서버 요청으로 넘어갑니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;DNS(Domain name system) 서버는 도메인 주소에 대응하는 IP 주소를 찾아주는 역할을 수행합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;2. 가장 가까운 DNS 서버에서 해당 도메인 이름에 해당하는 IP주소를 찾아 사용자가 입력한 URL 정보와 함께 전달을 합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;ISP(ex. SK 브로드밴드, KT...)를 통해 DNS서버가 호스팅하고 있는 서버의 IP 주소를 찾기 위해 DNS Query를 전달합니다.&lt;br/&gt;
+DNS Query는 현재 DNS 서버에 원하는 IP 주소가 존재하지 않으면 다른 DNS 서버를 방문하는 과정을 원하는 IP 주소를 찾을 때까지 반복합니다.&lt;br/&gt;
+해당 도메인 이름에 맞는 IP 주소로 변환하는 과정은 점(.)을 기준으로 계층적으로 구분하여 구성이 됩니다.&lt;br/&gt;
+해당 계층의 탐색 순서는 뒤에서부터 해당 도메인 이름에 맞는 지역 DNS를 탐색하며, root DNS 서버가 나올때까지 거꾸로 탐색합니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ex) . =&gt; com =&gt; google.com&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이와 같이 Local DNS 서버가 여러 DNS 서버를 차례대로 물어봐서 답을 찾는 과정을 &lt;strong&gt;Recursive Query&lt;/strong&gt;라고 부릅니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ad4d1651f22bf52400b38576dc237078/ed282/recursive_query.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 50%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvUlEQVR42oWSz28MYRzGJ5G44YS/ACdSXSWaCIkf7bZ+RClpOUjUQYITB60eSHDQhjhI9ODiQFDRrYQ2SlVFyZqu7bb7a+Z9Z95933fefWfe2Znd2Z3ZDKlsL46e5HN7niffPPlK0v+1enJycn8sFtsvSdKq/7oxxgcIIW0Qwg5VVTsVRTmez+e7FxcXT6VSqTOZTOZsybaXKClkZDneOz8fPzM7O3t2ZmamBypKVyNTKBSilNJ2COG+RmEThLCJENJMCN+Tz+ebG3Bu702n061vRkc734yPnxwbG+t6/frl4cRiYteLF89Hnj198ioIgs0Iob2apjVDCLcjhLZKjLGNuVxurV+p3KuURAWA/FHhOO2VknCLRWP4myxvKgtr3jaLP99NTW2xLT7EEFz+/un9ZT8MD/mVcsXi/F48Hl9HKV3fuPAcAKCbGOQyxXhQVbU+XdcvFnTYn0ylBqenp/t/zM09nJv79vDDx+mBZDJ5Har5m9ls+mo2m73CKLtBCLkEADiNEOpd2TEMgw7fMR/4JeuuEOZtIcTu30HtmlMkw0XDeExp8aTgRrdTpCOexYcwxgOqmjvol+0hv2Te8Wu1+67nRVfKIIQ9JucvBTMyFjMSBOMkQmicMyONdbAEVDWnAvAVAnUWQZAjBbSk63pa07SYxXmCE/zL4jzNGHulKEqX5NXrzUG1esJznDYuRFS4oiMMw07TNNcIwXan5r9fSMjy+Xhc7pPlX31VpxpRFGVDUK0e8zw36rpuVDhOW7lcPuGVSk2S53mffa+8bDEjoJTWCcF127b/YIxHuUGIRQshI7hGDVrL5bK/374dFwCAd+WSHVoGqTPGGgSu6y7btj0hGYaxU6c0Qk0zYppmhFIa0XU9omlaq4pQS1rXI5mM2sKYve3LROzIyPCtRwsLC60Nz0ruHzsar/cX9cgr/gZxD7YAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;recursuve query&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ad4d1651f22bf52400b38576dc237078/984b6/recursive_query.png&quot;
+        srcset=&quot;/static/ad4d1651f22bf52400b38576dc237078/4d6f2/recursive_query.png 158w,
+/static/ad4d1651f22bf52400b38576dc237078/3c1ae/recursive_query.png 315w,
+/static/ad4d1651f22bf52400b38576dc237078/984b6/recursive_query.png 630w,
+/static/ad4d1651f22bf52400b38576dc237078/e7d8e/recursive_query.png 945w,
+/static/ad4d1651f22bf52400b38576dc237078/ed282/recursive_query.png 964w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3.전달받은 IP주소를 이용하여 웹 브라우저는 웹 서버에게 해당 웹사이트에 맞는 html문서를 요청합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;해당 HTTP 요청 메세지는 TCP/IP 프로토콜을 사용하여 서버로 전송됩니다.&lt;br/&gt;
+TCP는 전송 제어프로토콜로 데이터의 전송을 제어하고 데이터를 어떻게 보낼 지, 어떻게 맞출 지 정합니다.&lt;br/&gt;
+IP의 특징인 비신뢰성과 비연결성으로 인해 IP 프로토콜 만으로는 통신을 할 수 없습니다. 그렇기에, 신뢰성과 연결성을 책임지는 TCP를 활용하여 통신을 합니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;TCP/IP : 데이터가 의도된 목적지에 닿을 수 있도록 보장해주는 통신규약&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IP(Internet Protocol)
+&lt;ul&gt;
+&lt;li&gt;전 세계 수억대의 컴퓨터가 인터넷을 하기 위해서는 서로의 정체를 알 수 있도록 특별한 주소를 부여했는데 이 주소를 IP주소라 한다.&lt;/li&gt;
+&lt;li&gt;IP주소는 4바이트로 이루어진 주소번호를 사용한다. ex)192.168.100.100&lt;/li&gt;
+&lt;li&gt;숫자로 된 인터넷 주소는 식별하기 어렵기에 인간이 식별하기 쉬운 도메인 이름으로 변환시켜주는 Domain Name 서비스를 사용한다. ex) &lt;a href=&quot;http://www.naver.com&quot;&gt;www.naver.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Internet Protocol의 줄임말로, 인터넷에서 컴퓨터의 위치를 찾아서 데이터를 전송하기 위해 지켜야 할 규약이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;TCP(Transmission Control Protocol)
+&lt;ul&gt;
+&lt;li&gt;두 호스트가 교환하는 데이터와 승인메세지의 형식을 정의&lt;/li&gt;
+&lt;li&gt;서버와 클라이언트간의 데이터를 신뢰성있게 전달하기 위해 만들어진 규약&lt;/li&gt;
+&lt;li&gt;TCP는 데이터 패킷에 일련의 번호를 부여하여 데이터 손실을 찾아서 교정하고, 순서를 재조합하여 클라이언트에게 전달할 수 있게 해준다. 이는 데이터가 네트워크 선로를 통해 전달되는 과정에서 손실되거나 순서가 뒤바뀌어서 전달될 수 있기 때문에 중요하다.&lt;/li&gt;
+&lt;li&gt;복잡해서 신뢰성이 높다.&lt;/li&gt;
+&lt;li&gt;인터넷은 패킷을 이용해서 정보를 전달하므로, 이 패킷을 전달하는 규약도 필요하다.&lt;/li&gt;
+&lt;li&gt;패킷: 데이터를 일정한 크기로 자른 단위로 인터넷에서 정보를 전달하는 단위이다. 나누어진 패킷이 순서대로 도착한다는 보장이 없으므로 규칙이 필요하다.&lt;/li&gt;
+&lt;li&gt;TCP는 전달받은 패킷을 재조립하고, 패킷에 손상이 있거나 손실된 패킷이 있다면 재전송을 요청하는 패킷을 전송하여 재전송받는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;즉, IP는 데이터가 찾아갈 주소, TCP는 찾아온 데이터가 형식에 맞게 왔는지 확인하는 필터입니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;TCP는 3 way handshake 과정을 통해 연결 및 데이터를 수신받고, 4 way handshake 과정을 통해 연결을 종료합니다.&lt;/p&gt;
+&lt;p&gt;🎈 &lt;strong&gt;3 way handshake의 과정&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A 클라이언트는 B 서버에 접속을 요청하는 SYN 패킷을 전송합니다.&lt;/li&gt;
+&lt;li&gt;B 서버는 SYN 요청을 받고 A 클라이언트에게 요청을 수락한다는 SYN_ACK flag가 설정된 패킷을 전송합니다.&lt;/li&gt;
+&lt;li&gt;A 클라이언트는 B 서버에게 ACK를 전송 후, 연결이 이루어지고 데이터가 오고 가게 됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/501247226fffe9d0df1ac51492c81e90/298c1/3_way_handshake.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 73.41772151898735%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABcRAAAXEQHKJvM/AAACpklEQVR42q1UTWsTQRiexFqt9itNk+xOZnfcTbrZJnFbSaylFaI0jRFpoZUUIUpoaJUiigftTRb01IMfFG8F9SAeSi9CCSVpmmQ2Kdm2lP4Gb/4GhZEpTTXRYA++MAy88+778TzPuwD8Mgv4z2YFALQ0JqaUWimlLUfH2hDPzqmju94cDke7IAhQkpyuk1QXBIcHIVdwMPnA7089HfR6vZ11o4qiU7bb7R0Y8yrrNJFItDJ/sVicJoS8KZVKr/L5fIJ1E4/HzyCELiPOEffduR8Ozj6LyLLsrEsIIbTzPC8Kgh0yXywW62H+3V3z/d7eHi2Xy7RarX4EAHQHg4rqdnZr0GkfC0ynRvtn5qOcl3P8PkELQsiNELohCEIAIdRWe8hk8h7DMK7t7+9EdnYMmUFjs9m6PFevh2RVvaVEb48NLLyMKaFI73E2v9/fKoqiDWPMIYR62EdNmGcwsGKWyPo3TpvTFYyxGn6dk4dXv7Y1BbzG5ubm5sNMJrNWLBY/EEI+ra2tZvL53KOjmH/KzFKTDaWUSQFsb2+vHhwcUMMwvpum+aNSqVBCyJcTJcQYn+V5vhdj3F3zLS4uIl3XR7LZbF8uty5vbGx4V1ZWDmXFMHe7e/vUqSTvv/dY5PnQuTqWGcOMaYy5fiYNl0s7z8BvtkEIoSEIe6KM4cDdJxOuRtmwiowYdodCodM+nxxm/q2trRQhJFsul7OFQmGOxUej0S7Wkpuz3VQmUqMXZxb+kI2Fscvz/DiEUGHrlE5PdrAHQshbwzCoaZq0UqksAwA6NU1TLgQCA4IkjKtTc8OD888jsqY56/CTJMnFxvV4oCDLh6MeWjqd7lhaWoK6rsNkMnm8XkPLJalvcvaK6AuMhF98vhR5V2j/28/B2rDoliZqaMrwT+ASyxeVojxIAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;3 way handshake&quot;
+        title=&quot;&quot;
+        src=&quot;/static/501247226fffe9d0df1ac51492c81e90/984b6/3_way_handshake.png&quot;
+        srcset=&quot;/static/501247226fffe9d0df1ac51492c81e90/4d6f2/3_way_handshake.png 158w,
+/static/501247226fffe9d0df1ac51492c81e90/3c1ae/3_way_handshake.png 315w,
+/static/501247226fffe9d0df1ac51492c81e90/984b6/3_way_handshake.png 630w,
+/static/501247226fffe9d0df1ac51492c81e90/e7d8e/3_way_handshake.png 945w,
+/static/501247226fffe9d0df1ac51492c81e90/58c38/3_way_handshake.png 1260w,
+/static/501247226fffe9d0df1ac51492c81e90/298c1/3_way_handshake.png 2293w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;🎈 &lt;strong&gt;4 way handshake 과정&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;클라이언트가 연결을 종료하겠다는 FIN 플래그를 전송합니다.&lt;/li&gt;
+&lt;li&gt;서버는 확인메세지 ACK를 보낸 후, 자신의 통신이 끝날 때까지 기다립니다.&lt;/li&gt;
+&lt;li&gt;서버의 통신이 끝났으면 연결이 종료되었다고 클라이언트에 FIN 플래그를 전송합니다.&lt;/li&gt;
+&lt;li&gt;클라이언트는 확인했다는 메세지 ACK를 보냅니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;만약, Client에서 세션을 종료시킨 뒤 도착하는 패킷이 있다면 해당 패킷은 Drop되고 데이터는 유실되게 됩니다.&lt;/li&gt;
+&lt;li&gt;이러한 현상을 위해 Client는 Server로부터 FIN을 수신하더라도 일정시간동안 세션을 남겨놓고 잉여 패킷을 기다리는 TIME_WAIT 과정을 마지막으로 거치게 됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/fd525edf82b680152ac8096c5f60054d/9bae8/4_way_handshake.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 72.15189873417721%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB0UlEQVR42o2TiY4aMQyGef/XKmhVVqUc5RpQgZUY2IFyzkzufFWyMAL2aC1FVpz4t38fNR7EOcdqtWK321U2733UUkqWyyVFUVT269tVardO4VhrOZ5ztDaPseK7LgXeeT6T2p3DRefaIozDeiKwMbr6Y84FshRIpdBaU5Ylxph7wGBMkoTBcMgkSRj/nqOsw3h4Waa0uj2kAwfsVhk/Wy1+tFqMRiPG4zH7/b5iEAFDhGDcbrccDntedweurKxzKCkx2lDkAnXM8c5FNl/W8FYKZTFKBzTmkynPT9/xQsW3P6s19W91Go0G9fqbns1mkX5oWu2x6G+ABlMIsDZ23d1koY5nsteM9XpNmqZRZ1nGZrPhdDp9kqG22AvnQLfIc7w2eKkxxzzahJRVVv+mHAClBuNIFy/0O10wNr7t0zW/ej3anQ7T6ZR+v39XywgYZi9ECic06JALzqcSbS6UnatmyoU5tO5dM+4yDHVoNpu02x1GwyG98SSOTXBJZnOems+UxqEc2EK8dTkAej7u8jVlFz86cmWwl4/O2sgg3JQHmYvg8J+bcgXxPm5CKEEpRBz8sL9BhwBfyYdNCXVcLBYMBoO4Cd1utzphNG6DPwL+BV0HP8g0UreAAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;4 way handshake&quot;
+        title=&quot;&quot;
+        src=&quot;/static/fd525edf82b680152ac8096c5f60054d/984b6/4_way_handshake.png&quot;
+        srcset=&quot;/static/fd525edf82b680152ac8096c5f60054d/4d6f2/4_way_handshake.png 158w,
+/static/fd525edf82b680152ac8096c5f60054d/3c1ae/4_way_handshake.png 315w,
+/static/fd525edf82b680152ac8096c5f60054d/984b6/4_way_handshake.png 630w,
+/static/fd525edf82b680152ac8096c5f60054d/e7d8e/4_way_handshake.png 945w,
+/static/fd525edf82b680152ac8096c5f60054d/58c38/4_way_handshake.png 1260w,
+/static/fd525edf82b680152ac8096c5f60054d/9bae8/4_way_handshake.png 1330w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. WAS(Web Application Server)와 데이터베이스에서 웹페이지 작업을 처리합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;웹 서버 혼자서 모든 로직 처리 및 데이터 관리를 하게 되면 서버에 과부하가 일어날 가능성이 높습니다.
+그렇기에 서버의 일을 돕는 조력자 역할을 하는 것이 WAS입니다.&lt;/p&gt;
+&lt;p&gt;WAS는 사용자의 컴퓨터나 장치에 웹 어플리케이션을 수행해주는 미들웨어 입니다.
+특정 데이터 요청을 브라우저로부터 받게되면, 웹 서버는 페이지의 로직이나 데이터베이스의 연동을 위해 WAS에게 이들의 처리를 요청합니다.
+WAS는 해당 요청을 통해 동적인 페이지 처리를 담당하고, DB에서 필요한 데이터 정보를 받아 그에 맞는 파일을 생성합니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;웹 서버: 정적인 파일(HTML, CSS, 이미지 파일)을 처리&lt;br/&gt;
+WAS: 동적인 파일(JS, TS)을 처리&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/614a67a8777228673abcc87e90d8c5d4/a1f70/was.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 41.139240506329116%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABcSAAAXEgFnn9JSAAABzElEQVR42mPQ3Xo7JXzzuebXm5ZqZLuoS+X76yv8P8PA6r30jvHG49dO7zh2/sHOExfvbDt64f72Exevp25968nAwMDw/z8DIwM2YL/12oy6Dfs+n9i6MWemCwN/fZSJ0kt7Bp7MLc+MT5w8/e7w/j3/jx05/PfQ/n3/Tx8/8nP6ua/+EAP/Yzdw24kTfBuOHOEFsbW0GNj4ZPiEQGzZmS+Vz9y8X3z/7u3mG1fOdV2+erXt/v37Ff7rvxgwMOAwDAaQbGNj4OcXBLOmfpNlWPWfDeS1Nx1mMqGhocxg8Zn/5Rhm/meF6d2/fz8LMgYbhmIgH8SFcAMZGJi/dNlLwNWgGUgIsMJcKDf3u9LJy3dqrly50n/7xrWJ127c6rl+82aj3+pnJgwM9SxQ9YynTpxIu3r16pJr164tPn78eAW6gWy8vFLCIIbv6s/ab968ef/qycP/e3du//v4/p3/3z6++z5jz9WY+fHyEv8Xmgrfmpmm/P79uxsPHz78f+PGjb/Pnz//j+FCfn55ARBDd8ln3W3nH9zad/7mhw1HLr7edebGu70X7z3L2XI/6FghA+f/Ra7c3TGWYtevX1928uTJ+0ePHr116dKlQwDNV/gUUAH+/AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;WAS&quot;
+        title=&quot;&quot;
+        src=&quot;/static/614a67a8777228673abcc87e90d8c5d4/984b6/was.png&quot;
+        srcset=&quot;/static/614a67a8777228673abcc87e90d8c5d4/4d6f2/was.png 158w,
+/static/614a67a8777228673abcc87e90d8c5d4/3c1ae/was.png 315w,
+/static/614a67a8777228673abcc87e90d8c5d4/984b6/was.png 630w,
+/static/614a67a8777228673abcc87e90d8c5d4/a1f70/was.png 683w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. WAS에서의 작업 처리 결과들을 웹 서버로 전송하고, 웹 서버는 웹 브라우저에게 html 문서 결과를 전달합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;전달 과정에서 status code를 통해 서버 요청에 따른 결과 및 상태를 전달합니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;1xx: 정보가 담긴 메세지&lt;/li&gt;
+&lt;li&gt;2xx: response 성공&lt;/li&gt;
+&lt;li&gt;3xx: 클라이언트를 다른 URL로 리다이렉트&lt;/li&gt;
+&lt;li&gt;4xx: 클라이언트 측에서 에러 발생&lt;/li&gt;
+&lt;li&gt;5xx: 서버 측에서 에러 발생&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a7c83480e2c53589208dbed10e66f486/9a6db/http_status_code.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 69.62025316455697%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAQADBf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAHtJpDNX//EABoQAAICAwAAAAAAAAAAAAAAAAECABADESH/2gAIAQEAAQUCfk1WRSwr/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAGxAAAgEFAAAAAAAAAAAAAAAAARARADFBkcH/2gAIAQEABj8CntXO0IOX/8QAGhABAAIDAQAAAAAAAAAAAAAAAQARECFBUf/aAAgBAQABPyH0O2uIcwBRUFAKDuBS4//aAAwDAQACAAMAAAAQzA//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAWEQADAAAAAAAAAAAAAAAAAAABEBH/2gAIAQIBAT8QhX//xAAaEAEBAAMBAQAAAAAAAAAAAAABEQAxQRAh/9oACAEBAAE/EEE+gIoFyl0ne2SKWdWuO8XYWhzHVSL5/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;http status code&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a7c83480e2c53589208dbed10e66f486/af1fa/http_status_code.jpg&quot;
+        srcset=&quot;/static/a7c83480e2c53589208dbed10e66f486/ab180/http_status_code.jpg 158w,
+/static/a7c83480e2c53589208dbed10e66f486/ba98e/http_status_code.jpg 315w,
+/static/a7c83480e2c53589208dbed10e66f486/af1fa/http_status_code.jpg 630w,
+/static/a7c83480e2c53589208dbed10e66f486/9a6db/http_status_code.jpg 920w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;브라우저 렌더링 과정&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;6. Critical Rendering Path를 통해 웹 브라우저 화면에 웹 페이지 내용을 출력합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;웹 브라우저에 출력되는 단계를 Critical Rendering Path라고 하며 크게 6단계로 분류됩니다.&lt;br/&gt;
+성능을 최적화하려면 수신받은 HTML, CSS, JS 파일들을 어떤 단계를 거치는지 파악한 후, 해당 과정들을 최소화하는 것이 매우 중요합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d0b38b9a6f625d4961b970dfaee36635/c13bc/critical_render_path.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 37.9746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAIAAAB2/0i6AAAACXBIWXMAAAsTAAALEwEAmpwYAAABZUlEQVR42nXQUWuCUAAFYP9qIfgjCpQwerlQRvjkc0H9hEju9hBhWNFmW/Zod6WWaBZe9V7vNmMbjO17PgcOh2OloigYY3me73Y727bt7RYhZFnW89PT68uLvd1uNps4jr+Td1xRFBhjQghjjFLqeV4YhlEYXqIIIbR3HLTfu66LEIrjOMsyXMqy7LNMCEmSxHEcCOHD4+PpdFqv15PJxDRNQkie58UXUqKUEkIwxp/lNE2v1yuEsFqt8jy/WCy63W6lUpFlOU3T8/l8z/2JE0VRUZQoiuLS5XJRVbVerwMATNPUNE1RlNVqNRgMarXaaDSaz+eiKLZaLd/3OUmSOp3O8Xh8K7muq2lao9Ho9Xqz2azdbjebTcMw+v2+JEnD4XA6ncqyDADwPI/DGAdBoOs6z/OCIBiGoaqqIAgAgCRJfN+/3W6/Tv6ZTSlljB0OB13XIYRBEFiWNR6Pl8vl/ZviHx/ld2/glTLn71srAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;critical render path&quot;
+        title=&quot;&quot;
+        src=&quot;/static/d0b38b9a6f625d4961b970dfaee36635/984b6/critical_render_path.png&quot;
+        srcset=&quot;/static/d0b38b9a6f625d4961b970dfaee36635/4d6f2/critical_render_path.png 158w,
+/static/d0b38b9a6f625d4961b970dfaee36635/3c1ae/critical_render_path.png 315w,
+/static/d0b38b9a6f625d4961b970dfaee36635/984b6/critical_render_path.png 630w,
+/static/d0b38b9a6f625d4961b970dfaee36635/c13bc/critical_render_path.png 939w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이 후 과정은 &lt;a href=&quot;../web-perform-optimization/&quot;&gt;여기&lt;/a&gt;에서 자세히 정리해 놓았으니 참고 부탁드립니당ㅎㅎ&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;마무리&lt;/h3&gt;
+&lt;p&gt;프론트엔드 개발 공부를 하면서도 제가 짜는 코드가 어떻게 화면에 구현되는지 모른채 얼레벌레 코드를 짜고 있었다는 것을 알게된 시간이었습니다😅&lt;br/&gt;
+공부를 하면서 이런 동작 원리 하나하나가 코드를 짜는 데 중요하다는 것을 알게 되었습니다!&lt;br/&gt;
+혹시나 틀린 내용이 있다면 언제든 피드백 부탁드립니다! 🙆‍♀️&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;참고&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://velog.io/@tnehd1998/%EC%A3%BC%EC%86%8C%EC%B0%BD%EC%97%90-www.google.com%EC%9D%84-%EC%9E%85%EB%A0%A5%ED%96%88%EC%9D%84-%EB%95%8C-%EC%9D%BC%EC%96%B4%EB%82%98%EB%8A%94-%EA%B3%BC%EC%A0%95&quot;&gt;https://velog.io/@tnehd1998/%EC%A3%BC%EC%86%8C%EC%B0%BD%EC%97%90-www.google.com%EC%9D%84-%EC%9E%85%EB%A0%A5%ED%96%88%EC%9D%84-%EB%95%8C-%EC%9D%BC%EC%96%B4%EB%82%98%EB%8A%94-%EA%B3%BC%EC%A0%95&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://velog.io/@jhyun_k/%EB%82%B4-%ED%99%94%EB%A9%B4%EC%97%90-%EB%84%A4%EC%9D%B4%EB%B2%84%EA%B0%80-%EC%BC%9C%EC%A7%80%EB%8A%94-%EA%B3%BC%EC%A0%95&quot;&gt;https://velog.io/@jhyun_k/%EB%82%B4-%ED%99%94%EB%A9%B4%EC%97%90-%EB%84%A4%EC%9D%B4%EB%B2%84%EA%B0%80-%EC%BC%9C%EC%A7%80%EB%8A%94-%EA%B3%BC%EC%A0%95&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://velog.io/@thyoondev/%EC%9B%B9-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EC%9D%98-%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC%EB%A5%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90&quot;&gt;https://velog.io/@thyoondev/%EC%9B%B9-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EC%9D%98-%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC%EB%A5%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://codechasseur.tistory.com/25&quot;&gt;https://codechasseur.tistory.com/25&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[프론트엔드 면접 준비 노트 (JavaScript)]]></title><description><![CDATA[Reference: 지금까지 받았던 신입 프론트엔드 면접 질문들 by arthur 개인 스터디 글로, 맞지 않는 내용이 있다면 피드백은 대 환영입니다 👼✨ 자바스크립트는 무슨 언어인가요? 자바스크립트는 HTML, CSS…]]></description><link>https://kirahaa.github.io/fe-interview-js/</link><guid isPermaLink="false">https://kirahaa.github.io/fe-interview-js/</guid><pubDate>Tue, 01 Aug 2023 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;Reference: &lt;a href=&quot;https://velog.io/@arthur/%EC%A7%80%EA%B8%88%EA%B9%8C%EC%A7%80-%EB%B0%9B%EC%95%98%EB%8D%98-%EC%8B%A0%EC%9E%85-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%93%A4#%EC%82%AC%EC%84%A4&quot;&gt;지금까지 받았던 신입 프론트엔드 면접 질문들 by arthur&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;개인 스터디 글로, 맞지 않는 내용이 있다면 피드백은 대 환영입니다 👼✨&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3&gt;자바스크립트는 무슨 언어인가요?&lt;/h3&gt;
-&lt;p&gt;자바스크립트는 본래 브라우저를 제어하는 언어였으나, &lt;strong&gt;Node.js&lt;/strong&gt;라는 새로운 실행환경과 구글 V8엔진의 등장으로 자체 어플리케이션을 만들 수 있게 된 언어입니다.&lt;br/&gt;
-또한 자바스크립트는 명령형, 함수형, 객체지향 프로그래밍이 모두 가능한 멀티 패러다임 언어입니다.&lt;/p&gt;
+&lt;p&gt;자바스크립트는 HTML, CSS와 함께 웹을 구성하는 요소 중 하나로 웹 브라우저에서 동작하는 유일한 프로그래밍 언어입니다.&lt;br/&gt;
+자바스크립트는 개발자가 별도의 컴파일 작업을 수행하지 않는 인터프리터 언어입니다. 또한, 자바스크립트는 동적 타입 언어로, 런타임 시 타입을 결정하는 특징이 있습니다.&lt;/p&gt;
 &lt;h3&gt;변수 선언, 초기화, 할당의 차이점에 대해 설명해주세요.&lt;/h3&gt;
 &lt;p&gt;변수는 &lt;strong&gt;선언 =&gt; 초기화 =&gt; 할당&lt;/strong&gt; 단계를 거칩니다.&lt;/p&gt;
 &lt;p&gt;변수 선언은 변수를 생성하는 것을 의미합니다. 변수명(식별자)을 등록하여 스코프가 참조할 대상을 만듭니다.&lt;br/&gt;
@@ -682,6 +1152,61 @@ console.log(name);  // hayeong&lt;/code&gt;
 &lt;p&gt;Javascript의 타입은 &lt;strong&gt;원시 타입&lt;/strong&gt;과 &lt;strong&gt;객체 타입&lt;/strong&gt;으로 나뉩니다.&lt;/p&gt;
 &lt;p&gt;원시 타입은 불변값이라고도 부르며, &lt;strong&gt;string&lt;/strong&gt;, &lt;strong&gt;number&lt;/strong&gt;, &lt;strong&gt;boolean&lt;/strong&gt;, &lt;strong&gt;undefined&lt;/strong&gt;, &lt;strong&gt;null&lt;/strong&gt;, &lt;strong&gt;symbol&lt;/strong&gt; 총 6가지 데이터 타입이 있습니다.&lt;br/&gt;
 객체는 원시 타입을 제외한 나머지 값들(배열, 함수, 정규표현식 등) 모두 객체에 해당되며, 참조형 타입이라고도 부릅니다.&lt;/p&gt;
+&lt;h3&gt;Symbol(심벌) 타입은 뭐죠?&lt;/h3&gt;
+&lt;p&gt;Symbol 타입은 ES6에서 추가된 7번째 타입으로, 변경 불가능한 원시 타입의 값입니다. 심벌 값은 다른 값과 중복되지 않는 유일무이한 값입니다.
+따라서 주로 이름이 충동할 위험이 없는 객체의 유일한 프로퍼티 키를 만들기 위해 사용합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// 위, 아래, 왼쪽, 오른쪽을 나타내는 상수를 정의합니다.
+// 중복될 가능성이 없는 심벌 값으로 상수 값을 생성합니다.
+const Direction = {
+  UP: Symbol(&amp;quot;up&amp;quot;),
+  DOWN: Symbol(&amp;quot;down&amp;quot;),
+  LEFT: Symbol(&amp;quot;left&amp;quot;),
+  RIGHT: Symbol(&amp;quot;right&amp;quot;)
+}
+
+const myDirection = Direction.UP;
+
+if (myDirection === Direction.UP) {
+  console.log(&amp;quot;You are going UP.&amp;quot;);
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;정적 타이핑이 뭔가요?&lt;/h3&gt;
+&lt;p&gt;C나 자바 같은 정적 타입 언어는 변수를 선언할 때 변수에 할당할 수 있는 값의 종류, 즉 데이터 타입을 사전에 선언해야 합니다.
+이를 &lt;strong&gt;명시적 타입 선언&lt;/strong&gt;이라고 합니다. 다음은 C에서 정수 타입의 변수를 선언하는 예입니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// c 변수에는 1바이트 정수 타입의 값(-128 ~ 127)만을 할당할 수 있다.
+char c;
+
+// num 변수에는 4바이트 정수 타입의 값(-2,124,483,648 ~ 2,124,483,647)만을 할당할 수 있다.
+int num;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;동적 타이핑이 뭔가요?&lt;/h3&gt;
+&lt;p&gt;자바스크립트는 정적 타입 언어와 다르게 변수를 선언할 때 타입을 선언하지 않습니다. 다만 var, let, const 키워드를 사용해 변수를 선언할 뿐입니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;var foo;
+console.log(typeof foo);  // undefined
+
+foo = 3;
+console.log(typeof foo);  // number
+
+foo = null;
+console.log(typeof foo);  // object
+
+foo = Symbol();
+console.log(typeof foo);  // symbol
+
+foo = {};
+console.log(typeof foo);  // object
+
+foo = [];
+console.log(typeof foo);  // object
+
+foo = function () {}; 
+console.log(typeof foo);  // function&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;자바스크립트의 변수는 선언이 아닌 할당에 의해 타입이 결정(타입 추론) 됩니다. 그리고 재할당에 의해 변수의 타입은 언제든지 동적으로 변할 수 있습니다.
+이러한 특징을 동적 타이핑이라고 하며, 자바스크립트를 정적 타입 언어와 구별하기 위해 동적 타입 언어라고 합니다. 대표적인 동적 타입 언어로는 자바스크립트, 파이썬, PHP 등이 있습니다.&lt;/p&gt;
 &lt;h3&gt;생성자에 대해 설명해주세요.&lt;/h3&gt;
 &lt;p&gt;생성자 함수란 &lt;strong&gt;new&lt;/strong&gt; 연산자와 함께 호출하여 객체를 생성하는 함수를 의미합니다.&lt;br/&gt;
 생성자 함수에 의해 생성된 객체를 인스턴스라하며, 자바스크립트는 &lt;strong&gt;Object&lt;/strong&gt; 외에도 다양한 타입의 빌트인 생성자 함수를 제공합니다.&lt;br/&gt;
@@ -754,16 +1279,16 @@ TDZ는 변수가 선언되고 초기화되기 전까지의 영역을 의미하�
 &lt;p&gt;우선 상위 요소에 이벤트 핸들러를 등록합니다. 하위 요소에서 이벤트가 발생하면 이벤트는 먼저 해당 요소에서 시작하여 상위 요소로 전파됩니다.
 이벤트가 상위 요소까지 전파되면 상위 요소에 등록된 이벤트 핸들러가 이벤트를 캐치하여 처리합니다. 이때 &lt;strong&gt;event.target&lt;/strong&gt; 속성을 사용하여 이벤트가 발생한 실제 요소를 식별할 수 있습니다.&lt;/p&gt;
 &lt;h3&gt;호이스팅과 발생하는 이유에 대해 설명해주세요.&lt;/h3&gt;
-&lt;p&gt;호이스팅은 Javascript 엔진이 코드를 실행하기 전에 변수와 함수 선언을 스코프의 상단으로 끌어올리는 현상입니다.
-호이스팅이 발생하는 이유는 Javascript 엔진이 코드를 실행하기 전에  선언된 변수와 함수의 선언부를 미리 메모리에 할당하기 때문입니다.
-이렇게 선언들이 끌어올려지는 동작으로 인해 해당 변수와 함수를 선언 이전에 사용할 수 있게 되는데, 이것이 호이스팅의 원리입니다.
-이러한 동작은 실행 컨텍스트(Execution Context)가 형성되는 과정에서 일어나며, 변수와 함수의 선언부를 메모리에 먼저 올려놓는 것으로 이해할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;js 엔진은 변수 선언(을 포함한 모든 선언문)이 소스 코드의 어디에 있든 상관없이 다른 코드보다 먼저 실행합니다.
+런타임 이전에 실행 컨텍스트에 의해 소스코드 평가 과정에서 스코프에 등록되고 이를 마치 코드의 제일 위에 있는 것처럼 변수가 어디에 위치하던지와 상관없이 어디서든지 변수를 참조할 수 있는 것처럼 만드는 특징을 변수 호이스팅이라고 합니다.&lt;/p&gt;
+&lt;p&gt;사실 변수 선언뿐 아니라 var, let, const, function, function*, class 키워드를 사용해서 선언하는 모든 식별자(변수, 함수, 클래스 등)는 호이스팅 됩니다.
+모든 선언문은 런타임 이전 단계에서 먼저 실행되기 때문입니다.&lt;/p&gt;
 &lt;h3&gt;스코프(Scope)에 대해 설명해주세요.&lt;/h3&gt;
 &lt;p&gt;스코프는 변수와 함수에 접근할 수 있는 유효한 영역을 나타냅니다. 즉, 변수와 함수가 어디에서 정의되고 어디에서 참조될 수 있는지를 결정하는 규칙입니다.&lt;br/&gt;
 Javascript에는 전역 스코프와 지역 스코프가 있습니다. 변수와 함수가 스코프에 따라 유효한 영역이 결정되므로, 스코프의 관리는 변수의 생명주기와 충돌을 방지하는 데 중요한 역할을 합니다.&lt;/p&gt;
 &lt;h3&gt;클로저(Closure)에 대해 설명해주세요.&lt;/h3&gt;
-&lt;p&gt;클로저(Closure)는 반환된 내부 함수가 자신이 선언되었을 때의 환경(렉시컬 환경)인 스코프를 기억하여, 그 밖에서 호출되어도 해당 환경에 접근할 수 있는 함수를 의미합니다.&lt;/p&gt;
-&lt;p&gt;이를 통해 전역 변수를 사용하지 않고도 함수 밖에서 해당 변수에 접근할 수 있는 방법을 만들어 주며, 이는 반환된 함수를 제외하면 외부에서 접근할 수 없으므로 마치 private 변수처럼 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;클로저(Closure)는 자신이 선언되었을 때의 환경(렉시컬 환경)인 스코프를 기억하는 함수입니다.
+해당 함수의 생명 주기가 종료되더라도 함수의 반환된 값이 변수에 의해 아직 참조되고 있다면 생명 주기가 종료되더라도 렉시컬 환경에 남아 참조가 가능합니다.&lt;/p&gt;
 &lt;p&gt;클로저는 다음 예시에서 처럼 내부에 선언된 함수가 외부 함수의 지역변수를 사용해줬을 때만 클로저라고 선언됩니다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function outer() {
@@ -788,6 +1313,9 @@ function handleClick() {
   }
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;클로저를 사용하면 뭐가 좋죠?&lt;/h3&gt;
+&lt;p&gt;클로저는 &lt;strong&gt;상태(state)를 안전하게 변경하고 유지하기위해 사용&lt;/strong&gt;합니다.
+다시 말해, 상태가 의도치 않게 변경되지 않도록 상태를 안전하게 은닉하고 특정 함수에게만 상태변경을 허용하기 위해 사용합니다.&lt;/p&gt;
 &lt;h3&gt;실행 컨텍스트에 대해 설명해주세요.&lt;/h3&gt;
 &lt;p&gt;실행 컨텍스트는 자바스크립트 코드가 실행되는 환경을 말합니다. 자바스크립트 엔진이 코드를 실행할 때, 실행 컨텍스트를 생성하여 코드를 평가하고 실행합니다.
 실행 컨텍스트는 코드 실행에 필요한 여러 정보들을 담고 있으며, 함수 실행, 변수 및 함수 선언, 스코프 체인 등을 관리하는데 사용됩니다.&lt;/p&gt;
