@@ -1,4 +1,376 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 31 Oct 2023 08:10:49 GMT</lastBuildDate><item><title><![CDATA[클로저와 더 가까워지기]]></title><description><![CDATA[closure와 closer해져봅시다 ㅋ.ㅋ 클로저를 알기 전에, 자바스크립트의 렉시컬 스코핑에 대해 먼저 알아보도록 합시다! 스코프(Scope…]]></description><link>https://kirahaa.github.io/js-closure/</link><guid isPermaLink="false">https://kirahaa.github.io/js-closure/</guid><pubDate>Tue, 31 Oct 2023 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;closure와 closer해져봅시다 ㅋ.ㅋ&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 30 Nov 2023 05:47:50 GMT</lastBuildDate><item><title><![CDATA[리액트 쿼리(React Query)를 사용하는 이유]]></title><description><![CDATA[세줄 요약 React Query는 React Application에서 서버 상태를 불러오고, 캐싱하며, 지속적으로 동기화하고 업데이트하는 작업을 도와주는 라이브러리입니다. 복잡하고 장황한 코드가 필요한 다른 데이터 불러오기 방식과 달리 React…]]></description><link>https://kirahaa.github.io/why-react-query/</link><guid isPermaLink="false">https://kirahaa.github.io/why-react-query/</guid><pubDate>Mon, 20 Nov 2023 13:57:56 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;세줄 요약&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;React Query는 React Application에서 서버 상태를 불러오고, 캐싱하며, 지속적으로 동기화하고 업데이트하는 작업을 도와주는 라이브러리입니다.&lt;/li&gt;
+&lt;li&gt;복잡하고 장황한 코드가 필요한 다른 데이터 불러오기 방식과 달리 React Component 내부에서 간단하고 직관적으로 API를 사용할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;더 나아가 React Query에서 제공하는 캐싱, Window Focus Refetching 등 다양한 기능을 활용하여 API 요청과 관련된 번잡한 작업 없이 &quot;핵심 로직&quot;에 집중할 수 있습니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;React Query란?&lt;/h3&gt;
+&lt;p&gt;React Query는 React Application에서 서버의 상태를 불러오고, 캐싱하며, &lt;strong&gt;지속적으로 동기화&lt;/strong&gt;하고 업데이트 하는 작업을 도와주는 라이브러리입니다.
+React Query는 우리에게 친숙한 Hook을 사용하여 React Component 내부에서 자연스럽게 서버(또는 비동기적인 요청이 필요한 Source)의 데이터를 사용할 수 있는 방법을 제안합니다.&lt;/p&gt;
+&lt;p&gt;다음은 리액트 쿼리를 적용하기 전과 후의 API 통신 방법입니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// React query 사용 전
+import {useEffect, useState} from &amp;quot;react&amp;quot;;
+
+const [coins, setCoins] = useState&amp;lt;ICoin[]&amp;gt;([])
+const [loading, setLoading] = useState(true);
+
+useEffect(() =&amp;gt; {
+  (async() =&amp;gt; {
+    const response = await fetch(&amp;quot;https://api.coinpaprika.com/v1/coins&amp;quot;)
+    const json = await response.json()
+    setCoins(json)
+    setLoading(false)
+  })()
+}, [])&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// React query 사용 후
+// api.ts
+export const fetchCoins = async () =&amp;gt; {
+  const response = await fetch(&amp;quot;https://api.coinpaprika.com/v1/coins&amp;quot;)
+  return await response.json()
+}
+
+// Coins.ts
+const {isLoading, data} = useQuery&amp;lt;ICoin[]&amp;gt;({ queryKey: [&amp;#39;allCoins&amp;#39;], queryFn: fetchCoins })
+&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;길고 거창한 설명 없이도 해당 코드를 보면 React Query를 사용한 API 요청과 상태 관리가 얼마나 쉽고 자연스러운지 알 수 있습니다.&lt;/p&gt;
+&lt;h3&gt;React Query의 Query 요청&lt;/h3&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// 가장 기본적인 형태의 React Query useQuery Hook 사용 예시
+const { data } = useQuery(
+  queryKey,  // 이 Query 요청에 대한 응답 데이터를 캐시할 때 사용할 Unique Key (required)
+  fetchFn,   // 이 Query 요청을 수행하기 위한 Promise를 Return하는 함수 (required)
+  options,   // useQuery에서 사용되는 Option 객체 (optional)
+) &lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code&gt;useQuery&lt;/code&gt; Hook으로 수행되는 Query 요청은 HTTP METHOD &lt;strong&gt;GET&lt;/strong&gt; 요청과 같이 서버에 저장되어 있는 &quot;상태&quot;를 불러와 사용할 때 사용합니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;React Query는 다양한 UI에 유연하게 적용할 수 있도록 &lt;code&gt;useQueries&lt;/code&gt;, &lt;code&gt;useInfiniteQuery&lt;/code&gt; 같은 Hook들도 제공합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;React Query의 &lt;code&gt;useQuery&lt;/code&gt; Hook은 요청마다(API마다) 구분되는 **Unique Key (aka. Query Key)**를 필요로 합니다.
+React Query는 이 Unique Key로 서버 상태 (aka. API Response)를 로컬에 캐시하고 관리합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const Coins = () =&amp;gt; {
+  const {isLoading, data} = useQuery&amp;lt;ICoin[]&amp;gt;({ queryKey : [&amp;#39;allCoins&amp;#39;], queryFn: fetchCoins })
+  // &amp;#39;allCoins&amp;#39;를 Key로 사용하여 데이터 캐싱
+  // 다른 컴포넌트에서 &amp;#39;allCoins&amp;#39;를 QueryKey로 사용한 useQuery Hook이 있다면 캐시된 데이터를 우선 사용합니다.
+
+  // FYI, `data === undefined`를 평가하여 로딩 상태를 처리하는 것이 더 좋습니다.
+  // React Query는 내부적으로 stale-while-revalidate 캐싱 전략을 사용하고 있기 때문입니다.
+  return (
+    &amp;lt;Container&amp;gt;
+      &amp;lt;Header&amp;gt;
+        &amp;lt;Title&amp;gt;Coins&amp;lt;/Title&amp;gt;
+      &amp;lt;/Header&amp;gt;
+      {isLoading ? &amp;lt;Loader&amp;gt;Loading&amp;lt;/Loader&amp;gt; : (
+        &amp;lt;CoinsList&amp;gt;
+          {data?.slice(0, 100).map(coin =&amp;gt; &amp;lt;Coin key={coin.id}&amp;gt;
+          &amp;lt;Link to={coin.id} state={coin}&amp;gt;
+          &amp;lt;Img src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} alt={coin.name}/&amp;gt;
+            {coin.name} &amp;amp;rarr;
+          &amp;lt;/Link&amp;gt;
+        &amp;lt;/Coin&amp;gt;)}
+      &amp;lt;/CoinsList&amp;gt;)} 
+    &amp;lt;/Container&amp;gt;
+  )
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;stale-while-revalidate&lt;/strong&gt;란?&lt;br/&gt;&lt;br/&gt;
+&lt;code&gt;stale-while-revalidate&lt;/code&gt;는 개발자가 캐싱된 콘텐츠를 즉시 로드하는 즉시성과 객싱된 최신 콘텐츠가 향후에 사용되도록 보장하는 최신성 간의 균형을 유지하는데 도움을 주는 HTTP Cache-Control 확장 디렉티브입니다.&lt;/p&gt;
+&lt;p&gt;브라우저는 Cache-Control의 max-age를 기준으로 캐싱된 컨텐츠의 최신 상태 여부를 판단하게 되는데, swr은 캐싱된 낡은 컨텐츠에 대한 확장된 지시를 표현합니다.
+react-query를 사용함으로써 swr은 낡은 캐시로부터 빠르게 컨텐츠를 반환하고, 백그라운드에서 요청을 통해 캐싱된 컨텐츠의 재검증을 진행하여 캐싱 레이어에서 최신화된 대이터를 보장할 수 있도록 swr 캐싱 전략을 취하고 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;React Query를 쓰면 이런 게 편해진다&lt;/h3&gt;
+&lt;h4&gt;- Boilerplate 코드의 감소&lt;/h4&gt;
+&lt;p&gt;Redux를 사용할 경우 Redux의 기본 원칙 준수를 위한 다양한 Boilerplate 코드들이 필요합니다.
+더 나아가 다음 예시 코드를 보면 API 상태 관리를 위해 하나의 API 요청을 3가지 Action을 사용해 처리하고 있고,
+후에 기능이 추가되어 API 개수가 많아진다면 이런 상용구적인 코드도 함께 늘어나게 됩니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;API 상태를 Redux를 사용하여 관리하는 부분의 코드&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// features/todos/todos.slice.ts
+// API 상태를 관리하기 위한 Redux State
+import { createSlice, PayloadAction } from &amp;#39;@reduxjs/toolkit&amp;#39;;
+import { TodoItem } from &amp;#39;types/todo&amp;#39;;
+
+export interface TodoListState {
+  data?: TodoItem[];
+  isLoading: boolean;
+  error?: Error;
+}
+
+const initialState: TodoListState = {
+  data: undefined,
+  isLoading: false,
+  error: undefined,
+}
+
+export const todoListSlice = createSlice({
+  name: &amp;#39;todoList&amp;#39;,
+  initialState,
+  reducers: {
+    requestFetchTodos: (state) =&amp;gt; {
+      state.isLoading = true;
+    },
+    successFetchTodos: (state, action: PayloadAction&amp;lt;TodoItem[]&amp;gt;) =&amp;gt; {
+      state.data = action.payload;
+      state.isLoading = false;
+      state.error = undefined;
+    },
+    errorFetchTodos: (state, action: PayloadAction&amp;lt;string&amp;gt;) =&amp;gt; {
+      state.data = undefined;
+      state.isLoading = false;
+      state.error = action.payload;
+    }
+  }
+});
+
+export const { requestFetchTodos, successFetchTodos, errorFetchTodos } = todoListSlice.actions;
+
+export default todoListSlice.reducer;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;React Query로 API 상태를 관리하는 부분의 코드&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// quries/useTodosQuery.ts
+// API 상태를 불러오기 위한 React Query Custom Hook
+import axios from &amp;#39;axios&amp;#39;;
+import { useQuery } from &amp;#39;react-query&amp;#39;;
+import { TodoItem } from &amp;#39;types/todo&amp;#39;;
+
+// useQuery에서 사용할 UniqueKey를 상수로 선언하고 export로 외부에 노출합니다.
+// 상수로 UniqueKey를 관리할 경우 다른 Component (or Custom Hook)에서 쉽게 참조가 가능합니다.
+export const QUERY_KEY = &amp;#39;/todos&amp;#39;;
+
+// useQuery에서 사용할 `서버의 상태를 불러오는데 사용할 Promise를 반환하는 함수`
+const fetcher = () =&amp;gt; axios.get&amp;lt;TodoItem[]&amp;gt;(&amp;#39;/todos&amp;#39;).then(({ data }) =&amp;gt; data);
+
+const useTodosQuery = () =&amp;gt; {
+  return useQuery(QUERY_KEY, fetcher);
+};
+
+export default useTodosQuery;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;단순히 비교해봐도 &lt;strong&gt;Redux를 사용한 비동기 데이터 관리&lt;/strong&gt; 코드와 &lt;strong&gt;React Query를 사용한 비동기 데이터 관리&lt;/strong&gt; 코드의 분량이 크게 차이남을 알 수 있습니다.
+코드의 분량이 적어졌다는 것은 개발자에게 불필요한 작업이 필요 없어짐을 뜻하기도 하지만, 소스코드의 복잡도를 낮추어 유지보수의 용이성을 높이고 작업 간에 발생할 수 있는 사이드 이펙트나 휴먼 에러를 사전에 더
+잘 막을 수 있다는 의미도 갖게 될 것입니다.&lt;/p&gt;
+&lt;h4&gt;- API 요청 수행을 위한 규격화된 방식 제공&lt;/h4&gt;
+&lt;p&gt;React Query는 &lt;code&gt;React에서 비동기 데이터를 관리하기 위해 만들어진 라이브러리&lt;/code&gt;입니다. React Query는 API 요청 및 상태 관리를
+위해 (상당히 잘 만들어진!) 규격화된 방식을 제공합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;interface ApiState {
+  data?: Data;
+  isLoading: boolean;
+  error?: Error;
+}
+
+interface ApiState {
+  data?: Data;
+  status: &amp;#39;IDLE&amp;#39; | &amp;#39;LOADING&amp;#39; | &amp;#39;SUCCESS&amp;#39; | &amp;#39;ERROR&amp;#39;;
+  error?: Error;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Redux로 API 상태를 관리하는 경우 프로젝트 환경에 따른 설계와 구현이 요구되었습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;React Query는 API 상태와 관련된 다양한 데이터를 제공하여 복잡한 구현과 설계 없이도 개발자가 효율적으로 화면을 구성할 수 있게끔 도와줍니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const {
+  data,
+  dataUpdatedAt,
+  error,
+  errorUpdatedAt,
+  failureCount,
+  isError,
+  isFetched,
+  isFetchedAfterMount,
+  isFetching,
+  isIdle,
+  isLoading,
+  isLoadingError,
+  isPlaceholderData,
+  isPreviousData,
+  isRefetchError,
+  isRefetching,
+  isStale,
+  isSuccess,
+  refetch,
+  remove,
+  status,
+} = useQuery(queryKey, queryFn);&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;blockquote&gt;
+&lt;p&gt;React Query는 다양한 형태의 데이터를 제공하여 복잡한 작업 없이도 효율적으로 화면을 구성할 수 있다. (참고: &lt;a href=&quot;https://react-query.tanstack.com/reference/useQuery&quot;&gt;React Query 공식 홈페이지&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;- 사용자 경험 향상을 위한 기능 제공&lt;/h4&gt;
+&lt;p&gt;이전에는 비동기 데이터 관리를 위해 직접 구현하고 사용했던 기능들을, React Query는 자체적으로 제공하는 다양한 기능이 있어 이를 사용자 경험 향상에 손쉽게 사용할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// ex)
+// quires/useTodosQuery.ts
+// API 상태를 불러오기 위한 React Query Custom Hook
+
+const useTodosQuery = () =&amp;gt; {
+  return uesQuery(QUERY_KEY, fetcher, { refetchOnWindowFoucs: true });
+}
+
+export default useTodosQuery;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;React Query를 사용할 경우 단순한 옵션 부여만으로 &lt;strong&gt;Window Focus 이벤트 발생 시 서버 상태 동기화&lt;/strong&gt; 시나리오를 달성할 수 있습니다.
+다루는 API가 많아지고 컴포넌트 구조가 복잡해질수록 이전의 &lt;strong&gt;직접 Event Binding&lt;/strong&gt;하는 방식보다 유지보수하기 좋은 코드가 될 것입니다.&lt;/p&gt;
+&lt;p&gt;React Query와 함께라면 &lt;a href=&quot;https://tanstack.com/query/latest/docs/react/guides/window-focus-refetching?from=reactQueryV3&amp;#x26;original=https%3A%2F%2Ftanstack.com%2Fquery%2Fv3%2Fdocs%2Fguides%2Fwindow-focus-refetching&quot;&gt;Refetch on window focus&lt;/a&gt;외에
+&lt;a href=&quot;https://tanstack.com/query/latest/docs/react/guides/caching?from=reactQueryV3&amp;#x26;original=https%3A%2F%2Ftanstack.com%2Fquery%2Fv3%2Fdocs%2Fguides%2Fcaching&quot;&gt;API Caching&lt;/a&gt;, &lt;a href=&quot;https://tanstack.com/query/latest/docs/react/guides/query-retries?from=reactQueryV3&amp;#x26;original=https%3A%2F%2Ftanstack.com%2Fquery%2Fv3%2Fdocs%2Fguides%2Fquery-retries&quot;&gt;API Retry&lt;/a&gt;, &lt;a href=&quot;https://tanstack.com/query/latest/docs/react/guides/optimistic-updates?from=reactQueryV3&amp;#x26;original=https%3A%2F%2Ftanstack.com%2Fquery%2Fv3%2Fdocs%2Fguides%2Foptimistic-updates&quot;&gt;Optimistic Update&lt;/a&gt;, &lt;a href=&quot;https://tanstack.com/query/latest/docs/react/plugins/persistQueryClient?from=reactQueryV3&amp;#x26;original=https%3A%2F%2Ftanstack.com%2Fquery%2Fv3%2Fdocs%2Fplugins%2FpersistQueryClient&quot;&gt;Persist Caching&lt;/a&gt; 등 사용자 경험 향상을 위한 다양한 기법들을 손쉽게 프로젝트에 포함시킬 수 있습니다.&lt;/p&gt;
+&lt;p&gt;React Query에서 제공하는 이러한 기능들은 우리 개발자들로 하여금 제품과 직접적으로 연관되지 않는 작업에 투입해야 하는 리소스를 경감시켜 더 중요한 비즈니스 로직에 집중할 수 있게끔 도와줍니다.
+이러한 환경은 우리가 더 견고한 제품을 만들 수 있는 바탕이 되어주고 있습니다.&lt;/p&gt;
+&lt;h3&gt;마치며&lt;/h3&gt;
+&lt;p&gt;React Query를 사용하면, &lt;strong&gt;&apos;불필요한 코드의 감소&apos;, &apos;업무와 협업의 효율성을 위한 규격화된 방식 제공&apos;, &apos;사용자 경험 향상을 위한 다양한 Built-in 기능&apos;&lt;/strong&gt; 이라는 장점들을 정리해 볼 수 있겠네요~&lt;br/&gt;
+저도 React Query를 사용하면서 큰 매력을 느끼고 있었는데요!&lt;br/&gt;
+이렇게 정리해 보니 더더욱 쓸 이유가 확실해 보입니다!👍&lt;/p&gt;
+&lt;p&gt;그럼 다음 포스팅에서 또 만나요!~😉&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4&gt;참고 링크&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://tech.kakaopay.com/post/react-query-1/&quot;&gt;https://tech.kakaopay.com/post/react-query-1/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youthfulhps.dev/web/stale-while-ravalidate/&quot;&gt;https://youthfulhps.dev/web/stale-while-ravalidate/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[웹 성능 최적화를 위한 Lazy Loading 기법]]></title><description><![CDATA[Lazy Loading이란 무엇일까? 레이지 로딩(Lazy Loading…]]></description><link>https://kirahaa.github.io/img-lazy-loading/</link><guid isPermaLink="false">https://kirahaa.github.io/img-lazy-loading/</guid><pubDate>Wed, 01 Nov 2023 22:12:03 GMT</pubDate><content:encoded>&lt;h3&gt;Lazy Loading이란 무엇일까?&lt;/h3&gt;
+&lt;p&gt;레이지 로딩(Lazy Loading)은 페이지를 읽어들이는 시점에 중요하지 않은 리소스 로딩을 추후에 할 수 있게 하는 기술입니다.
+페이지를 로드하자마자 리소스를 로딩하는 일반적인 방식 대신, 실제로 사용자 화면에 보여질 필요가 있을 때까지 이러한 로딩을 지연하는 것입니다.&lt;/p&gt;
+&lt;p&gt;레이지 로딩의 목적은 &lt;strong&gt;(1) 최초 페이지 로딩 시간을 개선&lt;/strong&gt;하고 당장 화면에 표시되지 않는 이미지, 영상 등의 리소스를 나중에 로딩하면서 &lt;strong&gt;(2) 최초 데이터 전달 양을 감소시키는 것&lt;/strong&gt;입니다.&lt;/p&gt;
+&lt;p&gt;웹페이지를 로딩하는 기존 방식은 모든 리소스들을 한번에 받는 것입니다.
+이렇게하면 최초 로딩 시간이 더 커지게 되는데, 이러한 로딩 시간 증가는 인터넷 연결 속도가 느린 지역이나 디바이스를 사용할 때 특히 더 두드러지게 체감됩니다.&lt;/p&gt;
+&lt;p&gt;이러한 문제를 해결하기 위해 사용할 수 있는 테크닉이 레이지 로딩인 것입니다.
+레이지 로딩을 적용하면, 화면에 당장 보여지지 않거나 아직 유저의 인터렉션이 일어나지 않은 특정 리소스들의 로딩을 딜레이시킬 수 있습니다.
+이러한 방식을 적용하면, 당장 필요한 컨텐츠들이 먼저 로딩되고, 다른 리소스들은 필요해질 때 로딩되기 때문에 웹 페이지의 퍼포먼스를 눈에 띄게 개선할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;레이지 로딩은 주로 이미지와 영상들에 적용됩니다.
+하지만 이미지나 영상 뿐만 아니라, 다이나믹 컴포넌트, 방대한 양의 스크립트, 외부 위젯 등 다른 컨텐츠에도 적용될 수 있습니다.
+이렇듯 용량이 큰 컨텐츠들을 추후 필요해질 때 추가 로딩하도록 개발을 진행한다면 최초 페이지 로딩 시간을 줄이고 사용자 경험을 개선할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;이제 레이지 로딩이 무엇인지 알았으니, 어떻게 적용하면 되는지 살펴보도록 합시다!✨&lt;/p&gt;
+&lt;h3&gt;loading=&quot;lazy&quot; 태그 속성 사용&lt;/h3&gt;
+&lt;p&gt;HTML의 img 태그에 loading=&apos;lazy&apos;를 추가해주면 image의 lazy 로딩이 가능합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;#x3C;img src=&quot;./image.jpg&quot; loading=&quot;lazy&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;해당 속성을 사용하면 요소가 웹 브라우저 뷰포트에 들어오는 시점에 해당 컨텐츠의 다운로드 및 화면 표시가 이루어집니다.
+대부분의 웹 브라우저에서 지원되고 사용이 간편하지만, 기능적으로는 지연 로딩 여부만 가능하기 때문에 지연 로딩되는 대상에 대한 세세한 제어는 할 수 없습니다.
+세세한 제어를 하려면 자바스크립트로 구현하는 Intersection Observer API를 사용해야 합니다.&lt;/p&gt;
+&lt;p&gt;그리고 반드시 &lt;strong&gt;이미지의 크기 속성 값&lt;/strong&gt;이 있어야만 loading=&quot;lazy&quot; 속성이 적용되어 동작합니다.
+명시적으로 크기를 표시하지 않은 이미지는 지연 로딩이 적용되지 않습니다.
+크기를 표시할 때는 꼭 스크롤하는 방향에 대한 크기를 정해야 합니다.
+세로로 스크롤하는 웹페이지면 높이값이 있어야 지연 로딩이 적용됩니다.&lt;/p&gt;
+&lt;h3&gt;자바스크립트 Intersection Observer API 이용&lt;/h3&gt;
+&lt;p&gt;정기적으로 업데이트가 되고 있는 모던 웹 브라우저에서는 모두 지원되는 자바스크립트 API 기능입니다.
+이 API는 지연 로딩을 위한 API라기 보다는 웹페이지의 특정 요소가 뷰포트 영역과 교차를 하는지(뷰포트 영역 안에 들어왔는지)를 감시하는 모니터링 API입니다.
+웹페이지 요소가 뷰포트 영역 안에 들어오면, 해당 요소를 표시하거나, 또는 다른 특정 동작을 하도록 하는 트리거를 발생시켜 콜백 함수의 코드를 실행합니다.&lt;/p&gt;
+&lt;p&gt;Intersection Observer API 기능은 자바스크립트를 통해 기능을 구현하며, 웹 브라우저 뷰포트 안으로 들어오는 요소의 동작을 세밀하게, 또 선택적으로 제어할 수 있어서 트래픽을 더 효율적으로 제어할 수 있습니다.&lt;/p&gt;
+&lt;h4&gt;Intersection Observer 생성하기&lt;/h4&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;let observer = new IntersectionObserver(callback, options)&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;IntersectionObserver 생성자를 사용하여 옵저버를 만들 수 있습니다.
+인자로는 &lt;strong&gt;(1)콜백함수&lt;/strong&gt;와 &lt;strong&gt;(2)옵션들&lt;/strong&gt;이 들어가는데, 먼저 옵션들을 살펴봅시다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const options = {
+  root: ...,
+  rootMargin: ...,
+  threshold: ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;IntersectionObserver 생성자에 전달하는 두 개의 인자 중 두번째 옵션엔, 세 가지 필드가 있습니다.&lt;/p&gt;
+&lt;p&gt;(1) root:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;타겟 엘리먼트와의 교차 정도를 체크할 상대방입니다. 꼭 타겟의 윗 조상님들 중 하나여야 합니다. 만약 따로 지정하지 않거나, 명확하게 null이라고 표기할 경우엔 디폴트로 브라우저의 뷰포트가 root로 지정됩니다.&lt;/li&gt;
+&lt;li&gt;VanillaJS로 할 때는 document.queryselector ~~ 와 같이 작성하면 됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(2) rootMargin:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;루트를 감싸고 있는 마진을 뜻합니다. CSS margin 속성이랑 비슷한 모양으로 값을 넣을 수 있습니다. (예를 들어, CSS에서 10px 10px 10px 10px이라고 쓰면 top, right, bottom, left인 것과 같이 저 순서대로 값을 넣을 수 있습니다.) 이 값은 %로 작성될 수도 있습니다.&lt;/li&gt;
+&lt;li&gt;이 값들은 교차를 계산하기 전에 루트 엘리먼트의 바운딩 박스의 양 분의 늘어남/줄어남을 담당합니다. 디폴트는 모두 0입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(3) threshold:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;타겟 엘리먼트가 몇 % 정도 보여줘야 IntersectionObserver의 첫번째 인자로 전달된 콜백이 실행되어야 하는지를 정하는 값입니다.&lt;/li&gt;
+&lt;li&gt;그냥 일반 숫자 또는 배열로 표기합니다. 만약 &quot;내 타겟이 50%정도 노출되었을 때 콜백을 실행시켜!&quot;라고 명령하고 싶다면 0.5를 넣어주면 됩니다. 이것보다 조금 더 복잡하게, 노출도(?)가 25% 늘어날때마다 콜백이 실행되게 하고 싶다면 배열 값을 넣어주면 됩니다. [0, 0.25, 0.5, 0.75, 1].&lt;/li&gt;
+&lt;li&gt;디폴트값은 0이며, 이는 즉 내 타겟의 픽셀 한 개만 보이더라도 콜백을 실행해버리겠다는 의미입니다. 반대로, 1.0으로 설정하면 내 타겟을 이루는 모든 픽셀이 보여져야만 콜백이 실행된다는 것을 뜻합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;관찰 대상, 타겟 지정하기&lt;/h4&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;let myTarget = document.querySelector(&amp;#39;.lazy&amp;#39;);
+observer.observe(myTarget);&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;관찰자인 Observer를 만들었으니 그 관찰자의 관심 대상인 관찰 대상, target element도 만들어주어야 합니다.
+타겟은 observer(타겟) 메소드를 통해 지정할 수 있습니다.&lt;/p&gt;
+&lt;h4&gt;콜백이 실행되면...&lt;/h4&gt;
+&lt;p&gt;지정된 threshold를 만나는 순간 콜백이 실행됩니다. 콜백이 실행되면, 콜백은 IntersectionObserverEntry 객체와 우리의 관찰자 observer를 전달받게 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;let callback = (entries, observer) =&amp;gt; {
+  entries.forEach(entry =&amp;gt; {
+    ...
+  })
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;콜백함수가 받게 되는 entry list는 각 타겟당 하나의 엔트리를 포함하고 있습니다.
+이 엔트리는 Intersection Observer API의 인터페이스로, 특정 시점에서의 타겟 엘리먼트와 루트의 교차 여부를 보여줍니다.
+메소드는 없고, read-only인 속성 7개를 가지고 있는데 그 중에서 isIntersection 속성에 대해 알아봅시다.&lt;/p&gt;
+&lt;p&gt;isIntersection 속성은 Boolean으로 true/false 값을 갖는데, true일 경우엔 엔트리의 주인공인 타겟이 루트와 현재 교차하고 있다는 것을 의미합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const myElement = useRef();
+
+// ...
+
+
+const handleScrolling = useCallback(( [entry] ) =&amp;gt; {
+  if (entry.isIntersecting) {
+    // 만약 지금 타겟이 루트랑 교차중이라면, 이 곳을 실행!
+  }
+}, [...]) 
+
+useEffect(() =&amp;gt; {
+  let observer;
+  const {current} = myElement;
+  
+  if (current) {
+    observer = new IntersectionObserver(handleScrolling, {threashold: 0.7})
+    observer.observe(current)
+    
+    return () =&amp;gt; observer &amp;amp;&amp;amp; observer.disconnect()
+  }
+}, [handleScrolling])&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;strong&gt;++ 바닐라JS 예시 코드&lt;/strong&gt;&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;window.onload = function () {
+  const imgs = document.querySelectorAll(&amp;#39;.img&amp;#39;);
+
+  const options = {
+    root: null,
+    threshold: 0.5
+  };
+
+  const callback = function(entries, Observer) {
+    entries.forEach(entry =&amp;gt; {
+      if(entry.isIntersecting) {
+        Observer.unobserve(entry.target);
+        entry.target.src = entry.target.dataset.src;
+      }
+    })
+  }
+
+  let observer = new IntersectionObserver(callback, options);
+
+  for(let i = 0; i &amp;lt; imgs.length; i++) {
+    observer.observe(imgs[i]);
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h4&gt;마치며&lt;/h4&gt;
+&lt;p&gt;프론트엔드 개발자가 되고 싶었던 가장 큰 이유 중 하나가 바로 보기 좋고 재미있는 각종 인터랙션과 애니메이션 등을 많이 만들어보고 싶었기 때문인데,
+이번에 INtersection Observer API를 공부해보니 너무 재미있었습니다! 꼭 다음 프로젝트에서 써먹을 수 있길 바라며,,, 그럼 틀린 부분이 있다면 댓글 부탁드리고 다음에 또 만나욥+_+&lt;/p&gt;</content:encoded></item><item><title><![CDATA[클로저와 더 가까워지기]]></title><description><![CDATA[closure와 closer해져봅시다 ㅋ.ㅋ 클로저를 알기 전에, 자바스크립트의 렉시컬 스코핑에 대해 먼저 알아보도록 합시다! 스코프(Scope…]]></description><link>https://kirahaa.github.io/js-closure/</link><guid isPermaLink="false">https://kirahaa.github.io/js-closure/</guid><pubDate>Tue, 31 Oct 2023 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;closure와 closer해져봅시다 ㅋ.ㅋ&lt;/p&gt;
 &lt;h3&gt;클로저를 알기 전에,&lt;/h3&gt;
 &lt;p&gt;자바스크립트의 렉시컬 스코핑에 대해 먼저 알아보도록 합시다!&lt;/p&gt;
 &lt;h3&gt;스코프(Scope)란?&lt;/h3&gt;
