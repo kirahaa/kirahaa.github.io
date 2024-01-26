@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 30 Nov 2023 05:47:50 GMT</lastBuildDate><item><title><![CDATA[리액트 쿼리(React Query)를 사용하는 이유]]></title><description><![CDATA[세줄 요약 React Query는 React Application에서 서버 상태를 불러오고, 캐싱하며, 지속적으로 동기화하고 업데이트하는 작업을 도와주는 라이브러리입니다. 복잡하고 장황한 코드가 필요한 다른 데이터 불러오기 방식과 달리 React…]]></description><link>https://kirahaa.github.io/why-react-query/</link><guid isPermaLink="false">https://kirahaa.github.io/why-react-query/</guid><pubDate>Mon, 20 Nov 2023 13:57:56 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Jan 2024 07:20:52 GMT</lastBuildDate><item><title><![CDATA[노개북 - 클린코드 Assignment 01]]></title><description><![CDATA[📌 1주차
+금 | Assignment #01 책 구매 인증 TIL (Today I Learned) 2024.01.2…]]></description><link>https://kirahaa.github.io/clean-code-01/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-01/</guid><pubDate>Fri, 26 Jan 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;📌 1주차
+금 | Assignment #01&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;책 구매 인증&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;TIL (Today I Learned)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;2024.01.26&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/e0d081b1027f23dde0278967bdd5c46a/b37e7/cleancode_front.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 133.54430379746836%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAMEBQH/xAAWAQEBAQAAAAAAAAAAAAAAAAACAAH/2gAMAwEAAhADEAAAAWitTuMGtTiUV0HhH//EAB0QAAICAQUAAAAAAAAAAAAAAAECAAMyERITITH/2gAIAQEAAQUCopQ08FUYIsTCW5L5HGpsYiB23J2P/8QAFhEAAwAAAAAAAAAAAAAAAAAAABAR/9oACAEDAQE/ASv/xAAXEQEAAwAAAAAAAAAAAAAAAAAAARAS/9oACAECAQE/AWUV/8QAHBAAAgICAwAAAAAAAAAAAAAAAAECERAhEiIy/9oACAEBAAY/Ao8oKzwiqQsrOmx9mbP/xAAfEAADAAIABwAAAAAAAAAAAAAAAREhQRAxUXGBkeH/2gAIAQEAAT8hbTDLLaF8saqLGkYdnhMVaG9QmT3nkQovJHdDYzq1P//aAAwDAQACAAMAAAAQiPN//8QAFxEAAwEAAAAAAAAAAAAAAAAAAAEQIf/aAAgBAwEBPxCHgz//xAAXEQEBAQEAAAAAAAAAAAAAAAABACER/9oACAECAQE/EOyHbUGX/8QAHBABAAMAAgMAAAAAAAAAAAAAAQARITFBYXHh/9oACAEBAAE/EEW0dB1nYmBYdBQcsyjIONjG59sELwgJ3BoMUz2wPQPSIA1BgtLWFaWz/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;clean code&quot;
+        title=&quot;&quot;
+        src=&quot;/static/e0d081b1027f23dde0278967bdd5c46a/af1fa/cleancode_front.jpg&quot;
+        srcset=&quot;/static/e0d081b1027f23dde0278967bdd5c46a/ab180/cleancode_front.jpg 158w,
+/static/e0d081b1027f23dde0278967bdd5c46a/ba98e/cleancode_front.jpg 315w,
+/static/e0d081b1027f23dde0278967bdd5c46a/af1fa/cleancode_front.jpg 630w,
+/static/e0d081b1027f23dde0278967bdd5c46a/23301/cleancode_front.jpg 945w,
+/static/e0d081b1027f23dde0278967bdd5c46a/b37e7/cleancode_front.jpg 1080w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;개발자 필독서 중에 항상 나오던 책이라 꼭 읽어보고 싶었는데,
+이번 기회를 통해 제대로 읽어 볼 수 있을 것 같다!&lt;br/&gt;
+책 표지를 중요시하는 편인데 제목에 맞게 참 깔끔하고 간결한 표지ㅎㅎ&lt;/p&gt;
+&lt;p&gt;앞으로 열심히 읽어보겠습니다!🙋‍♀️&lt;br/&gt;
+노개북 화이팅~!~!📚&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리액트 쿼리(React Query)를 사용하는 이유]]></title><description><![CDATA[세줄 요약 React Query는 React Application에서 서버 상태를 불러오고, 캐싱하며, 지속적으로 동기화하고 업데이트하는 작업을 도와주는 라이브러리입니다. 복잡하고 장황한 코드가 필요한 다른 데이터 불러오기 방식과 달리 React…]]></description><link>https://kirahaa.github.io/why-react-query/</link><guid isPermaLink="false">https://kirahaa.github.io/why-react-query/</guid><pubDate>Mon, 20 Nov 2023 13:57:56 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;세줄 요약&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;React Query는 React Application에서 서버 상태를 불러오고, 캐싱하며, 지속적으로 동기화하고 업데이트하는 작업을 도와주는 라이브러리입니다.&lt;/li&gt;
