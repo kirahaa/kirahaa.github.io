@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 30 Jan 2024 08:36:41 GMT</lastBuildDate><item><title><![CDATA[노개북 - 클린코드 Assignment 04]]></title><description><![CDATA[📌 1주차 - Assignment #04 📚 TIL (2024.01.29) -…]]></description><link>https://kirahaa.github.io/clean-code-04/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-04/</guid><pubDate>Mon, 29 Jan 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 30 Jan 2024 08:45:30 GMT</lastBuildDate><item><title><![CDATA[노개북 - 클린코드 Assignment 04]]></title><description><![CDATA[📌 1주차 - Assignment #04 📚 TIL (2024.01.29) -…]]></description><link>https://kirahaa.github.io/clean-code-04/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-04/</guid><pubDate>Mon, 29 Jan 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;📌 &lt;strong&gt;1주차 - Assignment #04&lt;/strong&gt;&lt;/p&gt;
 &lt;h4&gt;📚 TIL (2024.01.29) - 3장. 함수&lt;/h4&gt;
 &lt;/blockquote&gt;
@@ -78,8 +78,9 @@
 누구도 처음부터 탁 짜내지 않는다.&lt;/p&gt;
 &lt;p&gt;진짜 목표는 시스템이라는 이야기를 풀어가는 데 있다는 사실을 명심해야 한다. 우리가 작성하는 함수가 분명하고 정확한 언어로 깔끔하게 같이 맞아떨어져야 이야기를 풀어가기가 쉬워진다는 사실을 기억해야 한다.&lt;/p&gt;
 &lt;h3&gt;🎈 오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요.&lt;/h3&gt;
-&lt;p&gt;이론적으로는 알고 있던 내용들이었는데, 사실 실무에서는 짧고 간단한 이름을 주로 사용했던 것 같다.
-작게 만들기, 한 가지만 하기, 서술적인 이름을 사용하기, 인수는 되도록이면 적게,&lt;/p&gt;
+&lt;p&gt;이론적으로는 알고 있던 내용들이었는데, 사실 실무에서는 짧고 간단한 이름을 주로 사용했던 것 같다.&lt;br/&gt;
+작게 만들기, 한 가지만 하기, 서술적인 이름을 사용하기, 인수는 되도록이면 적게!&lt;/p&gt;
+&lt;p&gt;처음부터 잘 짜여진 코드는 누구에게도 어려운 것이라고 하니 좀 위안이 되었다. 나도 그동안 내가 했던 코드들을 잘 리팩토링 해보며 개선해 가야 겠다!&lt;/p&gt;
 &lt;h3&gt;🎈 궁금한 내용이나, 잘 이해되지 않는 내용이 있다면 적어보세요.&lt;/h3&gt;
 &lt;p&gt;다형성(polymorphism)이란?&lt;/p&gt;
 &lt;p&gt;: 프로그램 언어 각 요소들(상수, 변수, 식, 객체, 메소드 등)이 다양한 자료형(type)에 속하는 것이 허가되는 성질&lt;/p&gt;</content:encoded></item><item><title><![CDATA[노개북 - 클린코드 Assignment 03]]></title><description><![CDATA[📌 1주차 - Assignment #03 📚 TIL (2024.01.28) -…]]></description><link>https://kirahaa.github.io/clean-code-03/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-03/</guid><pubDate>Sun, 28 Jan 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
