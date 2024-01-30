@@ -10,15 +10,9 @@ tags:
   - "cleancode"
 ---
 
-
-> 📌 1주차
-> 금 | Assignment #01
-> - 책 구매 인증
-
-
-## TIL (Today I Learned)
-
-**2024.01.26**
+> 📌 **1주차 - Assignment #01**
+> 
+> #### - 책 구매 인증
 
 ![clean code](./cleancode_front.jpg)
 
