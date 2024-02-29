@@ -51,12 +51,85 @@ try 블록에서 무슨 일이 생기든지 catch 블록은 프로그램 상태�
 ##### 호출자를 고려해 예외 클래스를 정의하라
 
 애플리케이션에서 오류를 정의할 때 프로그래머에게 가장 중요한 관심사는 **오류를 잡아내는 방법**이 되어야 한다.
+흔히 예외 클래스가 하나만 있어도 충분한 코드가 많다.
+예외 클래스에 포함된 정보로 오류를 구분해도 괜찮은 경우가 그렇다. 
+한 예외는 잡아내고 다른 예외는 무시해도 괜찮은 경우라면 여러 예외 클래스를 사용한다.
 
+##### null을 반환하지 마라
+
+우리가 흔히 저지르는 오류를 범하는 습관이 있다. 그 중 첫째가 `null`을 반환하는 습관이다. 
+
+```
+public void registerItem(Item item) {
+    if (item != null) {
+        ItemRegistry registry = peristentStore.getItemRegistry();
+        if (registry != null) {
+            Item existing = registry.getItem(item.getID());
+            if (existing.getBillingPeriod().hasRetailOwner()) {
+                existing.register(item);
+            }
+        }
+    }
+} 
+```
+
+위 코드는 나쁜 코드이다! `null`을 반환하는 코드는 일거리를 늘릴 뿐만 아니라 호출자에게 문제를 떠넘긴다.
+누구하나라도 `null` 확인을 빼먹는다면 애플리케이션이 통제 불능에 빠질지도 모른다.
+위 코드는 null 확인이 누락된 문제라 말하기 쉽다.
+하지만 실상은 null 확인이 너무 많아 문제다. 메서드에서 null을 반환하고픈 유혹이 든다면 그 대신 예외를 던지거나 특수 사례 객체를 반환한다.
+사용하려는 외부 API가 null을 반환한다면 감싸기 메서드를 구현해 예외를 던지거나 특수 사례 객체를 반환하는 방식을 고려한다.
+
+```
+List<Employee> employees = getEmployees();
+if (employees != null) {
+    for(Employee e : employees) {
+        totalPay += e.getPay();
+    }
+}
+```
+
+위에서 getEmployees는 null도 반환한다. 하지만 반드시 null을 반환할 필요가 있을까? getEmployees를 변경해 빈 리스트를 반환한다면 코드가 훨씬 깔끔해 진다.
+
+```
+List<Employee> employees = getEmployees();
+for(Employee e : employees) {
+    totalPay += e.getPay();
+}
+```
+
+다행히 자바에는 Collections.emptyList()가 있어 미리 정의된 읽기 전용 리스트를 반환한다. 우리 목적에 적합한 리스트다.
+
+```
+public List<Employee> getEmployees() {
+    if ( ... 직원이 없다면 ... ) 
+        return Collections.emptyList();
+}
+```
+
+이렇게 코드를 변경하면 코드도 깔끔해질뿐더러 NullPointException이 발생할 가능성도 줄어든다.
+
+##### null을 전달하지 마라
+
+메서드에서 null을 반환하는 방식도 나쁘지만 메서드로 null을 전달하는 방식은 더 나쁘다. 정상적인 인수로 null을 기대하는 API가 아니라면
+메서드로 null을 전달하는 코드는 최대한 피한다.
+
+대다수 프로그래밍 언어는 호출자가 실수로 넘기는 null을 적절히 처리하는 방법이 없다. 그렇다면 애초에 null을 넘기지 못하도록 금지하는 정책이 합리적이다.
+즉, 인수로 null이 넘어오면 코드에 문제가 있다는 말이다. 이런 정책을 따르면 그만큼 부주의한 실수를 저지를 확률도 작아진다.
+
+> 깨끗한 코드는 읽기도 좋아야 하지만 안정성도 높아야 한다.
+> 이 둘은 상충하는 목표가 아니다. 오류 처리를 프로그램 논리와 분리해 독자적인 사안으로 고려하면 튼튼하고 깨끗한 코드를 작성할 수 있다.
+> 오류 처리를 프로그램 논리와 분리하면 독립적인 추론이 가능해지며 코드 유지보수성도 크게 높아진다.
 
 
 ### 🎈 오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요.
 
+프로그래밍 시작한 초기에는 오류고 뭐고 일단 잘 동작만 되기를 바라며 코드를 작성했었는데, 
+실무를 경험하면서 처음부터 예외를 작성하는 것에 대한 중요성을 알게 되었다.
+특히나 예외 작성할 때 null을 사용하는 습관이 있었는데, 이것도 좋지 않은 방법이라고 해서 뜨금했다..
 
 
 ### 🎈 궁금한 내용이나, 잘 이해되지 않는 내용이 있다면 적어보세요.
 
+JAVA에는 아무것도 없는 불변 리스트를 반환하는 Collections.emptyList()라는 메서드가 있는것 같은데, 
+Javascript에서는 그냥 빈 배열 만들어서 사용하면 되는 거겠죠..?
+JAVA로 예제가 나오니까 헷갈린다ㅠ
