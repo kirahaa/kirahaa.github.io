@@ -1,4 +1,245 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 06 Feb 2024 08:03:38 GMT</lastBuildDate><item><title><![CDATA[노개북 - 클린코드 Assignment 06]]></title><description><![CDATA[📌 2주차 - Assignment #06 📚 TIL (2024.02.05) -…]]></description><link>https://kirahaa.github.io/clean-code-06/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-06/</guid><pubDate>Mon, 05 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 29 Feb 2024 02:26:30 GMT</lastBuildDate><item><title><![CDATA[노개북 - 클린코드 Assignment 08]]></title><description><![CDATA[📌 2주차 - Assignment #07 📚 TIL (2024.02.08) -…]]></description><link>https://kirahaa.github.io/clean-code-08/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-08/</guid><pubDate>Thu, 08 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;📌 &lt;strong&gt;2주차 - Assignment #07&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;📚 TIL (2024.02.08) - 7장. 오류 처리&lt;/h4&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;🎈 책에서 기억하고 싶은 내용을 써보세요.&lt;/h3&gt;
+&lt;h5&gt;오류 코드보다 예외를 사용하라&lt;/h5&gt;
+&lt;p&gt;예외를 사용하면 호출자 코드가 더 깔끔해진다. 논리가 오류 처리 코드와 뒤섞이지 않으니까.&lt;/p&gt;
+&lt;h5&gt;Try-Catch-Finally 문부터 작성하라&lt;/h5&gt;
+&lt;p&gt;예외에서 프로그램 안에다 &lt;strong&gt;범위를 정의한다&lt;/strong&gt;는 사실이 매우 흥미롭다.
+try-catch-finally 문에서 try 블록에 들어가는 코드를 실행하면 어느 시점에서든 실행이 중단된 후 catch 블록으로 넘어갈 수 있다.&lt;/p&gt;
+&lt;p&gt;try 블록에서 무슨 일이 생기든지 catch 블록은 프로그램 상태를 일관성 있게 유지해야 한다.&lt;/p&gt;
+&lt;p&gt;먼저 강제로 예외를 일으키는 테스트 케이스를 작성한 후 테스트를 통과하게 코드를 작성하는 방법을 권장한다.
+그러면 자연스럽게 try 블록의 트랜잭션 범위부터 구현하게 되므로 범위 내에서 트랜잭션 본질을 유지하기 쉬워진다.&lt;/p&gt;
+&lt;h5&gt;미확인(unchecked) 예외를 사용하라&lt;/h5&gt;
+&lt;p&gt;확인된(checked) 예외는 OCP(Open Closed Principle)를 위반한다.
+메서드에서 확인된 예외를 던졌는데 catch 블록이 세 단계 위에 있다면 그 사이 메서드 모두가 선언부에 해당 예외를 정의해야 한다.
+즉, 하위 단계에서 코드를 변경하면 상위 단계 메서드 선언부를 전부 고쳐야 한다는 말이다.
+모듈과 관련된 코드가 전혀 바뀌지 않았더라도 (선언부가 바뀌었으므로) 모듈을 다시 빌드한 다음 배포해야 한다는 말이다.&lt;/p&gt;
+&lt;p&gt;때로는 확인된 예외도 유용하다. 아주 중요한 라이브러리를 작성한다면 모든 예외를 잡아야 한다.
+하지만 일반적인 애플리케이션은 의존성이라는 비용이 이익보다 크다.&lt;/p&gt;
+&lt;h5&gt;예외에 의미를 제공하라&lt;/h5&gt;
+&lt;p&gt;예외를 던질 때는 전후 상황을 충분히 덧붙인다. 그러면 오류가 발생한 원인과 위치를 찾기가 쉬워진다.
+자바는 모든 예외에 호출 스택을 제공한다.
+하지만 실패한 코드의 의도를 파악하려면 호출 스택만으로 부족하다.&lt;/p&gt;
+&lt;p&gt;오류 메시지에 정보를 담아 예외와 함께 던진다. 실패한 연산 이름과 실패 유형도 언급한다. 애플리케이션이 로깅 기능을 사용한다면 catch 블록에서 오류를 기록하도록 충분한 정보를 남겨준다.&lt;/p&gt;
+&lt;h5&gt;호출자를 고려해 예외 클래스를 정의하라&lt;/h5&gt;
+&lt;p&gt;애플리케이션에서 오류를 정의할 때 프로그래머에게 가장 중요한 관심사는 &lt;strong&gt;오류를 잡아내는 방법&lt;/strong&gt;이 되어야 한다.
+흔히 예외 클래스가 하나만 있어도 충분한 코드가 많다.
+예외 클래스에 포함된 정보로 오류를 구분해도 괜찮은 경우가 그렇다.
+한 예외는 잡아내고 다른 예외는 무시해도 괜찮은 경우라면 여러 예외 클래스를 사용한다.&lt;/p&gt;
+&lt;h5&gt;null을 반환하지 마라&lt;/h5&gt;
+&lt;p&gt;우리가 흔히 저지르는 오류를 범하는 습관이 있다. 그 중 첫째가 &lt;code&gt;null&lt;/code&gt;을 반환하는 습관이다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;public void registerItem(Item item) {
+    if (item != null) {
+        ItemRegistry registry = peristentStore.getItemRegistry();
+        if (registry != null) {
+            Item existing = registry.getItem(item.getID());
+            if (existing.getBillingPeriod().hasRetailOwner()) {
+                existing.register(item);
+            }
+        }
+    }
+} &lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;위 코드는 나쁜 코드이다! &lt;code&gt;null&lt;/code&gt;을 반환하는 코드는 일거리를 늘릴 뿐만 아니라 호출자에게 문제를 떠넘긴다.
+누구하나라도 &lt;code&gt;null&lt;/code&gt; 확인을 빼먹는다면 애플리케이션이 통제 불능에 빠질지도 모른다.
+위 코드는 null 확인이 누락된 문제라 말하기 쉽다.
+하지만 실상은 null 확인이 너무 많아 문제다. 메서드에서 null을 반환하고픈 유혹이 든다면 그 대신 예외를 던지거나 특수 사례 객체를 반환한다.
+사용하려는 외부 API가 null을 반환한다면 감싸기 메서드를 구현해 예외를 던지거나 특수 사례 객체를 반환하는 방식을 고려한다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;List&amp;lt;Employee&amp;gt; employees = getEmployees();
+if (employees != null) {
+    for(Employee e : employees) {
+        totalPay += e.getPay();
+    }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;위에서 getEmployees는 null도 반환한다. 하지만 반드시 null을 반환할 필요가 있을까? getEmployees를 변경해 빈 리스트를 반환한다면 코드가 훨씬 깔끔해 진다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;List&amp;lt;Employee&amp;gt; employees = getEmployees();
+for(Employee e : employees) {
+    totalPay += e.getPay();
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;다행히 자바에는 Collections.emptyList()가 있어 미리 정의된 읽기 전용 리스트를 반환한다. 우리 목적에 적합한 리스트다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;public List&amp;lt;Employee&amp;gt; getEmployees() {
+    if ( ... 직원이 없다면 ... ) 
+        return Collections.emptyList();
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이렇게 코드를 변경하면 코드도 깔끔해질뿐더러 NullPointException이 발생할 가능성도 줄어든다.&lt;/p&gt;
+&lt;h5&gt;null을 전달하지 마라&lt;/h5&gt;
+&lt;p&gt;메서드에서 null을 반환하는 방식도 나쁘지만 메서드로 null을 전달하는 방식은 더 나쁘다. 정상적인 인수로 null을 기대하는 API가 아니라면
+메서드로 null을 전달하는 코드는 최대한 피한다.&lt;/p&gt;
+&lt;p&gt;대다수 프로그래밍 언어는 호출자가 실수로 넘기는 null을 적절히 처리하는 방법이 없다. 그렇다면 애초에 null을 넘기지 못하도록 금지하는 정책이 합리적이다.
+즉, 인수로 null이 넘어오면 코드에 문제가 있다는 말이다. 이런 정책을 따르면 그만큼 부주의한 실수를 저지를 확률도 작아진다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;깨끗한 코드는 읽기도 좋아야 하지만 안정성도 높아야 한다.
+이 둘은 상충하는 목표가 아니다. 오류 처리를 프로그램 논리와 분리해 독자적인 사안으로 고려하면 튼튼하고 깨끗한 코드를 작성할 수 있다.
+오류 처리를 프로그램 논리와 분리하면 독립적인 추론이 가능해지며 코드 유지보수성도 크게 높아진다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;🎈 오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요.&lt;/h3&gt;
+&lt;p&gt;프로그래밍 시작한 초기에는 오류고 뭐고 일단 잘 동작만 되기를 바라며 코드를 작성했었는데,
+실무를 경험하면서 처음부터 예외를 작성하는 것에 대한 중요성을 알게 되었다.
+특히나 예외 작성할 때 null을 사용하는 습관이 있었는데, 이것도 좋지 않은 방법이라고 해서 뜨금했다..&lt;/p&gt;
+&lt;h3&gt;🎈 궁금한 내용이나, 잘 이해되지 않는 내용이 있다면 적어보세요.&lt;/h3&gt;
+&lt;p&gt;JAVA에는 아무것도 없는 불변 리스트를 반환하는 Collections.emptyList()라는 메서드가 있는것 같은데,
+Javascript에서는 그냥 빈 배열 만들어서 사용하면 되는 거겠죠..?
+JAVA로 예제가 나오니까 헷갈린다ㅠ&lt;/p&gt;</content:encoded></item><item><title><![CDATA[노개북 - 클린코드 Assignment 07]]></title><description><![CDATA[📌 2주차 - Assignment #07 📚 TIL (2024.02.06) -…]]></description><link>https://kirahaa.github.io/clean-code-07/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-07/</guid><pubDate>Tue, 06 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;📌 &lt;strong&gt;2주차 - Assignment #07&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;📚 TIL (2024.02.06) - 6장. 객체와 자료 구조&lt;/h4&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;🎈 책에서 기억하고 싶은 내용을 써보세요.&lt;/h3&gt;
+&lt;p&gt;변수를 비공개로 정의하는 이유가 있다. 남들이 변수에 의존하지 않게 만들고 싶어서다.&lt;/p&gt;
+&lt;h5&gt;자료 추상화&lt;/h5&gt;
+&lt;p&gt;변수 사이에 함수라는 계층을 넣는다고 구현이 저절로 감춰지지는 않는다.
+구현을 감추려면 추상화가 필요하다!&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;// 구체적인 Point 클래스
+public class Point {
+    public double x;
+    public double y;
+}
+
+// 추상적인 Point 클래스
+public interface Point {
+    double getX();
+    double getY();
+    void setCartesian(double x, double y);
+    double getR();
+    double getTheta();
+    void setPolar(double r, double theta);
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;첫번째 예시는 변수를 private로 선언하더라도 각 값마다 조회 함수와 설정 함수를 제공한다면 구현을 외부로 노출하는 셈이다.
+변수 사이에 함수라는 계층을 넣는다고 구현이 저절로 감춰지지는 않는다. 구현을 감추려면 추상화가 필요하다!
+추상 인터페이스를 제공해 사용자가 구현을 모른 채 자료의 핵심을 조작할 수 있어야 진정한 의미의 클래스다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;// 구체적인 Vehicle 클래스
+public interface Vehicle {
+    double getFuelTankCapacityInGallons();
+    double getGallonsOfGasoline();
+}
+
+// 추상적인 Vehicle 클래스
+public interface Vehicle {
+    double getPercentFuelRemaining();
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;자료를 세세하게 공개하기보다는 추상적인 개념으로 표현하는 편이 좋다.
+인터페이스나 조회/설정 함수만으로는 추상화가 이뤄지지 않는다.
+개발자는 객체가 포함하는 자료를 표현할 가장 좋은 방법을 심각하게 고민해야 한다.&lt;/p&gt;
+&lt;h5&gt;자료/객체 비대칭&lt;/h5&gt;
+&lt;p&gt;객체는 추상화 뒤로 자료를 숨긴 채 자료를 다루는 함수만 공개한다.
+자료 구조는 자료를 그대로 공개하며 별다른 함수는 제공하지 않는다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(자료 구조를 사용하는) 절차적인 코드는 기존 자료 구조를 변경하지 않으면서 새 함수를 추가하기 쉽다.
+반면, 객체 지향 코드는 기존 함수를 변경하지 않으면서 새 클래스를 추가하기 쉽다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;절차적인 코드는 새로운 자료 구조를 추가하기 어렵다.
+그러려면 모든 함수를 고쳐야 한다. 객체 지향 코드는 새로운 함수를 추가하기 어렵다.
+그러려면 모든 클래스를 고쳐야 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;다시 말해, 객체 지향 코드에서 어려운 변경은 절차적인 코드에서 쉬우며, 절차적인 코드에서 어려운 변경은 객체 지향 코드에서 쉽다!&lt;/p&gt;
+&lt;p&gt;복잡한 시스템을 짜다 보면 새로운 함수가 아니라 새로운 자료 타입이 필요한 경우가 생긴다.
+이때는 클래스와 객체 지향 기법이 가장 적합하다. 반면,
+새로운 자료 타입이 아니라 새로운 함수가 필요한 경우도 생긴다. 이때는 절차적인 코드와 자료 구조가 좀 더 적합하다.&lt;/p&gt;
+&lt;h5&gt;디미터 법칙&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;메소드가 반환하는 객체의 메소드를 사용하면 안된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;모듈은 자신이 조작하는 객체의 속사정을 몰라야 한다. 객체는 자료를 숨기고 함수를 공개한다. &lt;br/&gt;
+→ 객체는 조회 함수로 내부 구조를 공개하면 안 된다는 의미다.
+그러면 내부 구조를 (숨기지 않고) 노출하는 셈이니까.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;strong&gt;기차 충돌&lt;/strong&gt; 위와 같은 코드를 기차 충돌이라 부른다.
+여러 객차가 한줄로 이어진 기차처럼 보이기 때문이다. 일반적으로 이 방식은 피하는 편이 좋다.&lt;/p&gt;
+&lt;p&gt;위 코드는 다음과 같이 나누는 편이 좋다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;Options opts = ctxt.getOptions();
+File scratchDir = opts.getScratchDir();
+final String outputDir = scratchDir.getAbsolutePath();&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;위 예제가 디미터 법칙을 위반하는지 여부는 ctxt, Options, ScratchDir이 객체인지 아니면 자료 구조인지에 달렸다.
+객체라면 내부 구조를 숨겨야 하므로 확실히 디미터 법칙을 위반한다. 반면, 자료 구조라면 당연히 내부 구조를 노출하므로 디미터 법칙이 적용되지 않는다.&lt;/p&gt;
+&lt;h5&gt;잡종 구조&lt;/h5&gt;
+&lt;p&gt;이런 혼란으로 때때로 절반은 객체, 절반은 자료 구조인 잡종 구조가 나온다.
+이는 양쪽 세상에서 단점만 모아놓은 구조다. 그러므로 잡종 구조는 되도록 피하는 편이 좋다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;구조체 감추기&lt;/strong&gt;&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;ctxt.getAbsolutePathOfScratchDirectoryOption();
+
+ctxt.getScratchDirectoryOption().getAbsolutePath();&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;첫번째 방법은 ctxt 객체에 공개해야 하는 메서드가 너무 많아진다.&lt;/p&gt;
+&lt;p&gt;두번째 방법은 getScratchDirectoryOption()이 객체가 아니라 자료 구조를 반환한다고 가정한다.&lt;/p&gt;
+&lt;p&gt;ctxt가 객체라면 뭔가를 하라고 말해야지 속을 드러내라고 말하면 안 된다.&lt;/p&gt;
+&lt;p&gt;ctxt 객체에 임시 파일을 생성하라고 시키면 어떨까?&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;ctxt는 내부 구조를 드러내지 않으며, 모듈에서 해당 함수는 자신이 몰라야 하는 여러 객체를 탐색할 필요가 없다.
+따라서 디미터 법칙을 위반하지 않는다.&lt;/p&gt;
+&lt;h5&gt;자료 전달 객체&lt;/h5&gt;
+&lt;p&gt;자료 구조체의 전형적인 형태는 공개 변수만 있고 함수가 없는 클래스다.
+이런 자료 구조체를 때로는 자료 전달 객체(Data Transfer Object, DTO)라 한다.
+DTO는 굉장히 유용한 구조체다. 특히 데이터베이스와 통신하거나 소켓에서 받은 메시지의 구문을 분석할 때 유용하다.
+특히 DTO는 데이터베이스에 저장된 가공되지 않은 정보를 애플리케이션 코드에서 사용할 객체로 변환하는 일련의 단계에서 가장 처음으로 사용하는 구조체다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;결론&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;객체는 동작을 공개하고 자료를 숨긴다. 그래서 기존 동작을 변경하지 않으면서 새 객체 타입을 추가하기는 쉬운 반면,
+기존 객체에 새 동작을 추가하기는 어렵다.
+자료 구조는 별다른 동작 없이 자료를 노출한다.
+그래서 기존 자료 구조에 새 동작을 추가하기는 쉬우나, 기존 함수에 새 자료 구조를 추가하기는 어렵다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;🎈 오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요.&lt;/h3&gt;
+&lt;p&gt;객체는 동작을 공개하고 자료를 숨긴다. 자료 구조는 별다른 동작 없이 자료를 노출한다.&lt;/p&gt;
+&lt;p&gt;새로운 자료 타입 추가에 대한 유연성이 필요할 때는 &lt;strong&gt;객체&lt;/strong&gt;, 새로운 동작에 대한 유연성이 필요하면 &lt;strong&gt;자료 구조&lt;/strong&gt;와 &lt;strong&gt;절차적인 코드&lt;/strong&gt;를 사용하자.&lt;/p&gt;
+&lt;p&gt;굳이 OOP에 집착할 필요 없이 그때 그때 상황에 맞는 방법을 선택하면 된다.&lt;/p&gt;
+&lt;h3&gt;🎈 궁금한 내용이나, 잘 이해되지 않는 내용이 있다면 적어보세요.&lt;/h3&gt;
+&lt;p&gt;책의 예시는 Java여서, Javascript 환경에서 객체 지향 프로그래밍에 대해 정리해 보려고 한다.&lt;/p&gt;
+&lt;p&gt;Javascript에서 정보 은닉을 구현하는 방법은 여러 가지가 있다. 주로 클로저(Closure)나 프로토타입을 활용하여 구현된다.
+예를 들어, 클로저를 사용하여 private 멤버를 정의하고 public 메서드를 통해 접근할 수 있도록 하는 방법이다.
+ES6부터 도입된 클래스(class) 문법을 활용하여 정보 은닉을 구현할 수도 있다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;function Counter() {
+  // private 변수
+  let count = 0;
+  
+  // public 메서드
+  this.increment = function() {
+    count++;
+  }
+  
+  this.decrement = function() {
+    count--;
+  }
+  
+  this.getCount = function() {
+    return count;
+  }
+}
+
+// Counter 객체 생성
+let counter = new Counter();
+
+// 외부에서는 getCount 메서드를 통해서만 count에 접근할 수 있음
+console.log(counter.getCount());  // 출력: 0
+
+counter.increment();
+counter.increment();
+
+console.log(counter.getCount());  // 출력: 2&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이 예시에서는 &lt;strong&gt;count&lt;/strong&gt; 변수를 클로저 내부에 선언하여 외부에서 접근할 수 없도록 만들었다.
+대신에 &lt;code&gt;increment&lt;/code&gt;, &lt;code&gt;decrement&lt;/code&gt;, &lt;code&gt;getCount&lt;/code&gt; 메서드를 통해서만 &lt;strong&gt;count&lt;/strong&gt; 변수에 접근할 수 있다.
+이를 통해 정보 은닉이 구현되었다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[노개북 - 클린코드 Assignment 06]]></title><description><![CDATA[📌 2주차 - Assignment #06 📚 TIL (2024.02.05) -…]]></description><link>https://kirahaa.github.io/clean-code-06/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-06/</guid><pubDate>Mon, 05 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;📌 &lt;strong&gt;2주차 - Assignment #06&lt;/strong&gt;&lt;/p&gt;
 &lt;h4&gt;📚 TIL (2024.02.05) - 5장. 형식 맞추기&lt;/h4&gt;
 &lt;/blockquote&gt;
