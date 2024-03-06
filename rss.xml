@@ -1,5 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 04 Mar 2024 07:22:57 GMT</lastBuildDate><item><title><![CDATA[노개북 - 클린코드 Assignment 09]]></title><description><![CDATA[📌 2주차 - Assignment #08 📚 TIL (2024.02.09) -…]]></description><link>https://kirahaa.github.io/clean-code-09/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-09/</guid><pubDate>Fri, 09 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
-&lt;p&gt;📌 &lt;strong&gt;2주차 - Assignment #08&lt;/strong&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 06 Mar 2024 07:55:01 GMT</lastBuildDate><item><title><![CDATA[노개북 - 클린코드 Assignment 10]]></title><description><![CDATA[📌 2주차 - Assignment #10 📚 TIL (2024.02.10) - 9장. 단위 테스트 🎈 책에서 기억하고 싶은 내용을 써보세요. 지난 10년 동안 우리 분야는 눈부신 성장을 이뤘다.
+1997년만 해도 TDD(Test Driven…]]></description><link>https://kirahaa.github.io/clean-code-10/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-10/</guid><pubDate>Sat, 10 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;📌 &lt;strong&gt;2주차 - Assignment #10&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;📚 TIL (2024.02.10) - 9장. 단위 테스트&lt;/h4&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;🎈 책에서 기억하고 싶은 내용을 써보세요.&lt;/h3&gt;
+&lt;p&gt;지난 10년 동안 우리 분야는 눈부신 성장을 이뤘다.
+1997년만 해도 TDD(Test Driven Development)라는 개념을 아무도 몰랐다.
+우리들 대다수에게 단위 테스트란 자기 프로그램이 &apos;돌아간다&apos;는 사실만 확인하는 일회성 코드에 불과했다.
+지금은 애자일과 TDD 덕택에 단위 테스트를 자동화하는 프로그래머들이 이미 많아졌으며 점점 더 늘어나는 추세이다.
+테스트를 추가하려고 급하게 서두르는 와중에 제대로 된 테스트 케이스를 작성해야 한다는 좀 더 미묘한(그리고 더욱 중요한) 사실을 놓쳐버렸다.&lt;/p&gt;
+&lt;h5&gt;단위 테스트란? (Unit Test?)&lt;/h5&gt;
+&lt;p&gt;유닛 테스트(unit test)는 컴퓨터 프로그래밍에서 소스 코드의 특정 모듈이 의도된 대로 정확히 작동하는지 검증하는 절차다.
+즉, 모든 함수와 메소드에 대한 테스트 케이스를 작성하는 절차를 말한다.&lt;/p&gt;
+&lt;h5&gt;TDD 법칙 세 가지&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;실패하는 단위 테스트를 작성할 때까지 실제 코드를 작성하지 않는다.&lt;/li&gt;
+&lt;li&gt;컴파일은 실패하지 않으면서 실행이 실패하는 정도로만 단위 테스트를 작성한다.&lt;/li&gt;
+&lt;li&gt;현재 실패하는 테스트를 통과할 정도로만 실제 코드를 작성한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;위 세 가지 규칙을 따르면 개발과 테스트가 대략 30초 주기로 묶인다.
+테스트 코드와 실제 코드가 함께 나올뿐더러 테스트 코드가 실제 코드보다 불과 몇 초 전에 나온다.&lt;/p&gt;
+&lt;p&gt;하지만 실제 코드와 맞먹을 정도로 방대한 테스트 코드는 심각한 관리 문제를 유발하기도 한다.&lt;/p&gt;
+&lt;h5&gt;깨끗한 테스트 코드 유지하기&lt;/h5&gt;
+&lt;p&gt;테스트 코드는 실제 코드 못지 않게 중요하다.
+테스트 코드는 사고와 설계와 주의가 필요하다. 실제 코드 못지 않게 깨끗하게 짜야 한다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;테스트는 유연성, 유지보수성, 재사용성을 제공한다.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;테스트 코드를 깨끗하게 유지하지 않으면 결국은 잃어버린다.
+코드에 유연성, 유지보수성, 재사용성을 제공하는 버팀목이 바로 단위 테스트다.
+그러므로 실제 코드를 점검하는 자동화된 단위 테스트 슈트는 설계와 아키텍처를 최대한 깨끗하게 보존하는 열쇠다.
+테스트는 유연성, 유지보수성, 재사용성을 제공한다. 테스트 케이스가 있으면 변경이 쉬워지기 때문이다.&lt;/p&gt;
+&lt;h5&gt;깨끗한 테스트 코드&lt;/h5&gt;
+&lt;p&gt;깨끗한 테스트 코드를 만들려면? 세 가지가 필요하다. &lt;strong&gt;가독성, 가독성, 가독성.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;어쩌면 가독성은 실제 코드보다 테스트 코드에 더더욱 중요하다.
+테스트 코드에서 가독성을 높이려면? 여느 코드와 마찬가지다. 명료성, 단순성, 풍부한 표현력이 필요하다.
+테스트 코드는 최소의 표현으로 많은 것을 나타내야 한다.&lt;/p&gt;
+&lt;p&gt;테스트 코드는 본론에 돌입해 진짜 필요한 자료 유형과 함수만 사용한다.
+그러므로 코드를 읽는 사람은 온갖 잡다하고 세세한 코드에 주눅들고 헷갈릴 필요 없이 코드가 수행하는 기능을 재빨리 이해한다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;도메인에 특화된 테스트 언어&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;도메인에 특화된 언어(DSL: Domain-specific language)로 테스트 코드를 구현하면, 흔히 쓰는 시스템 조작 API를 사용하는 대신
+API 위에다 함수와 유틸리티를 구현한 후 그 함수와 유틸리티를 사용하므로 테스트 코드를 짜기도 읽기도 쉬워진다.
+이렇게 구현한 함수와 유틸리티는 테스트 코드에서 사용하는 특수 API가 된다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이중 표준&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;테스트 API 코드에 적용하는 표준은 실제 코드에 적용하는 표준과 확실히 다르다.
+단순하고, 간결하고, 표현력이 풍부해야 하지만, 실제 코드만큼 효율적일 필요는 없다.
+실제 환경과 테스트 환경은 요구사항이 판이하게 다르다.&lt;/p&gt;
+&lt;p&gt;실제 환경에서는 절대로 안 되지만 테스트 환경에서는 전혀 문제없는 방식이 바로 이중 표준의 본질이다.
+대개 메모리나 CPU 효율과 관련 있는 경우다. 코드의 깨끗함과는 철저히 무관하다.&lt;/p&gt;
+&lt;h5&gt;F.I.R.S.T&lt;/h5&gt;
+&lt;p&gt;깨끗한 테스트는 다음 다섯 가지 규칙을 따른다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fast 빠르게&lt;/strong&gt; - 테스트는 빨라야 한다. 테스트는 자주 돌려야 하기 때문에 느리면 안 된다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Independent 독립적으로&lt;/strong&gt; - 각 테스트는 서로 의존하면 안 된다. 테스트가 서로에게 의존하면 연달아 실패하기 때문에 원인을 진단하기 어렵다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Repeatable 반복가능하게&lt;/strong&gt; - 어떤 환경에서든 반복 가능해야 한다. local, QA, Staging, 운영 환경 어디서든 테스트가 돌아가야 한다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Self-Validating 자가검증하는&lt;/strong&gt; - 테스트는 bool 값으로 결과를 내야 한다. 성공 아니면 실패다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Timely 적시에&lt;/strong&gt; - 테스트는 적시에 작성해야 한다. 단위 테스트는 테스트하려는 실제 코드를 구현하기 직전에 구현한다.&lt;/p&gt;
+&lt;h5&gt;결론&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;테스트 코드는 실제 코드의 유연성, 유지보수성, 재사용성을 보존하고 강화하기 때문에 지속적으로 깨끗하게 관리하자.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;🎈 오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요.&lt;/h3&gt;
+&lt;p&gt;깨끗한 테스트 코드를 짜본적이 사실 많지 않다. 책에서 얘기한 것처럼 프로젝트를 진행하다보면 &apos;지저분해도 빨리&apos;가 주된 목표였던 것 같다.
+그저 돌아만 가면 된다는 마인드로 빨리 빨리 코드를 적었던 것 같은데, 요즘은 그래도 변수나 함수 이름을 신경쓰고, 최대한 깔끔하고 읽기 편하게 작성하려고 하고 있다.&lt;/p&gt;
+&lt;h3&gt;🎈 궁금한 내용이나, 잘 이해되지 않는 내용이 있다면 적어보세요.&lt;/h3&gt;
+&lt;p&gt;🔎 테스트 당 assert 하나만 사용하라고 했는데, assert란?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;뒤의 조건이 True가 아니면 AssertError를 발생한다. 원하는 조건의 변수 값을 보증받을 때까지 assert로 테스트 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[노개북 - 클린코드 Assignment 09]]></title><description><![CDATA[📌 2주차 - Assignment #09 📚 TIL (2024.02.09) -…]]></description><link>https://kirahaa.github.io/clean-code-09/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-09/</guid><pubDate>Fri, 09 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;📌 &lt;strong&gt;2주차 - Assignment #09&lt;/strong&gt;&lt;/p&gt;
 &lt;h4&gt;📚 TIL (2024.02.09) - 8장. 경계&lt;/h4&gt;
 &lt;/blockquote&gt;
 &lt;h3&gt;🎈 책에서 기억하고 싶은 내용을 써보세요.&lt;/h3&gt;
@@ -64,8 +130,8 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;학습 테스트를 실질적으로 어떻게 해야 할 지 감이 안온다..😖&lt;/p&gt;</content:encoded></item><item><title><![CDATA[노개북 - 클린코드 Assignment 08]]></title><description><![CDATA[📌 2주차 - Assignment #07 📚 TIL (2024.02.08) -…]]></description><link>https://kirahaa.github.io/clean-code-08/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-08/</guid><pubDate>Thu, 08 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
-&lt;p&gt;📌 &lt;strong&gt;2주차 - Assignment #07&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;학습 테스트를 실질적으로 어떻게 해야 할 지 감이 안온다..😖&lt;/p&gt;</content:encoded></item><item><title><![CDATA[노개북 - 클린코드 Assignment 08]]></title><description><![CDATA[📌 2주차 - Assignment #08 📚 TIL (2024.02.08) -…]]></description><link>https://kirahaa.github.io/clean-code-08/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-08/</guid><pubDate>Thu, 08 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;📌 &lt;strong&gt;2주차 - Assignment #08&lt;/strong&gt;&lt;/p&gt;
 &lt;h4&gt;📚 TIL (2024.02.08) - 7장. 오류 처리&lt;/h4&gt;
 &lt;/blockquote&gt;
 &lt;h3&gt;🎈 책에서 기억하고 싶은 내용을 써보세요.&lt;/h3&gt;
