@@ -1,0 +1,46 @@
+.wrap {
+  background: linear-gradient(#319aee 20%, #fff);
+}
+.content {
+  margin: 0 auto;
+  padding: 10rem 0;
+  max-width: 64rem;
+
+  h1 {
+    margin: 0;
+    font-size: 5rem;
+  }
+  h2 {
+    font-size: 3rem;
+  }
+  h4 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .big-paragraph {
+    font-size: 2rem;
+  }
+  .project {
+    padding-bottom: 3rem;
+    p {
+      margin: 1rem 0;
+    }
+  }
+}
+.row {
+  display: flex;
+  padding: 3rem 0;
+  border-bottom: 1px solid #eee;
+
+  &-left {
+    flex-basis: 18rem;
+    flex-shrink: 0;
+    padding-right: 1rem;
+  }
+  &-right {
+
+  }
+}
+.role {
+  display: block;
+}
