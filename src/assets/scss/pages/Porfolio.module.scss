@@ -11,11 +11,15 @@
     font-size: 5rem;
   }
   h2 {
+    margin-top: 4rem;
     font-size: 3rem;
   }
   h4 {
     margin-top: 2rem;
     margin-bottom: 1rem;
+  }
+  section {
+    padding: 0 2rem;
   }
   .big-paragraph {
     font-size: 2rem;
@@ -26,11 +30,15 @@
       margin: 1rem 0;
     }
   }
+  .other {
+    padding: 3rem 0;
+    border-bottom: 1px dashed #eee;
+  }
 }
 .row {
   display: flex;
   padding: 3rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px dashed #eee;
 
   &-left {
     flex-basis: 18rem;
@@ -43,4 +51,32 @@
 }
 .role {
   display: block;
+}
+
+@media screen and (max-width: 960px) {
+  .content {
+    h1 {
+      font-size: 3rem;
+    }
+    h2 {
+      font-size: 3rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+    h4 {
+      font-size: 1.3rem;
+    }
+    .big-paragraph {
+      font-size: 1.5rem;
+    }
+  }
+  .row {
+    flex-direction: column;
+
+    &-left {
+      flex-basis: 100%;
+      margin-bottom: 1rem;
+    }
+  }
 }
