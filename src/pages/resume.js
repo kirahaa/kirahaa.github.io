@@ -2,7 +2,7 @@ import * as React from "react"
 import {graphql} from "gatsby"
 import * as styles from '../assets/scss/pages/Porfolio.module.scss'
 
-const Portfolio = ({ data, location }) => {
+const Resume = ({ data, location }) => {
   const workExperience = [
     {
       name: "스틱인터랙티브",
@@ -234,7 +234,7 @@ const Portfolio = ({ data, location }) => {
     </>
   )
 }
-export default Portfolio
+export default Resume
 
 export const pageQuery = graphql`
   {

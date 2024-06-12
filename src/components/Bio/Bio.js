@@ -80,7 +80,7 @@ const Bio = ({showTags}) => {
             <Link to="/"><strong>{author.name}</strong></Link>
           </h1>
           <p>{author?.summary || null}</p>
-          <Link to="/portfolio" className={styles.link}>Portfolio</Link>
+          <Link to="/resume" className={styles.link}>Resume</Link>
           <ul className={styles['contacts__list']}>
             {Object.keys(social).map((name) => (!social[name] ? null : (
               <li key={name} className={styles['contacts__listItem']}>
