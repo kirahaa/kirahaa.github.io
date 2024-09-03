@@ -1,4 +1,100 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 12 Jun 2024 04:41:12 GMT</lastBuildDate><item><title><![CDATA[노개북 - 클린코드 Assignment 12]]></title><description><![CDATA[📌 3주차 - Assignment #12 📚 TIL (2024.02.13) - 1…]]></description><link>https://kirahaa.github.io/clean-code-12/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-12/</guid><pubDate>Tue, 13 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 03 Sep 2024 07:56:43 GMT</lastBuildDate><item><title><![CDATA[Next.js 캘린더 컴포넌트 만들기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/nextjs-calendar/</link><guid isPermaLink="false">https://kirahaa.github.io/nextjs-calendar/</guid><pubDate>Tue, 03 Sep 2024 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;간만에 쓰는 블로그네욤..&lt;/p&gt;
+&lt;p&gt;오늘은 얼마전 기업 기술 과제로 캘린더 컴포넌트를 만들었던 경험이 있었는데,
+만들면서 꽤나 배운 점들이 많아서 기록해 보려고 합니다.&lt;/p&gt;
+&lt;p&gt;한 번 만들어봤다고 해도, 따로 정리나 기록을 해놓지 않으면 나중에 생각했을 때 남는 점이 없는 것 같아요.
+(만든지 일주일됐는데 벌써 가물가물한 1인..😮‍💨)&lt;/p&gt;
+&lt;p&gt;그런 의미에서 나중의 &apos;나 자신&apos;을 위해 잘 기록해 보려고 합니다. 레츠꼬~!&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Next.js ?&lt;/h2&gt;
+&lt;p&gt;Next.js는 리액트를 위해 만든 &lt;strong&gt;오픈소스 자바스크립트 웹 프레임워크&lt;/strong&gt;로, 리액트에는 없는
+서버 사이드 렌더링(server-side rendering, SSR), 정적 사이트 생성(static site generation, SSG), 증분 정적 재생성(incremental static regeneration, ISR)과 같은 기능을 제공한다고 합니다.&lt;/p&gt;
+&lt;p&gt;SSR? SSG? ISR? 용어가 너무 어렵고 복잡해보이는데, 알기 쉽게 정리를 해봅시다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;브라우저 렌더링?&lt;/strong&gt;&lt;br/&gt;
+우선 렌더링이란 &lt;strong&gt;브라우저가 서버로부터 받은 데이터를 브라우저 화면에 표시해주는 작업&lt;/strong&gt;입니다.&lt;br/&gt;
+즉, 브라우저가 서버로부터 HTML, CSS, Javascript 파일을 전달받고, 브라우저의 렌더링 엔진이 각 파일을 해석해 브라우저 화면을 그려주는 것이죠.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이러한 렌더링 방식은 &apos;클라이언트 사이드 렌더링(CSR)&apos;과 &apos;서버 사이드 렌더링(SSR)&apos;으로 나뉩니다.
+두 방식의 차이점을 간단하게 말하면 &lt;strong&gt;화면을 어디서 그리느냐&lt;/strong&gt;입니다.&lt;/p&gt;
+&lt;p&gt;클라이언트 사이드 렌더링은 &apos;브라우저&apos;에서 그리고, 서버 사이드 렌더링은 &apos;서버&apos;에서 다 그려서 브라우저로 보내줍니다.&lt;/p&gt;
+&lt;h4&gt;클라이언트 사이드 렌더링(CSR)&lt;/h4&gt;
+&lt;p&gt;: 클라이언트인 브라우저가 렌더링을 처리하는 방식&lt;br/&gt;
+서버에서 받은 데이터를 클라이언트인 브라우저가 화면(view)에 그립니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;React, Vue, Angular와 같은 프레임워크로 개발한 SPA(Single Page Application)이 클라이언트 사이드 렌더링 방식입니다.&lt;/li&gt;
+&lt;li&gt;브라우저에서 Javascript로 페이지를 렌더링합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5&gt;🔸 특징&lt;/h5&gt;
+&lt;p&gt;모든 JS 파일을 브라우저에서 Javscript로 페이지를 렌더링하기 때문에 사용자의 인터렉션에 빠르게 응답하고, 새로고침이 발생하지 않아 사용자 경험이 좋다는 장점이 있습니다.
+다만 서버에 첫 요청 시에 전체 페이지에 대한 모든 파일을 받아야 하므로 첫 페이지 로딩 속도가 느립니다.
+그리고 HTML 파일이 거의 비어있기 때문에 검색 엔진에 색인할 내용이 많지 않아 SEO에 불리합니다.&lt;/p&gt;
+&lt;h4&gt;서버 사이드 렌더링(SSR)&lt;/h4&gt;
+&lt;p&gt;: 서버가 렌더링을 처리하는 방식
+클라이언트가 서버에 데이터를 요청하면, 매번 서버에서 새로운 화면(view)을 그려 제공합니다.&lt;/p&gt;
+&lt;p&gt;서버 사이드 렌더링은 웹 페이지의 HTML을 서버에서 생성하여 클라이언트로 전송하는 방법입니다.&lt;/p&gt;
+&lt;p&gt;첫 페이지에 해당하는 문서만 전달하면 되기 때문에, 첫 페이지 로딩 속도가 클라이언트 사이드 렌더링보다 빠릅니다.
+또한, HTML에 모든 컨텐츠가 담겨있기 때문에 SEO에 유리하다는 장점이 있습니다.&lt;/p&gt;
+&lt;p&gt;다만, 유저가 다른 페이지의 데이터를 요청할 때마다 전체 화면을 서버로부터 다시 받아와야 하므로, 페이지 이동시 속도가 더 느리고,
+새로고침이 일어날 때 화면이 깜빡여 좋지 않은 사용자 경험을 줄 수 있습니다.
+페이지를 이동할 때마다 서버에서 모든 컨텐츠를 HTML을 그려 보내줘야 하기 때문에 사용자가 많아질 수록 서버에 데이터를 요청하는 횟수가 증가해 서버에 과부하가 걸릴 수 있습니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[클라이언트 사이드 렌더링(CSR)과 서버 사이드 렌더링(SSR)]]></title><description><![CDATA[브라우저 렌더링? 우선 렌더링이란 브라우저가 서버로부터 받은 데이터를 브라우저 화면에 표시해주는 작업입니다.
+즉, 브라우저가 서버로부터 HTML, CSS, Javascript…]]></description><link>https://kirahaa.github.io/ssr-csr/</link><guid isPermaLink="false">https://kirahaa.github.io/ssr-csr/</guid><pubDate>Tue, 03 Sep 2024 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3d17844dd80abb7bd28461027ef70961/aaf92/csr_ssr.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.32911392405063%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAIBBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAAEAQL/2gAMAwEAAhADEAAAAYK+mkajlx//xAAbEAABBAMAAAAAAAAAAAAAAAABAAIDERAiI//aAAgBAQABBQIR8hpEw21Vj//EABURAQEAAAAAAAAAAAAAAAAAAAEQ/9oACAEDAQE/AVn/xAAVEQEBAAAAAAAAAAAAAAAAAAAQIf/aAAgBAgEBPwGn/8QAGRAAAwADAAAAAAAAAAAAAAAAAAEREiBR/9oACAEBAAY/Asqi9E9P/8QAGhABAAMBAQEAAAAAAAAAAAAAAQARITFBUf/aAAgBAQABPyEl63Q9nVu/iU5ensF5eRCUmQ5P/9oADAMBAAIAAwAAABCT3//EABYRAAMAAAAAAAAAAAAAAAAAAAABIf/aAAgBAwEBPxBEgz//xAAYEQADAQEAAAAAAAAAAAAAAAAAAREhMf/aAAgBAgEBPxCQ9Fw//8QAGRABAAMBAQAAAAAAAAAAAAAAAQARITFB/9oACAEBAAE/EGYZKTgjFK6dUh5sAwD0WykXXdLyUWPFJkAAAA4E/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;CSR &amp;amp; SSR&quot;
+        title=&quot;&quot;
+        src=&quot;/static/3d17844dd80abb7bd28461027ef70961/af1fa/csr_ssr.jpg&quot;
+        srcset=&quot;/static/3d17844dd80abb7bd28461027ef70961/ab180/csr_ssr.jpg 158w,
+/static/3d17844dd80abb7bd28461027ef70961/ba98e/csr_ssr.jpg 315w,
+/static/3d17844dd80abb7bd28461027ef70961/af1fa/csr_ssr.jpg 630w,
+/static/3d17844dd80abb7bd28461027ef70961/23301/csr_ssr.jpg 945w,
+/static/3d17844dd80abb7bd28461027ef70961/78e18/csr_ssr.jpg 1260w,
+/static/3d17844dd80abb7bd28461027ef70961/aaf92/csr_ssr.jpg 1920w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;브라우저 렌더링?&lt;/h2&gt;
+&lt;p&gt;우선 렌더링이란 &lt;strong&gt;브라우저가 서버로부터 받은 데이터를 브라우저 화면에 표시해주는 작업&lt;/strong&gt;입니다.&lt;br/&gt;
+즉, 브라우저가 서버로부터 HTML, CSS, Javascript 파일을 전달받고, 브라우저의 렌더링 엔진이 각 파일을 해석해 브라우저 화면을 그려주는 것이죠.&lt;/p&gt;
+&lt;p&gt;이러한 렌더링 방식은 &apos;클라이언트 사이드 렌더링(CSR)&apos;과 &apos;서버 사이드 렌더링(SSR)&apos;으로 나뉩니다.&lt;br/&gt;
+두 방식의 차이점을 간단하게 말하면 &lt;strong&gt;화면을 어디서 그리느냐&lt;/strong&gt;입니다.&lt;/p&gt;
+&lt;p&gt;클라이언트 사이드 렌더링은 &apos;브라우저&apos;에서 그리고, 서버 사이드 렌더링은 &apos;서버&apos;에서 다 그려서 브라우저로 보내줍니다.&lt;/p&gt;
+&lt;h3&gt;클라이언트 사이드 렌더링(CSR)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;: 클라이언트인 브라우저가 렌더링을 처리하는 방식&lt;/strong&gt;&lt;br/&gt;
+서버에서 받은 데이터를 클라이언트인 브라우저가 화면(view)에 그립니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;React, Vue, Angular와 같은 프레임워크로 개발한 SPA(Single Page Application)이 클라이언트 사이드 렌더링 방식입니다.&lt;/li&gt;
+&lt;li&gt;브라우저에서 Javascript로 페이지를 렌더링합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;모든 JS 파일을 브라우저에서 Javscript로 페이지를 렌더링하기 때문에 사용자의 인터렉션에 빠르게 응답하고, 새로고침이 발생하지 않아 사용자 경험이 좋다는 장점이 있습니다.
+다만 서버에 첫 요청 시에 전체 페이지에 대한 모든 파일을 받아야 하므로 첫 페이지 로딩 속도가 느립니다.
+그리고 HTML 파일이 거의 비어있기 때문에 검색 엔진에 색인할 내용이 많지 않아 SEO에 불리합니다.&lt;/p&gt;
+&lt;h3&gt;서버 사이드 렌더링(SSR)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;: 서버가 렌더링을 처리하는 방식&lt;/strong&gt;&lt;br/&gt;
+클라이언트가 서버에 데이터를 요청하면, 매번 서버에서 새로운 화면(view)을 그려 제공합니다.&lt;/p&gt;
+&lt;p&gt;서버 사이드 렌더링은 웹 페이지의 HTML을 서버에서 생성하여 클라이언트로 전송하는 방법입니다.&lt;/p&gt;
+&lt;p&gt;첫 페이지에 해당하는 문서만 전달하면 되기 때문에, 첫 페이지 로딩 속도가 클라이언트 사이드 렌더링보다 빠릅니다.
+또한, HTML에 모든 컨텐츠가 담겨있기 때문에 SEO에 유리하다는 장점이 있습니다.&lt;/p&gt;
+&lt;p&gt;다만, 유저가 다른 페이지의 데이터를 요청할 때마다 전체 화면을 서버로부터 다시 받아와야 하므로, 페이지 이동시 속도가 더 느리고,
+새로고침이 일어날 때 화면이 깜빡여 좋지 않은 사용자 경험을 줄 수 있습니다.
+페이지를 이동할 때마다 서버에서 모든 컨텐츠를 HTML을 그려 보내줘야 하기 때문에 사용자가 많아질 수록 서버에 데이터를 요청하는 횟수가 증가해 서버에 과부하가 걸릴 수 있습니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[노개북 - 클린코드 Assignment 12]]></title><description><![CDATA[📌 3주차 - Assignment #12 📚 TIL (2024.02.13) - 1…]]></description><link>https://kirahaa.github.io/clean-code-12/</link><guid isPermaLink="false">https://kirahaa.github.io/clean-code-12/</guid><pubDate>Tue, 13 Feb 2024 22:12:03 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;📌 &lt;strong&gt;3주차 - Assignment #12&lt;/strong&gt;&lt;/p&gt;
 &lt;h4&gt;📚 TIL (2024.02.13) - 11장. 시스템&lt;/h4&gt;
 &lt;/blockquote&gt;
