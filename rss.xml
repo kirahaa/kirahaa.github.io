@@ -1,42 +1,322 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 03 Sep 2024 07:56:43 GMT</lastBuildDate><item><title><![CDATA[Next.js 캘린더 컴포넌트 만들기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/nextjs-calendar/</link><guid isPermaLink="false">https://kirahaa.github.io/nextjs-calendar/</guid><pubDate>Tue, 03 Sep 2024 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;간만에 쓰는 블로그네욤..&lt;/p&gt;
-&lt;p&gt;오늘은 얼마전 기업 기술 과제로 캘린더 컴포넌트를 만들었던 경험이 있었는데,
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 06 Sep 2024 08:07:09 GMT</lastBuildDate><item><title><![CDATA[Next.js 캘린더 컴포넌트 만들기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/nextjs-calendar/</link><guid isPermaLink="false">https://kirahaa.github.io/nextjs-calendar/</guid><pubDate>Fri, 06 Sep 2024 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;얼마전 기업 기술 과제로 캘린더 컴포넌트를 만들었던 경험이 있었는데,
 만들면서 꽤나 배운 점들이 많아서 기록해 보려고 합니다.&lt;/p&gt;
 &lt;p&gt;한 번 만들어봤다고 해도, 따로 정리나 기록을 해놓지 않으면 나중에 생각했을 때 남는 점이 없는 것 같아요.
 (만든지 일주일됐는데 벌써 가물가물한 1인..😮‍💨)&lt;/p&gt;
 &lt;p&gt;그런 의미에서 나중의 &apos;나 자신&apos;을 위해 잘 기록해 보려고 합니다. 레츠꼬~!&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2&gt;Next.js ?&lt;/h2&gt;
-&lt;p&gt;Next.js는 리액트를 위해 만든 &lt;strong&gt;오픈소스 자바스크립트 웹 프레임워크&lt;/strong&gt;로, 리액트에는 없는
-서버 사이드 렌더링(server-side rendering, SSR), 정적 사이트 생성(static site generation, SSG), 증분 정적 재생성(incremental static regeneration, ISR)과 같은 기능을 제공한다고 합니다.&lt;/p&gt;
-&lt;p&gt;SSR? SSG? ISR? 용어가 너무 어렵고 복잡해보이는데, 알기 쉽게 정리를 해봅시다.&lt;/p&gt;
+&lt;h2&gt;요구사항&lt;/h2&gt;
+&lt;p&gt;캘린더 컴포넌트 구현의 요구 사항은 다음과 같았습니다.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;브라우저 렌더링?&lt;/strong&gt;&lt;br/&gt;
-우선 렌더링이란 &lt;strong&gt;브라우저가 서버로부터 받은 데이터를 브라우저 화면에 표시해주는 작업&lt;/strong&gt;입니다.&lt;br/&gt;
-즉, 브라우저가 서버로부터 HTML, CSS, Javascript 파일을 전달받고, 브라우저의 렌더링 엔진이 각 파일을 해석해 브라우저 화면을 그려주는 것이죠.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;이러한 렌더링 방식은 &apos;클라이언트 사이드 렌더링(CSR)&apos;과 &apos;서버 사이드 렌더링(SSR)&apos;으로 나뉩니다.
-두 방식의 차이점을 간단하게 말하면 &lt;strong&gt;화면을 어디서 그리느냐&lt;/strong&gt;입니다.&lt;/p&gt;
-&lt;p&gt;클라이언트 사이드 렌더링은 &apos;브라우저&apos;에서 그리고, 서버 사이드 렌더링은 &apos;서버&apos;에서 다 그려서 브라우저로 보내줍니다.&lt;/p&gt;
-&lt;h4&gt;클라이언트 사이드 렌더링(CSR)&lt;/h4&gt;
-&lt;p&gt;: 클라이언트인 브라우저가 렌더링을 처리하는 방식&lt;br/&gt;
-서버에서 받은 데이터를 클라이언트인 브라우저가 화면(view)에 그립니다.&lt;/p&gt;
+&lt;p&gt;이 컴포넌트는 사용자가 시작일과 종료일을 선택하고, 선택한 날짜를 표시할 수 있는 기능을 포함합니다.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;React, Vue, Angular와 같은 프레임워크로 개발한 SPA(Single Page Application)이 클라이언트 사이드 렌더링 방식입니다.&lt;/li&gt;
-&lt;li&gt;브라우저에서 Javascript로 페이지를 렌더링합니다.&lt;/li&gt;
+&lt;li&gt;캘린더는 전달과 다음달로만 이동할 수 있어야 합니다.&lt;/li&gt;
+&lt;li&gt;사용자는 캘린더에서 두 개의 날짜를 선택할 수 있어야 합니다.&lt;/li&gt;
+&lt;li&gt;사용자가 선택한 두 날짜를 별도로 표시하는 영역이 있어야 합니다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h5&gt;🔸 특징&lt;/h5&gt;
-&lt;p&gt;모든 JS 파일을 브라우저에서 Javscript로 페이지를 렌더링하기 때문에 사용자의 인터렉션에 빠르게 응답하고, 새로고침이 발생하지 않아 사용자 경험이 좋다는 장점이 있습니다.
-다만 서버에 첫 요청 시에 전체 페이지에 대한 모든 파일을 받아야 하므로 첫 페이지 로딩 속도가 느립니다.
-그리고 HTML 파일이 거의 비어있기 때문에 검색 엔진에 색인할 내용이 많지 않아 SEO에 불리합니다.&lt;/p&gt;
-&lt;h4&gt;서버 사이드 렌더링(SSR)&lt;/h4&gt;
-&lt;p&gt;: 서버가 렌더링을 처리하는 방식
-클라이언트가 서버에 데이터를 요청하면, 매번 서버에서 새로운 화면(view)을 그려 제공합니다.&lt;/p&gt;
-&lt;p&gt;서버 사이드 렌더링은 웹 페이지의 HTML을 서버에서 생성하여 클라이언트로 전송하는 방법입니다.&lt;/p&gt;
-&lt;p&gt;첫 페이지에 해당하는 문서만 전달하면 되기 때문에, 첫 페이지 로딩 속도가 클라이언트 사이드 렌더링보다 빠릅니다.
-또한, HTML에 모든 컨텐츠가 담겨있기 때문에 SEO에 유리하다는 장점이 있습니다.&lt;/p&gt;
-&lt;p&gt;다만, 유저가 다른 페이지의 데이터를 요청할 때마다 전체 화면을 서버로부터 다시 받아와야 하므로, 페이지 이동시 속도가 더 느리고,
-새로고침이 일어날 때 화면이 깜빡여 좋지 않은 사용자 경험을 줄 수 있습니다.
-페이지를 이동할 때마다 서버에서 모든 컨텐츠를 HTML을 그려 보내줘야 하기 때문에 사용자가 많아질 수록 서버에 데이터를 요청하는 횟수가 증가해 서버에 과부하가 걸릴 수 있습니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[클라이언트 사이드 렌더링(CSR)과 서버 사이드 렌더링(SSR)]]></title><description><![CDATA[브라우저 렌더링? 우선 렌더링이란 브라우저가 서버로부터 받은 데이터를 브라우저 화면에 표시해주는 작업입니다.
+&lt;/blockquote&gt;
+&lt;p&gt;전달과 다음달로만 이동할 수 있어야 한다는 요구사항이 있어서 오히려 다행이라고 느껴졌어요ㅎㅎ
+만약 다른 달을 선택할 수 있도록 해야하면 추가 로직이 필요해질테니까요..!&lt;/p&gt;
+&lt;h3&gt;컴포넌트 구조&lt;/h3&gt;
+&lt;p&gt;먼저 캘린더의 컴포넌트 구조를 기능별로 나누어 다음과 같이 구성해보았습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a4245c896182a657366ca78cd5cccfc2/8cdd0/calendar_structure.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 53.16455696202532%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAACVklEQVR42m2Q60tTYRyA9y/1pahIS8sgiC4I0aegwsz71JAyK4LAMnP2IQLp4gcJ0vqQWGFU5jana26ZLnW3s53dzsXOcmcXrOCJc+aUqA8P73leOA+/32vRdR2DbDaLoiisra1tus7vjQKzSzJ1ffM02Xw0DvjMs3toieuP/Vt3zTYfZ3s9jDuTWMoR41xeXiYUCqGqKoqqkstqOBfSnL/t4WL/PPV3S3Q++ELXw4Utb+j3cuaWm1f2BBZZlslkMmZU0zTz2whKkkw+q/Hek+RIl5MTV10c7y5x9PKMSdlP9sxS0+Fg5F3MmFAmEFjFCJeRJIlUSiL7Q+WNK87epk9UWe0caCtR2TpNZeu2V7c72HnhI48mIlhisRjDw8PmqtFoFEEQTEKhMFIqZgYrWuwc6nBwsN1BtdVhTnfsissMGXc1nU52N0zx5LWAxfg5kUggCgJRg2gUURQRxTiqFP8raFDVZqf22hynb3424/8Eg8EgkXCYcDJJJBrFmNjr9TL24iUFPcNbV9xcsabTsR212k3KfviSkz2NUzw1glI6TVqWWR8bQ1pZQdU04qLI18UlNgrr/33DKqvD5L9vaKwoyTLa5CSqICAmEqRSKRRFJfNdwbUo0XjPS9ugj9ZNmm1ek7Jb7/uou+NhYiaJxW6f5pvfTzCdIilJeD3zzLndBIMhlLTIhDPGrvopKpqn2ddUorZnjlM33Fu+v8XOjnMfGBqPYCnk8+RyOfK6Tj6fp1gsmq7ncvz6WcQf0eh7torteYCBTQZHgyZlt40G6B1Zwbmo8gcV66xGLZz0QgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;캘린더 구조&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a4245c896182a657366ca78cd5cccfc2/984b6/calendar_structure.png&quot;
+        srcset=&quot;/static/a4245c896182a657366ca78cd5cccfc2/4d6f2/calendar_structure.png 158w,
+/static/a4245c896182a657366ca78cd5cccfc2/3c1ae/calendar_structure.png 315w,
+/static/a4245c896182a657366ca78cd5cccfc2/984b6/calendar_structure.png 630w,
+/static/a4245c896182a657366ca78cd5cccfc2/e7d8e/calendar_structure.png 945w,
+/static/a4245c896182a657366ca78cd5cccfc2/58c38/calendar_structure.png 1260w,
+/static/a4245c896182a657366ca78cd5cccfc2/8cdd0/calendar_structure.png 1304w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Header&lt;/strong&gt;: 해당 년도와 달 표시, 전달과 다음달로 이동할 수 있는 버튼&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Body&lt;/strong&gt;: 날짜를 선택할 수 있는 영역&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Footer&lt;/strong&gt;: 선택된 날짜가 표시되는 영역&lt;/p&gt;
+&lt;h3&gt;날짜 라이브러리 date-fns&lt;/h3&gt;
+&lt;p&gt;date-fns는 Javascript와 Typescript는 날짜 관련 유틸리티 라이브러리입니다.
+날짜를 다루는 다양한 함수들을 제공하여 날짜 및 시간 관련 작업을 쉽게 처리할 수 있도록 도와주는 라이브러리라고 하네요.
+구현 과정에서 유틸리티성 라이브러리는 자유롭게 사용이 가능하다하여 빠른 작업을 위해 date-fns 라이브러리를 사용해 주었습니다.&lt;/p&gt;
+&lt;h3&gt;구현&lt;/h3&gt;
+&lt;p&gt;캘린더는 아래의 기준으로 구현하였습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;일요일이 첫 번째 요일로 시작한다.&lt;/li&gt;
+&lt;li&gt;캘린더가 꽉 찰 수 있도록 전달의 마지막 주의 날짜와 다음달의 첫 번째 주의 날짜도 표시한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이를 구현하기 위해서 date-fns에서 다음의 메서드들을 가져와 사용하였습니다.&lt;/p&gt;
+&lt;h4&gt;format()&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;format()&lt;/code&gt; 함수를 사용하여 날짜 및 시간을 원하는 형태의 문자열로 변경할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;import { format } from &amp;quot;date-fns&amp;quot;
+
+let date = new Date();
+console.log(date); // Tue Aug 15 2023 00:00:00 GMT+0900 (한국 표준시)
+console.log(format(date, &amp;quot;yyyy-MM-d&amp;quot;)) // 2023-08-15
+console.log(format(date, &amp;quot;yyyy/MM/d&amp;quot;)) // 2023/08/15
+console.log(format(date, &amp;quot;Y&amp;quot;)) // 2023
+console.log(format(date, &amp;quot;M&amp;quot;)) // 8
+console.log(format(date, &amp;quot;d&amp;quot;)) // 15&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;저는 현재 달의 년도와 월을 가져오기 위해 다음과 같이 사용해주었습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;const CalendarHeader = ({
+    currentMonth,
+    prevMonth,
+    nextMonth
+  }: CalendarHeaderProps ) =&amp;gt; {
+  return (
+    &amp;lt;HeaderCell&amp;gt;
+      &amp;lt;button onClick={prevMonth}&amp;gt;&amp;lt;MdKeyboardArrowLeft size={30}/&amp;gt;&amp;lt;/button&amp;gt;
+      &amp;lt;span&amp;gt;
+        {format(currentMonth, &amp;quot;yyyy&amp;quot;)}년{&amp;#39; &amp;#39;}
+        {format(currentMonth, &amp;quot;M&amp;quot;)}월
+      &amp;lt;/span&amp;gt;
+      &amp;lt;button onClick={nextMonth}&amp;gt;&amp;lt;MdKeyboardArrowRight size={30}/&amp;gt;&amp;lt;/button&amp;gt;
+    &amp;lt;/HeaderCell&amp;gt;
+  )
+}
+export default CalendarHeader;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h4&gt;subMonths(), addMonths()&lt;/h4&gt;
+&lt;p&gt;주어진 날짜를 기준으로 연도나 월을 증감시켜주기 위해 subMonths(), addMonths() 메서드를 사용하였습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;const [currentDate, setCurrentDate] = useState(new Date())
+
+const prevMonth = () =&amp;gt; {
+    setCurrentDate(subMonths(currentDate, 1))
+}
+const nextMonth = () =&amp;gt; {
+    setCurrentDate(addMonths(currentDate, 1))
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h4&gt;getYear(), getMonth()&lt;/h4&gt;
+&lt;p&gt;해당 달의 첫째 날과 마지막 날을 가져오기 위해 사용하였습니다.
+이는 달력에 표시할 날짜 범위를 정하는 데 사용됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;const firstDayOfMonth = () =&amp;gt; {
+    return new Date(getYear(currentDate), getMonth(currentDate, 1)
+}
+
+const lastDayOfMonth = () =&amp;gt; {
+    return new Date(getYear(currentDate), getMonth(currentDate) + 1, 0)
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h4&gt;eachDayOfInterval()&lt;/h4&gt;
+&lt;p&gt;달력에 날짜를 표시하기 위해 계산한 기간 동안의 모든 날짜를 배열로 가져오기 위해 사용하였습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;const currentMonthDates = () =&amp;gt; {
+    return eachDayOfInterval({
+        start: firstDayOfMonth(),
+        end: lastDayOfMonth()
+    })
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h4&gt;startOfWeek(), subDays(), addDays(), endOfWeek()&lt;/h4&gt;
+&lt;p&gt;주어진 날짜를 기준으로 전달과 다음달의 날짜를 배열로 가져오기 위해 사용하였습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;const prevMonthDates = () =&amp;gt; {
+    const startDate = startOfWeek(firstDayOfMonth())
+    const endDate = subDays(firstDayOfMonth(), 1)
+    
+    if (startDate &amp;gt; endDate) {
+        return []
+    }
+    
+    return eachDayOfInterval({
+        start: startDate,
+        end: endDate
+    })
+}
+
+const NextMonthDates = () =&amp;gt; {
+    const startDate = addDays(lastDayOfMonth(), 1)
+    const endDate = endOfWeek(lasyDayOfMonth())
+    
+    if (startDate &amp;gt; endDate) {
+        return []
+    }
+    
+    return eachDayOfInterval({
+        start: startDate, 
+        end: endDate
+    })
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h4&gt;view 구현&lt;/h4&gt;
+&lt;p&gt;메서드를 조합하여 &lt;code&gt;useCalendar&lt;/code&gt; 훅으로 만들고 구현하였습니다.
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/10c750cf0453d87d53f09b434ce03d9f/9708d/calendar.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 122.78481012658229%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZCAYAAAAxFw7TAAAACXBIWXMAABYlAAAWJQFJUiTwAAACgklEQVR42qWVy24aUQyGeZL2OdvXQYqEsgiCIrFCSEhZpt0gwmWAGS6BgQEGcU+Iq8/UaC6QTUcyx/j4/LZ/+8xk5Mbz+fmp62KxkOl0KrPZTFarlfi+L8fjUb56MreM5/NZ13q9LrlcTh4eHiSfz0s2mxXP82JBbwKeTqeUvL+/y+Fw0JUAHx8fqiP3/BUQZ0pLynw+lyAIZDwei+u6Kuhmj/ryPwzD+4DL5VImk4ny9/LyItVqVSqViurwiB2f6BkAoSFDKRgg3jJD5wCHWRGawmp7rGSGcCYGiIPjOApIWb1eT23dbldto9FIwQFhj8NQwH8qGQ6Hsl6vL4BWcpKXJEe2H11Nj2VogESy0q18uDKbNePt7U3Lt6yxMUqpDKMkm55cTQckaSNIjEMisklUyxZurONkiGCjPPzJHH/4vGZoXbbyrMtJm/E2mU40CHsWBBrujo3xlRylqC05NuipsYFYK5NyomODzW4J40V57EEFYDebAqlGsBFO1Fs2u2rRoU81pdPpXLNBFkEgndfXWIYA4cdhMoRHBD3WFOvkhaO5zHxfFuu1jMkwDC+8/uMLP2uKXTtsqcGmUzo2RF0uJfzzWw4/f8iq1ZJpEKjd/KKjZEFSgJSC48B1xQsC2f4qyvn7N9k8P0uP++p5erjdbuth7rSNTmwOATSSoyPis7qu+JFbAXf42ZWzmWW9NoUfCC+Xy1Kr1aTf72u2jIfjeaoDQGOenp7SPo6jOsD6ggWQlAuFgpRKJWk0Ghendls6rZaWCOBgMJDHx0cpFovSbDavQAg+V0BKtvuLkG1SlIIvfOw9cM1wv9/LdrtV2e12d2Wz2dz0wcYH7e5n9H+evy76XV/apPwwAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;calendar&quot;
+        title=&quot;&quot;
+        src=&quot;/static/10c750cf0453d87d53f09b434ce03d9f/984b6/calendar.png&quot;
+        srcset=&quot;/static/10c750cf0453d87d53f09b434ce03d9f/4d6f2/calendar.png 158w,
+/static/10c750cf0453d87d53f09b434ce03d9f/3c1ae/calendar.png 315w,
+/static/10c750cf0453d87d53f09b434ce03d9f/984b6/calendar.png 630w,
+/static/10c750cf0453d87d53f09b434ce03d9f/e7d8e/calendar.png 945w,
+/static/10c750cf0453d87d53f09b434ce03d9f/9708d/calendar.png 1160w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;// CalendarBody 컴포넌트
+
+const DAYS = [&amp;#39;일&amp;#39;, &amp;#39;월&amp;#39;, &amp;#39;화&amp;#39;, &amp;#39;수&amp;#39;, &amp;#39;목&amp;#39;, &amp;#39;금&amp;#39;, &amp;#39;토&amp;#39;];
+
+const CalendarBody = (
+  {
+    currentMonthDates,
+    prevMonthDates,
+    nextMonthDates,
+    todayDate,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate
+  }: DateGridProps ) =&amp;gt; {
+
+  const handleDateClick = (date: Date) =&amp;gt; {
+    if (!startDate || (startDate &amp;amp;&amp;amp; endDate)) {
+      setStartDate(date)
+      setEndDate(null)
+    } else {
+      if (isBefore(date, startDate)) {
+        setStartDate(date)
+        setEndDate(null)
+      } else {
+        setEndDate(date)
+      }
+    }
+  }
+
+  const isDateInRange = (date: Date) =&amp;gt; {
+    if (!startDate || !endDate) return false
+    return isBefore(date, endDate) &amp;amp;&amp;amp; isAfter(date, startDate)
+  }
+
+  const isStartDate = (date: Date) =&amp;gt; startDate &amp;amp;&amp;amp; isSameDay(date, startDate)
+  const isEndDate = (date: Date) =&amp;gt; endDate &amp;amp;&amp;amp; isSameDay(date, endDate)
+
+  return (
+    &amp;lt;BodyCell&amp;gt;
+      &amp;lt;DaysCell&amp;gt;
+        {DAYS.map((day) =&amp;gt; (
+          &amp;lt;DayCell key={day}&amp;gt;{day}&amp;lt;/DayCell&amp;gt;
+        ))}
+      &amp;lt;/DaysCell&amp;gt;
+      &amp;lt;DatesCell&amp;gt;
+        {prevMonthDates.map((prevDate) =&amp;gt; (
+          &amp;lt;DateCell
+            key={prevDate.toString()}
+            notCurrentMonth
+            isInRange={isDateInRange(prevDate)}
+            isStartDate={isStartDate(prevDate)}
+            isEndDate={isEndDate(prevDate)}
+            onClick={() =&amp;gt; handleDateClick(prevDate)}
+          &amp;gt;
+            {getDate(prevDate)}
+          &amp;lt;/DateCell&amp;gt;
+        ))}
+        {currentMonthDates.map((currentDate) =&amp;gt; (
+          &amp;lt;DateCell
+            key={currentDate.toString()}
+            isToday={isSameDay(currentDate, todayDate)}
+            isInRange={isDateInRange(currentDate)}
+            isStartDate={isStartDate(currentDate)}
+            isEndDate={isEndDate(currentDate)}
+            onClick={() =&amp;gt; handleDateClick(currentDate)}
+          &amp;gt;
+            {getDate(currentDate)}
+          &amp;lt;/DateCell&amp;gt;
+        ))}
+        {nextMonthDates.map((nextDate) =&amp;gt; (
+          &amp;lt;DateCell
+            key={nextDate.toString()}
+            notCurrentMonth
+            isInRange={isDateInRange(nextDate)}
+            isStartDate={isStartDate(nextDate)}
+            isEndDate={isEndDate(nextDate)}
+            onClick={() =&amp;gt; handleDateClick(nextDate)}
+          &amp;gt;
+            {getDate(nextDate)}
+          &amp;lt;/DateCell&amp;gt;
+        ))}
+      &amp;lt;/DatesCell&amp;gt;
+    &amp;lt;/BodyCell&amp;gt;
+  )
+}
+export default CalendarBody;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;시작일(startDate)과 종료일(endDate)도 &lt;code&gt;useCalendar&lt;/code&gt; 훅에 넣어 공통으로 관리해주었습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;export default function useCalendar() {
+  const [startDate, setStartDate] = useState&amp;lt;null | Date&amp;gt;(null)
+  const [endDate, setEndDate] = useState&amp;lt;null | Date&amp;gt;(null)
+  ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;const CalendarFooter = (
+  {
+    startDate,
+    endDate
+  }) =&amp;gt; {
+  return (
+    &amp;lt;FooterCell&amp;gt;
+      &amp;lt;DateCell&amp;gt;
+        &amp;lt;dt&amp;gt;시작일&amp;lt;/dt&amp;gt;
+        &amp;lt;dd&amp;gt;{startDate ? format(startDate, &amp;#39;yyyy-MM-dd&amp;#39;) : &amp;#39;날짜 입력&amp;#39;}&amp;lt;/dd&amp;gt;
+      &amp;lt;/DateCell&amp;gt;
+      &amp;lt;DateCell&amp;gt;
+        &amp;lt;dt&amp;gt;종료일&amp;lt;/dt&amp;gt;
+        &amp;lt;dd&amp;gt;{endDate ? format(endDate, &amp;#39;yyyy-MM-dd&amp;#39;) : &amp;#39;날짜 입력&amp;#39;}&amp;lt;/dd&amp;gt;
+      &amp;lt;/DateCell&amp;gt;
+    &amp;lt;/FooterCell&amp;gt;
+  )
+}
+export default CalendarFooter;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3&gt;마무리&lt;/h3&gt;
+&lt;p&gt;다행히 date-fns가 여러 편리한 함수를 제공해줘서 단순히 이를 잘 활용하기만 하면 돼서 생각보다 금방 만들 수 있었습니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[클라이언트 사이드 렌더링(CSR)과 서버 사이드 렌더링(SSR)]]></title><description><![CDATA[브라우저 렌더링? 우선 렌더링이란 브라우저가 서버로부터 받은 데이터를 브라우저 화면에 표시해주는 작업입니다.
 즉, 브라우저가 서버로부터 HTML, CSS, Javascript…]]></description><link>https://kirahaa.github.io/ssr-csr/</link><guid isPermaLink="false">https://kirahaa.github.io/ssr-csr/</guid><pubDate>Tue, 03 Sep 2024 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
