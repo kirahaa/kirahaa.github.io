@@ -45,6 +45,55 @@ tags:
 
 **Footer**: 선택된 날짜가 표시되는 영역
 
+
+```
+// components/Calendar/index.tsx
+const Calendar = () => {
+  const {
+    currentDate,
+    currentMonthDates,
+    todayDate,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    prevMonth,
+    nextMonth,
+    prevMonthDates,
+    nextMonthDates
+  } = useCalendar()
+
+  return (
+    <CalendarCell>
+      <CalendarHeader
+        currentMonth={currentDate}
+        prevMonth={prevMonth}
+        nextMonth={nextMonth}
+      />
+      <CalendarBody
+        currentMonthDates={currentMonthDates()}
+        prevMonthDates={prevMonthDates()}
+        nextMonthDates={nextMonthDates()}
+        todayDate={todayDate()}
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+      />
+      <CalendarFooter
+        startDate={startDate}
+        endDate={endDate}
+      />
+    </CalendarCell>
+  )
+}
+export default Calendar;
+```
+
+미리 스포를 해보자면, 최종 캘린더 컴포넌트 구조는 위와 같습니다.
+
+데이터와 UI적인 요소를 분리하기 위해 데이터 관련 로직은 useCalendar 훅을 만들었습니다.
+
 ### 날짜 라이브러리 date-fns
 
 date-fns는 Javascript와 Typescript는 날짜 관련 유틸리티 라이브러리입니다.
@@ -298,3 +347,8 @@ export default CalendarFooter;
 ### 마무리
 
 다행히 date-fns가 여러 편리한 함수를 제공해줘서 단순히 이를 잘 활용하기만 하면 돼서 생각보다 금방 만들 수 있었습니다.
+
+간단하지만 오랜만에 제대로 된 컴포넌트를 만들어 본 것이었는데, 너무 즐거운 작업이었습니다~!
+
+특히 처음으로 Next.js + Typescript 환경에서 작업해봤는데, 다행히 복잡한 작업은 아니라 큰 어려움은 없었습니다.<br/>
+누군가에게 도움이 되는 글이었길 바라며, 문의사항이 있으시다면 댓글 부탁드려요😊
