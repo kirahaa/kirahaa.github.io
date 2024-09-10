@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 06 Sep 2024 08:07:09 GMT</lastBuildDate><item><title><![CDATA[Next.js 캘린더 컴포넌트 만들기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/nextjs-calendar/</link><guid isPermaLink="false">https://kirahaa.github.io/nextjs-calendar/</guid><pubDate>Fri, 06 Sep 2024 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;얼마전 기업 기술 과제로 캘린더 컴포넌트를 만들었던 경험이 있었는데,
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[kirahaa blog]]></description><link>https://kirahaa.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 10 Sep 2024 08:28:19 GMT</lastBuildDate><item><title><![CDATA[Next.js 캘린더 컴포넌트 만들기]]></title><description><![CDATA[…]]></description><link>https://kirahaa.github.io/nextjs-calendar/</link><guid isPermaLink="false">https://kirahaa.github.io/nextjs-calendar/</guid><pubDate>Fri, 06 Sep 2024 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;얼마전 기업 기술 과제로 캘린더 컴포넌트를 만들었던 경험이 있었는데,
 만들면서 꽤나 배운 점들이 많아서 기록해 보려고 합니다.&lt;/p&gt;
 &lt;p&gt;한 번 만들어봤다고 해도, 따로 정리나 기록을 해놓지 않으면 나중에 생각했을 때 남는 점이 없는 것 같아요.
 (만든지 일주일됐는데 벌써 가물가물한 1인..😮‍💨)&lt;/p&gt;
@@ -54,6 +54,51 @@
 &lt;p&gt;&lt;strong&gt;Header&lt;/strong&gt;: 해당 년도와 달 표시, 전달과 다음달로 이동할 수 있는 버튼&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Body&lt;/strong&gt;: 날짜를 선택할 수 있는 영역&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Footer&lt;/strong&gt;: 선택된 날짜가 표시되는 영역&lt;/p&gt;
+&lt;deckgo-highlight-code   &gt;
+          &lt;code slot=&quot;code&quot;&gt;// components/Calendar/index.tsx
+const Calendar = () =&amp;gt; {
+  const {
+    currentDate,
+    currentMonthDates,
+    todayDate,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    prevMonth,
+    nextMonth,
+    prevMonthDates,
+    nextMonthDates
+  } = useCalendar()
+
+  return (
+    &amp;lt;CalendarCell&amp;gt;
+      &amp;lt;CalendarHeader
+        currentMonth={currentDate}
+        prevMonth={prevMonth}
+        nextMonth={nextMonth}
+      /&amp;gt;
+      &amp;lt;CalendarBody
+        currentMonthDates={currentMonthDates()}
+        prevMonthDates={prevMonthDates()}
+        nextMonthDates={nextMonthDates()}
+        todayDate={todayDate()}
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+      /&amp;gt;
+      &amp;lt;CalendarFooter
+        startDate={startDate}
+        endDate={endDate}
+      /&amp;gt;
+    &amp;lt;/CalendarCell&amp;gt;
+  )
+}
+export default Calendar;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;미리 스포를 해보자면, 최종 캘린더 컴포넌트 구조는 위와 같습니다.&lt;/p&gt;
+&lt;p&gt;데이터와 UI적인 요소를 분리하기 위해 데이터 관련 로직은 useCalendar 훅을 만들었습니다.&lt;/p&gt;
 &lt;h3&gt;날짜 라이브러리 date-fns&lt;/h3&gt;
 &lt;p&gt;date-fns는 Javascript와 Typescript는 날짜 관련 유틸리티 라이브러리입니다.
 날짜를 다루는 다양한 함수들을 제공하여 날짜 및 시간 관련 작업을 쉽게 처리할 수 있도록 도와주는 라이브러리라고 하네요.
@@ -316,7 +361,10 @@ export default CalendarBody;&lt;/code&gt;
 export default CalendarFooter;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3&gt;마무리&lt;/h3&gt;
-&lt;p&gt;다행히 date-fns가 여러 편리한 함수를 제공해줘서 단순히 이를 잘 활용하기만 하면 돼서 생각보다 금방 만들 수 있었습니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[클라이언트 사이드 렌더링(CSR)과 서버 사이드 렌더링(SSR)]]></title><description><![CDATA[브라우저 렌더링? 우선 렌더링이란 브라우저가 서버로부터 받은 데이터를 브라우저 화면에 표시해주는 작업입니다.
+&lt;p&gt;다행히 date-fns가 여러 편리한 함수를 제공해줘서 단순히 이를 잘 활용하기만 하면 돼서 생각보다 금방 만들 수 있었습니다.&lt;/p&gt;
+&lt;p&gt;간단하지만 오랜만에 제대로 된 컴포넌트를 만들어 본 것이었는데, 너무 즐거운 작업이었습니다~!&lt;/p&gt;
+&lt;p&gt;특히 처음으로 Next.js + Typescript 환경에서 작업해봤는데, 다행히 복잡한 작업은 아니라 큰 어려움은 없었습니다.&lt;br/&gt;
+누군가에게 도움이 되는 글이었길 바라며, 문의사항이 있으시다면 댓글 부탁드려요😊&lt;/p&gt;</content:encoded></item><item><title><![CDATA[클라이언트 사이드 렌더링(CSR)과 서버 사이드 렌더링(SSR)]]></title><description><![CDATA[브라우저 렌더링? 우선 렌더링이란 브라우저가 서버로부터 받은 데이터를 브라우저 화면에 표시해주는 작업입니다.
 즉, 브라우저가 서버로부터 HTML, CSS, Javascript…]]></description><link>https://kirahaa.github.io/ssr-csr/</link><guid isPermaLink="false">https://kirahaa.github.io/ssr-csr/</guid><pubDate>Tue, 03 Sep 2024 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
